@@ -6,20 +6,13 @@
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "type": "module",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "build": "vite build",
     "dev": "vite build --watch",
     "type-check": "tsc --noEmit"
   },
-  "keywords": [
-    "react",
-    "components",
-    "ui",
-    "design-system"
-  ],
+  "keywords": ["react", "components", "ui", "design-system"],
   "author": "harryk-im",
   "license": "MIT",
   "peerDependencies": {
