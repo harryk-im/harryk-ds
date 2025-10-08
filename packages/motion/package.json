@@ -1,0 +1,43 @@
+{
+  "name": "@harryk-motion",
+  "version": "0.1.0",
+  "description": "Motion components and animations for Harryk Design System",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build --watch",
+    "type-check": "tsc --noEmit"
+  },
+  "keywords": [
+    "react",
+    "motion",
+    "animation",
+    "framer-motion",
+    "design-system"
+  ],
+  "author": "harryk-im",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "framer-motion": "^11.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.16",
+    "@types/react-dom": "^19.1.9",
+    "@vitejs/plugin-react-swc": "^4.1.0",
+    "framer-motion": "^11.0.0",
+    "typescript": "~5.9.3",
+    "vite": "^7.1.7",
+    "vite-plugin-dts": "^4.3.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
