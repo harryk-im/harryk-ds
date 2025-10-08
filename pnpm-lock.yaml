@@ -17,6 +17,9 @@ importers:
       globals:
         specifier: ^16.4.0
         version: 16.4.0
+      husky:
+        specifier: ^9.1.7
+        version: 9.1.7
 
   packages/motion:
     dependencies:
@@ -912,6 +915,11 @@ packages:
 
   he@1.2.0:
     resolution: {integrity: sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==}
+    hasBin: true
+
+  husky@9.1.7:
+    resolution: {integrity: sha512-5gs5ytaNjBrh5Ow3zrvdUUY+0VxIuWVL4i9irt6friV+BqdCfmV11CQTWMiBYWHbXhco+J1kHfTOUkePhCDvMA==}
+    engines: {node: '>=18'}
     hasBin: true
 
   import-lazy@4.0.0:
@@ -1994,6 +2002,8 @@ snapshots:
       function-bind: 1.1.2
 
   he@1.2.0: {}
+
+  husky@9.1.7: {}
 
   import-lazy@4.0.0: {}
 

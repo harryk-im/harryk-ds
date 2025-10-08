@@ -14,7 +14,8 @@
     "clean": "pnpm -r exec rm -rf dist node_modules",
     "type-check": "pnpm -r type-check",
     "lint": "biome check .",
-    "lint:fix": "biome check --write ."
+    "lint:fix": "biome check --write .",
+    "prepare": "husky"
   },
   "author": "harryk-im",
   "license": "MIT",
@@ -22,7 +23,8 @@
   "devDependencies": {
     "@biomejs/biome": "2.2.5",
     "@types/node": "^24.6.0",
-    "globals": "^16.4.0"
+    "globals": "^16.4.0",
+    "husky": "^9.1.7"
   },
   "keywords": [
     "react",
