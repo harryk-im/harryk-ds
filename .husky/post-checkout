@@ -1,0 +1,15 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# 브랜치 체크아웃을 확인해요 ($3 = 1이면 브랜치 체크아웃)
+if [ "$3" = "1" ]; then
+  echo "🔄 브랜치 체크아웃을 감지했어요"
+
+  # 현재 HEAD와 체크아웃된 커밋 간 package.json 변경 여부 확인
+  if git diff --name-only HEAD@{1} HEAD | grep -q "package.json"; then
+    echo "📦 패키지 변경사항을 감지했어요. pnpm install을 실행할게요..."
+    pnpm install
+  else
+    echo "✅ 패키지 변경사항을 감지하지 못했어요. pnpm install 실행을 건너뛸게요"
+  fi
+fi

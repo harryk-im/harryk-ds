@@ -1,0 +1,12 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "🔍 커밋 전 lint check를 실행할게요..."
+pnpm lint
+
+if [ $? -ne 0 ]; then
+  echo "❌ lint check 중 에러가 발생했어요. 커밋을 취소할게요"
+  exit 1
+fi
+
+echo "✅ lint check를 통과했어요. 커밋을 진행할게요"
