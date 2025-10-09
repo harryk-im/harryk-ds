@@ -1,7 +1,10 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.2.5/schema.json",
   "vcs": { "enabled": false, "clientKind": "git", "useIgnoreFile": false },
-  "files": { "ignoreUnknown": false },
+  "files": {
+    "ignoreUnknown": false,
+    "includes": ["!**/dist/**", "!**/storybook-static/**"]
+  },
   "formatter": {
     "enabled": true,
     "formatWithErrors": false,
@@ -17,8 +20,7 @@
   },
   "linter": {
     "enabled": true,
-    "rules": { "recommended": false },
-    "includes": ["**", "!dist"]
+    "rules": { "recommended": false }
   },
   "javascript": {
     "formatter": {
