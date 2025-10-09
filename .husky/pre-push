@@ -1,0 +1,13 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "🔨 git push 전 빌드 체크를 실행할게요..."
+pnpm build
+
+if [ $? -ne 0 ]; then
+  echo "❌ 빌드 중 에러가 발생했어요. git push를 취소할게요"
+  exit 1
+fi
+
+echo "✅ 빌드 체크를 통과했어요. git push를 진행할게요"
+
