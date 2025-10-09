@@ -6,12 +6,14 @@
   "type": "module",
   "scripts": {
     "build": "pnpm -r build",
-    "dev": "pnpm --parallel --filter=\"@harryk-ds/ui\" --filter=\"@harryk-motion\" dev",
+    "dev": "pnpm --parallel --filter=\"@harryk-ds/ui\" --filter=\"@harryk-ds/motion\" dev",
     "build:ui": "pnpm --filter @harryk-ds/ui build",
-    "build:motion": "pnpm --filter @harryk-motion build",
+    "build:motion": "pnpm --filter @harryk-ds/motion build",
     "dev:ui": "pnpm --filter @harryk-ds/ui dev",
-    "dev:motion": "pnpm --filter @harryk-motion dev",
-    "clean": "pnpm -r exec rm -rf dist node_modules",
+    "dev:motion": "pnpm --filter @harryk-ds/motion dev",
+    "storybook": "pnpm --filter @harryk-ds/storybook storybook",
+    "build-storybook": "pnpm --filter @harryk-ds/storybook build-storybook",
+    "clean": "pnpm -r exec rm -rf dist && rm -rf apps/storybook/storybook-static",
     "type-check": "pnpm -r type-check",
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
@@ -19,7 +21,10 @@
   },
   "author": "harryk-im",
   "license": "MIT",
-  "workspaces": ["packages/*"],
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
   "devDependencies": {
     "@biomejs/biome": "2.2.5",
     "@types/node": "^24.6.0",

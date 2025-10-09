@@ -1,0 +1,86 @@
+import { Meta } from "@storybook/blocks";
+
+<Meta title="Welcome/소개" />
+
+# Harryk 디자인 시스템 📖
+
+안녕하세요! **Harryk 디자인 시스템**에 오신 것을 환영합니다.
+
+이 디자인 시스템은 일관성 있고 재사용 가능한 UI 컴포넌트들을 제공하여 개발 효율성과 사용자 경험을 향상시키는 것을 목표로 합니다.
+
+## 🏗️ 아키텍처
+
+이 프로젝트는 **모노레포** 구조로 구성되어 있습니다:
+
+### 📦 Packages
+
+- **`@harryk-ds/ui`** - 기본 UI 컴포넌트들 (Button 등)
+- **`@harryk-ds/motion`** - 애니메이션 컴포넌트들 (FadeIn 등)
+
+### 🏢 Apps
+
+- **`@harryk-ds/storybook`** - 컴포넌트 문서화 및 테스트를 위한 Storybook
+
+### 🎯 설계 원칙
+
+**중앙 집중형 스토리 관리**를 채택했습니다:
+
+- 컴포넌트 패키지는 순수한 라이브러리로 유지 (Storybook 의존성 없음)
+- 모든 스토리 파일은 `apps/storybook/src/stories`에 위치
+- 의존성 중복 제거 및 번들 크기 최소화
+
+## 🚀 시작하기
+
+### 개발 환경 실행
+
+```bash
+# 의존성 설치
+pnpm install
+
+# Storybook 실행
+pnpm storybook
+
+# 컴포넌트 개발
+pnpm dev
+```
+
+### 빌드
+
+```bash
+# 모든 패키지 빌드
+pnpm build
+
+# Storybook 빌드 (배포용)
+pnpm build-storybook
+```
+
+## 📚 컴포넌트 둘러보기
+
+왼쪽 사이드바에서 다음 카테고리들을 확인해보세요:
+
+### UI Components
+
+- **Button** - 다양한 스타일과 크기의 버튼 컴포넌트
+
+### Motion Components
+
+- **FadeIn** - 부드러운 페이드인 애니메이션 컴포넌트
+
+## 🛠️ 기술 스택
+
+- **React 19** - UI 라이브러리
+- **TypeScript** - 타입 안전성
+- **Vite** - 빌드 도구
+- **Vanilla Extract** - CSS-in-JS (UI 패키지)
+- **Framer Motion** - 애니메이션 (Motion 패키지)
+- **pnpm** - 패키지 매니저
+- **Storybook** - 컴포넌트 문서화
+
+## 📖 사용 방법
+
+각 컴포넌트의 상세한 사용법은 해당 컴포넌트의 문서 페이지에서 확인할 수 있습니다.
+**Controls** 탭에서 props를 직접 조작해보며 컴포넌트의 동작을 확인해보세요!
+
+---
+
+**Happy Coding! 🎉**

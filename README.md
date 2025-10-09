@@ -1,73 +1,254 @@
-# React + TypeScript + Vite
+# Harryk 디자인 시스템 📚
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Harryk 디자인 시스템**은 일관성 있고 재사용 가능한 UI 컴포넌트들을 제공하는 모노레포 기반 디자인 시스템입니다.
 
-Currently, two official plugins are available:
+## 🏗️ 프로젝트 구조
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+harryk-ds/
+├── packages/                    # 컴포넌트 패키지들
+│   ├── ui/                     # UI 컴포넌트 (@harryk-ds/ui)
+│   │   └── src/components/
+│   │       └── Button/         # 버튼 컴포넌트
+│   └── motion/                 # 모션 컴포넌트 (@harryk-ds/motion)
+│       └── src/components/
+│           └── FadeIn/         # 페이드인 애니메이션
+└── apps/                       # 애플리케이션들
+    └── storybook/              # Storybook 문서화 (@harryk-ds/storybook)
+        └── src/stories/        # 모든 스토리 파일
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 아키텍처 원칙
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+이 프로젝트는 **중앙 집중형 스토리 관리** 방식을 채택했습니다:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- **컴포넌트 패키지** (`packages/*`): 순수한 컴포넌트 라이브러리
+
+  - Storybook 의존성 없음
+  - 가벼운 번들 크기
+  - 독립적인 배포 가능
+
+- **Storybook 앱** (`apps/storybook`): 문서화 전용
+  - 모든 스토리 파일 포함
+  - Storybook 의존성 집중
+  - 의존성 중복 제거
+
+## 🚀 시작하기
+
+### 1. 의존성 설치
+
+```bash
+pnpm install
 ```
+
+### 2. 개발 서버 실행
+
+#### Storybook 실행 (추천)
+
+```bash
+pnpm storybook
+```
+
+http://localhost:6006 에서 컴포넌트들을 확인할 수 있습니다.
+
+#### 컴포넌트 개발 모드
+
+```bash
+pnpm dev
+```
+
+### 3. 빌드
+
+```bash
+# 모든 패키지 빌드
+pnpm build
+
+# Storybook 정적 사이트 빌드 (배포용)
+pnpm build-storybook
+```
+
+## 📦 패키지들
+
+### @harryk-ds/ui
+
+기본 UI 컴포넌트들을 포함합니다.
+
+**컴포넌트:**
+
+- `Button` - 다양한 variant와 size를 지원하는 버튼
+
+**기술 스택:**
+
+- React 19
+- TypeScript
+- Vanilla Extract CSS
+- Vite
+
+### @harryk-ds/motion
+
+애니메이션 컴포넌트들을 포함합니다.
+
+**컴포넌트:**
+
+- `FadeIn` - 다양한 방향과 설정을 지원하는 페이드인 애니메이션
+
+**기술 스택:**
+
+- React 19
+- TypeScript
+- Framer Motion
+- Vite
+
+## 🛠️ 사용 방법
+
+### 패키지 설치
+
+```bash
+# UI 컴포넌트
+npm install @harryk-ds/ui
+
+# 모션 컴포넌트
+npm install @harryk-ds/motion
+```
+
+### 컴포넌트 사용
+
+```tsx
+import { Button } from "@harryk-ds/ui";
+import { FadeIn } from "@harryk-ds/motion";
+
+function App() {
+  return (
+    <FadeIn direction="up" duration={0.6}>
+      <Button variant="primary" size="lg">
+        안녕하세요!
+      </Button>
+    </FadeIn>
+  );
+}
+```
+
+## 📖 문서화
+
+모든 컴포넌트의 상세한 문서는 Storybook에서 확인할 수 있습니다:
+
+```bash
+pnpm storybook
+```
+
+각 컴포넌트별로 다음을 제공합니다:
+
+- 사용법 및 예시
+- Props API 문서
+- 인터랙티브 컨트롤
+- 접근성 가이드라인
+
+## 🎨 디자인 토큰
+
+### 색상
+
+- Primary: `#2196f3`
+- Secondary: `#9e9e9e`
+- Success: `#4caf50`
+- Warning: `#ff9800`
+- Error: `#f44336`
+
+### 타이포그래피
+
+- Font Family: system-ui, -apple-system, sans-serif
+- Font Sizes: 12px, 14px, 16px, 18px, 24px, 32px
+
+### 간격
+
+- Spacing Scale: 4px, 8px, 12px, 16px, 24px, 32px, 48px, 64px
+
+## 🔧 개발
+
+### 스크립트
+
+```bash
+# 개발
+pnpm dev                 # 모든 패키지 워치 모드
+pnpm dev:ui             # UI 패키지만 개발
+pnpm dev:motion         # Motion 패키지만 개발
+
+# 빌드
+pnpm build              # 모든 패키지 빌드
+pnpm build:ui           # UI 패키지만 빌드
+pnpm build:motion       # Motion 패키지만 빌드
+
+# Storybook
+pnpm storybook          # Storybook 개발 서버
+pnpm build-storybook    # Storybook 정적 빌드
+
+# 유틸리티
+pnpm type-check         # 타입 체크
+pnpm lint               # 린트 검사
+pnpm lint:fix           # 린트 자동 수정
+pnpm clean              # 빌드 파일 및 node_modules 정리
+```
+
+### 기술 스택
+
+- **언어**: TypeScript
+- **UI 라이브러리**: React 19
+- **빌드 도구**: Vite
+- **패키지 매니저**: pnpm (workspace)
+- **CSS-in-JS**: Vanilla Extract (UI 패키지)
+- **애니메이션**: Framer Motion (Motion 패키지)
+- **문서화**: Storybook
+- **린터**: Biome
+- **Git Hooks**: Husky
+
+## 🚀 배포
+
+### Storybook 배포 (Vercel)
+
+1. **Vercel 프로젝트 생성**
+
+   ```bash
+   vercel --prod
+   ```
+
+2. **빌드 설정**
+
+   - Build Command: `pnpm build-storybook`
+   - Output Directory: `apps/storybook/storybook-static`
+   - Root Directory: `/`
+
+3. **환경 변수** (필요시)
+   ```
+   NODE_VERSION=20
+   ```
+
+### npm 패키지 배포
+
+```bash
+# UI 패키지 배포
+cd packages/ui
+npm publish
+
+# Motion 패키지 배포
+cd packages/motion
+npm publish
+```
+
+## 🤝 기여하기
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📝 License
+
+MIT License - 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
+
+## 👥 Authors
+
+- **harryk-im** - _Initial work_
+
+---
+
+**Happy Coding! 🎉**
