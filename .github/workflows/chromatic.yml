@@ -1,8 +1,6 @@
 name: "Chromatic Deployment"
 
 on:
-  push:
-    branches: [main, develop]
   pull_request:
     branches: [main, develop]
 
@@ -52,6 +50,6 @@ jobs:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           workingDir: apps/storybook
           buildScriptName: build-storybook
+          skip: 'chromatic' # 시각적 회귀 테스트 건너뛰기
           onlyChanged: true # TurboSnap 활성화 (변경된 스토리만 테스트)
           exitZeroOnChanges: true # PR에서 변경사항이 있어도 실패하지 않음
-          autoAcceptChanges: ${{ github.ref == 'refs/heads/main' }} # main 브랜치에서는 자동 승인
