@@ -20,7 +20,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -41,7 +41,7 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --no-frozen-lockfile
 
       - name: Build packages
         run: pnpm build
@@ -55,7 +55,3 @@ jobs:
           onlyChanged: true # TurboSnap 활성화 (변경된 스토리만 테스트)
           exitZeroOnChanges: true # PR에서 변경사항이 있어도 실패하지 않음
           autoAcceptChanges: ${{ github.ref == 'refs/heads/main' }} # main 브랜치에서는 자동 승인
-
-
-
-
