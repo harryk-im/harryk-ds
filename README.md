@@ -1,5 +1,8 @@
 # Harryk 디자인 시스템 📚
 
+[![CI Pipeline](https://github.com/harryk-im/harryk-ds/actions/workflows/ci.yml/badge.svg)](https://github.com/harryk-im/harryk-ds/actions/workflows/ci.yml)
+[![Chromatic](https://github.com/harryk-im/harryk-ds/actions/workflows/chromatic.yml/badge.svg)](https://github.com/harryk-im/harryk-ds/actions/workflows/chromatic.yml)
+
 **Harryk 디자인 시스템**은 일관성 있고 재사용 가능한 UI 컴포넌트들을 제공하는 모노레포 기반 디자인 시스템입니다.
 
 ## 🏗️ 프로젝트 구조
@@ -194,17 +197,17 @@ pnpm clean              # 빌드 파일 및 node_modules 정리
 
 ### 기술 스택
 
-- **언어**: TypeScript
+- **언어**: TypeScript 5.9
 - **UI 라이브러리**: React 19
-- **빌드 도구**: Vite
-- **패키지 매니저**: pnpm (workspace)
+- **빌드 도구**: Vite 7
+- **패키지 매니저**: pnpm 8 (workspace)
 - **CSS-in-JS**: Vanilla Extract (UI 패키지)
-- **애니메이션**: Framer Motion (Motion 패키지)
-- **문서화**: Storybook + Chromatic
-- **시각적 테스트**: Chromatic
-- **린터**: Biome
-- **Git Hooks**: Husky
+- **애니메이션**: Framer Motion 11 (Motion 패키지)
+- **문서화**: Storybook 8 + Chromatic
+- **린터/포맷터**: Biome 2.2
+- **Git Hooks**: Husky 9
 - **CI/CD**: GitHub Actions
+- **Node.js**: 22
 
 ## 🚀 배포
 
@@ -246,7 +249,7 @@ pnpm clean              # 빌드 파일 및 node_modules 정리
 
 3. **환경 변수** (필요시)
    ```
-   NODE_VERSION=20
+   NODE_VERSION=22
    ```
 
 ### npm 패키지 배포
@@ -265,9 +268,35 @@ npm publish
 
 GitHub Actions를 통해 자동화된 CI/CD 파이프라인이 구성되어 있습니다:
 
-- **PR 생성 시**: 린트, 타입 체크, 빌드 검증
-- **main 브랜치 푸시 시**: Chromatic 배포 및 시각적 테스트
-- **시각적 회귀 테스트**: Chromatic을 통한 UI 변경사항 감지
+#### CI Pipeline (`.github/workflows/ci.yml`)
+
+**트리거**: main, develop 브랜치로의 push 또는 PR
+
+**작업 내용**:
+1. **Lint and Type Check**
+   - Biome를 통한 코드 린팅
+   - TypeScript 타입 체크
+
+2. **Build**
+   - 모든 패키지 빌드 검증
+   - Storybook 정적 빌드
+   - 빌드 결과물 아티팩트 업로드 (7일 보관)
+
+#### Chromatic Deployment (`.github/workflows/chromatic.yml`)
+
+**트리거**: main, develop 브랜치로의 PR 생성 시
+
+**작업 내용**:
+- Storybook 빌드 및 Chromatic 배포
+- TurboSnap 활성화 (변경된 스토리만 처리)
+- 시각적 회귀 테스트는 스킵 (`skip: 'chromatic'`)
+- PR 리뷰용 Storybook 미리보기 제공
+
+**특징**:
+- ✅ 의존성 캐싱으로 빌드 시간 단축
+- ✅ Node.js 22 환경에서 실행
+- ✅ 병렬 처리로 효율적인 CI 실행
+- ✅ PR에서 자동 실패 방지 (`exitZeroOnChanges`)
 
 ## 🤝 기여하기
 
