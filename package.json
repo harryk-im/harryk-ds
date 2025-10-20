@@ -13,6 +13,8 @@
     "dev:motion": "pnpm --filter @harryk-ds/motion dev",
     "storybook": "pnpm --filter @harryk-ds/storybook storybook",
     "build-storybook": "pnpm --filter @harryk-ds/storybook build-storybook",
+    "chromatic": "pnpm --filter @harryk-ds/storybook chromatic",
+    "chromatic:ci": "pnpm --filter @harryk-ds/storybook chromatic:ci",
     "clean": "pnpm -r exec rm -rf dist && rm -rf apps/storybook/storybook-static",
     "type-check": "pnpm -r type-check",
     "lint": "biome check .",

@@ -1,99 +1,99 @@
-import { Button } from '@harryk-ds/ui'
-import type { Meta, StoryObj } from '@storybook/react'
+import { Button } from "@harryk-ds/ui";
+import type { Meta, StoryObj } from "@storybook/react";
 
 const meta = {
-  title: 'UI/Button',
+  title: "UI/Button",
   component: Button,
   parameters: {
-    layout: 'centered',
+    layout: "centered",
     docs: {
       description: {
         component:
-          'Button 컴포넌트는 다양한 variant와 size를 지원하는 기본 버튼 컴포넌트입니다.',
+          "Button 컴포넌트는 다양한 variant와 size를 지원하는 기본 버튼 컴포넌트입니다.",
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
   argTypes: {
     variant: {
-      control: { type: 'select' },
-      options: ['primary', 'secondary', 'outline'],
-      description: '버튼의 스타일 variant',
+      control: { type: "select" },
+      options: ["primary", "secondary", "outline"],
+      description: "버튼의 스타일 variant",
     },
     size: {
-      control: { type: 'select' },
-      options: ['sm', 'md', 'lg'],
-      description: '버튼의 크기',
+      control: { type: "select" },
+      options: ["sm", "md", "lg"],
+      description: "버튼의 크기",
     },
     children: {
-      control: { type: 'text' },
-      description: '버튼 내부 텍스트',
+      control: { type: "text" },
+      description: "버튼 내부 텍스트",
     },
     disabled: {
-      control: { type: 'boolean' },
-      description: '버튼 비활성화 상태',
+      control: { type: "boolean" },
+      description: "버튼 비활성화 상태",
     },
   },
-} satisfies Meta<typeof Button>
+} satisfies Meta<typeof Button>;
 
-export default meta
-type Story = StoryObj<typeof meta>
+export default meta;
+type Story = StoryObj<typeof meta>;
 
 // 기본 스토리
 export const Default: Story = {
   args: {
-    children: 'Button',
+    children: "Button",
   },
-}
+};
 
 // Variant 스토리들
 export const Primary: Story = {
   args: {
-    variant: 'primary',
-    children: 'Primary Button',
+    variant: "primary",
+    children: "Primary Button",
   },
-}
+};
 
 export const Secondary: Story = {
   args: {
-    variant: 'secondary',
-    children: 'Secondary Button',
+    variant: "secondary",
+    children: "Secondary Button",
   },
-}
+};
 
 export const Outline: Story = {
   args: {
-    variant: 'outline',
-    children: 'Outline Button',
+    variant: "outline",
+    children: "Outline Button",
   },
-}
+};
 
 // Size 스토리들
 export const Small: Story = {
   args: {
-    size: 'sm',
-    children: 'Small Button',
+    size: "sm",
+    children: "Small Button",
   },
-}
+};
 
 export const Medium: Story = {
   args: {
-    size: 'md',
-    children: 'Medium Button',
+    size: "md",
+    children: "Medium Button",
   },
-}
+};
 
 export const Large: Story = {
   args: {
-    size: 'lg',
-    children: 'Large Button',
+    size: "lg",
+    children: "Large Button",
   },
-}
+};
 
 // 상태 스토리들
 export const Disabled: Story = {
   args: {
-    children: 'Disabled Button',
+    children: "Disabled Button",
     disabled: true,
   },
-}
+};

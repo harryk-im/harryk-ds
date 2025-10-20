@@ -181,6 +181,10 @@ pnpm build:motion       # Motion 패키지만 빌드
 pnpm storybook          # Storybook 개발 서버
 pnpm build-storybook    # Storybook 정적 빌드
 
+# Chromatic (시각적 테스트)
+pnpm chromatic          # Chromatic 배포 및 시각적 테스트
+pnpm chromatic:ci       # CI 환경용 Chromatic 실행
+
 # 유틸리티
 pnpm type-check         # 타입 체크
 pnpm lint               # 린트 검사
@@ -196,11 +200,35 @@ pnpm clean              # 빌드 파일 및 node_modules 정리
 - **패키지 매니저**: pnpm (workspace)
 - **CSS-in-JS**: Vanilla Extract (UI 패키지)
 - **애니메이션**: Framer Motion (Motion 패키지)
-- **문서화**: Storybook
+- **문서화**: Storybook + Chromatic
+- **시각적 테스트**: Chromatic
 - **린터**: Biome
 - **Git Hooks**: Husky
+- **CI/CD**: GitHub Actions
 
 ## 🚀 배포
+
+### Chromatic 설정
+
+1. **Chromatic 계정 생성**
+   - [chromatic.com](https://www.chromatic.com/)에서 계정 생성
+   - GitHub 저장소 연결
+
+2. **프로젝트 토큰 설정**
+   ```bash
+   # 환경 변수 파일 생성
+   cp env.example .env
+   # CHROMATIC_PROJECT_TOKEN에 발급받은 토큰 입력
+   ```
+
+3. **GitHub Secrets 설정**
+   - Repository Settings > Secrets and variables > Actions
+   - `CHROMATIC_PROJECT_TOKEN` 추가
+
+4. **Chromatic 배포**
+   ```bash
+   pnpm chromatic
+   ```
 
 ### Storybook 배포 (Vercel)
 
@@ -232,6 +260,14 @@ npm publish
 cd packages/motion
 npm publish
 ```
+
+### CI/CD 파이프라인
+
+GitHub Actions를 통해 자동화된 CI/CD 파이프라인이 구성되어 있습니다:
+
+- **PR 생성 시**: 린트, 타입 체크, 빌드 검증
+- **main 브랜치 푸시 시**: Chromatic 배포 및 시각적 테스트
+- **시각적 회귀 테스트**: Chromatic을 통한 UI 변경사항 감지
 
 ## 🤝 기여하기
 

@@ -6,9 +6,15 @@
   "type": "module",
   "scripts": {
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build --stats-json",
+    "chromatic": "npx chromatic --only-changed --storybook-base-dir ../../ --storybook-config-dir .storybook",
+    "chromatic:ci": "npx chromatic --exit-zero-on-changes --storybook-base-dir ../../ --storybook-config-dir .storybook"
   },
-  "keywords": ["storybook", "design-system", "components"],
+  "keywords": [
+    "storybook",
+    "design-system",
+    "components"
+  ],
   "author": "harryk-im",
   "license": "MIT",
   "dependencies": {
@@ -25,6 +31,7 @@
     "@types/react": "^19.1.16",
     "@types/react-dom": "^19.1.9",
     "@vanilla-extract/vite-plugin": "^5.1.1",
+    "chromatic": "^11.20.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "storybook": "^8.4.7",
