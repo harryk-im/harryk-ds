@@ -1,32 +1,32 @@
-import react from '@vitejs/plugin-react-swc'
-import { resolve } from 'path'
-import { defineConfig } from 'vite'
-import dts from 'vite-plugin-dts'
+import { resolve } from "node:path";
+import react from "@vitejs/plugin-react-swc";
+import { defineConfig } from "vite";
+import dts from "vite-plugin-dts";
 
 export default defineConfig({
   plugins: [
     react(),
     dts({
-      include: ['src'],
-      exclude: ['**/*.stories.*', '**/*.test.*'],
+      include: ["src"],
+      exclude: ["**/*.stories.*", "**/*.test.*"],
     }),
   ],
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/index.ts'),
-      name: 'HarrykMotion',
-      formats: ['es', 'cjs'],
-      fileName: (format) => `index.${format === 'es' ? 'js' : 'cjs'}`,
+      entry: resolve(__dirname, "src/index.ts"),
+      name: "HarrykMotion",
+      formats: ["es", "cjs"],
+      fileName: (format) => `index.${format === "es" ? "js" : "cjs"}`,
     },
     rollupOptions: {
-      external: ['react', 'react-dom', 'framer-motion'],
+      external: ["react", "react-dom", "framer-motion"],
       output: {
         globals: {
-          react: 'React',
-          'react-dom': 'ReactDOM',
-          'framer-motion': 'FramerMotion',
+          react: "React",
+          "react-dom": "ReactDOM",
+          "framer-motion": "FramerMotion",
         },
       },
     },
   },
-})
+});
