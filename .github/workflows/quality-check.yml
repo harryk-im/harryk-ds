@@ -1,6 +1,8 @@
 name: "CI Pipeline"
 
 on:
+  push:
+    branches: [main, develop]
   pull_request:
     branches: [main, develop]
 
@@ -86,13 +88,3 @@ jobs:
 
       - name: Build packages
         run: pnpm build
-
-      - name: Build Storybook
-        run: pnpm build-storybook
-
-      - name: Upload Storybook build
-        uses: actions/upload-artifact@v4
-        with:
-          name: storybook-build
-          path: apps/storybook/storybook-static/
-          retention-days: 7
