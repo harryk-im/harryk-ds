@@ -1,4 +1,4 @@
-name: "CI Pipeline"
+name: "Check Code Quality"
 
 on:
   push:
@@ -12,7 +12,7 @@ concurrency:
 
 jobs:
   lint-and-typecheck:
-    name: Lint and Type Check
+    name: Lint, Type, Build Check
     runs-on: ubuntu-latest
 
     steps:
