@@ -1,0 +1,15 @@
+echo "🔄 git pull 또는 git merge를 감지했어요"
+
+if git diff --name-only HEAD@{1} HEAD | grep -q "package.json"; then
+  echo "📦 패키지 변경사항을 감지했어요. pnpm install을 실행할게요..."
+  pnpm install
+
+  if [ $? -eq 0 ]; then
+    echo "✅ pnpm install이 성공적으로 완료되었어요!"
+  else
+    echo "❌ pnpm install 실행 중 오류가 발생했어요"
+    exit 1
+  fi
+else
+  echo "✅ 패키지 변경사항을 감지하지 못했어요. pnpm install 실행을 건너뛸게요"
+fi
