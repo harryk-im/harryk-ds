@@ -1,6 +1,6 @@
 # Harryk 디자인 시스템 📚
 
-[![CI Pipeline](https://github.com/harryk-im/harryk-ds/actions/workflows/ci.yml/badge.svg)](https://github.com/harryk-im/harryk-ds/actions/workflows/ci.yml)
+[![CI Pipeline](https://github.com/harryk-im/harryk-ds/actions/workflows/quality-check.yml/badge.svg)](https://github.com/harryk-im/harryk-ds/actions/workflows/quality-check.yml)
 [![Chromatic](https://github.com/harryk-im/harryk-ds/actions/workflows/chromatic.yml/badge.svg)](https://github.com/harryk-im/harryk-ds/actions/workflows/chromatic.yml)
 
 **Harryk 디자인 시스템**은 일관성 있고 재사용 가능한 UI 컴포넌트들을 제공하는 모노레포 기반 디자인 시스템입니다.
