@@ -17,7 +17,7 @@ const meta = {
   argTypes: {
     variant: {
       control: { type: "select" },
-      options: ["primary", "secondary", "outline"],
+      options: ["primary", "outline"],
       description: "버튼의 스타일 variant",
     },
     size: {
@@ -42,7 +42,7 @@ type Story = StoryObj<typeof meta>;
 // 기본 스토리
 export const Default: Story = {
   args: {
-    children: "Button",
+    children: "기본 버튼",
   },
 };
 
@@ -50,21 +50,13 @@ export const Default: Story = {
 export const Primary: Story = {
   args: {
     variant: "primary",
-    children: "Primary Button",
+    children: "기본 버튼",
   },
 };
-
-export const Secondary: Story = {
-  args: {
-    variant: "secondary",
-    children: "Secondary Button",
-  },
-};
-
 export const Outline: Story = {
   args: {
     variant: "outline",
-    children: "Outline Button",
+    children: "윤곽선 버튼",
   },
 };
 
@@ -72,28 +64,26 @@ export const Outline: Story = {
 export const Small: Story = {
   args: {
     size: "sm",
-    children: "Small Button",
+    children: "작은 버튼",
   },
 };
-
 export const Medium: Story = {
   args: {
     size: "md",
-    children: "Medium Button",
+    children: "중간 버튼",
   },
 };
-
 export const Large: Story = {
   args: {
     size: "lg",
-    children: "Large Button",
+    children: "큰 버튼",
   },
 };
 
 // 상태 스토리들
 export const Disabled: Story = {
   args: {
-    children: "Disabled Button",
+    children: "비활성화된 버튼",
     disabled: true,
   },
 };

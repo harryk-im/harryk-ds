@@ -1,24 +1,21 @@
-import React from "react";
-import * as styles from "./Button.css";
+import type { ButtonHTMLAttributes, ReactNode } from "react";
+import { forwardRef } from "react";
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary" | "outline";
-  size?: "sm" | "md" | "lg";
-  children?: React.ReactNode;
-}
+import type { ButtonSize, ButtonVariant } from "./Button.css";
+import { button, sizes, variants } from "./Button.css";
 
-export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  children?: ReactNode;
+};
+
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     { variant = "primary", size = "md", className, children, ...props },
     ref
   ) => {
-    const buttonClasses = [
-      styles.button,
-      styles.variants[variant],
-      styles.sizes[size],
-      className,
-    ]
+    const buttonClasses = [button, variants[variant], sizes[size], className]
       .filter(Boolean)
       .join(" ");
 

@@ -1,4 +1,4 @@
-name: "CI Pipeline"
+name: "Check Code Quality"
 
 on:
   push:
@@ -12,7 +12,7 @@ concurrency:
 
 jobs:
   lint-and-typecheck:
-    name: Lint and Type Check
+    name: Lint, Type, Build Check
     runs-on: ubuntu-latest
 
     steps:
@@ -88,13 +88,3 @@ jobs:
 
       - name: Build packages
         run: pnpm build
-
-      - name: Build Storybook
-        run: pnpm build-storybook
-
-      - name: Upload Storybook build
-        uses: actions/upload-artifact@v4
-        with:
-          name: storybook-build
-          path: apps/storybook/storybook-static/
-          retention-days: 7

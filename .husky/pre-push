@@ -1,6 +1,3 @@
-#!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
 echo "🔨 git push 전 빌드 체크를 실행할게요..."
 pnpm build
 
@@ -10,4 +7,3 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "✅ 빌드 체크를 통과했어요. git push를 진행할게요"
-

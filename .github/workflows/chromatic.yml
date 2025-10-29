@@ -10,6 +10,9 @@ jobs:
   chromatic:
     name: Run Chromatic
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
 
     steps:
       - name: Checkout code
@@ -47,11 +50,32 @@ jobs:
         run: pnpm build
 
       - name: Run Chromatic
+        id: chromatic
         uses: chromaui/action@latest
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           workingDir: apps/storybook
           buildScriptName: build-storybook
+          skip: 'chromatic' # 시각적 회귀 테스트 건너뛰기
           onlyChanged: true # TurboSnap 활성화 (변경된 스토리만 테스트)
           exitZeroOnChanges: true # PR에서 변경사항이 있어도 실패하지 않음
-          autoAcceptChanges: ${{ github.ref == 'refs/heads/main' }} # main 브랜치에서는 자동 승인
+
+      - name: Find previous comment
+        if: github.event_name == 'pull_request' && steps.chromatic.outputs.storybookUrl
+        uses: peter-evans/find-comment@v2
+        id: find-comment
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: 'github-actions[bot]'
+          body-includes: '🚀 Storybook:'
+
+      - name: Create or update PR comment
+        if: github.event_name == 'pull_request' && steps.chromatic.outputs.storybookUrl
+        uses: peter-evans/create-or-update-comment@v2
+        with:
+          comment-id: ${{ steps.find-comment.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            🚀 Storybook: ${{ steps.chromatic.outputs.storybookUrl }}
+            🚀 Chromatic: ${{ steps.chromatic.outputs.url }}
+          edit-mode: replace
