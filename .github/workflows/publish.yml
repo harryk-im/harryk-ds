@@ -14,15 +14,15 @@ on:
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
-  # 변경된 패키지 감지 및 배포
-  detect-and-publish:
-    name: Detect and Publish Changed Packages
+  # Changesets 기반 버전 관리 및 배포
+  release:
+    name: Version and Publish
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # 전체 히스토리 필요
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -39,14 +39,10 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          # .npmrc 파일 생성 (setup-node가 이미 생성했지만 재확인)
+          # .npmrc 파일 생성
           echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
           echo "@harryk-ds:registry=https://registry.npmjs.org/" >> ~/.npmrc
           echo "//registry.npmjs.org/:always-auth=true" >> ~/.npmrc
-
-          # .npmrc 내용 확인 (디버깅용, 토큰은 마스킹)
-          echo "✅ .npmrc 설정 완료"
-          cat ~/.npmrc | sed 's/_authToken=.*/_authToken=***/'
 
           # npm 인증 확인
           npm whoami || echo "⚠️ npm whoami 실패 (토큰 확인 필요)"
@@ -54,167 +50,128 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
 
-      - name: Detect changed packages
+      - name: Build packages
+        run: pnpm build
+
+      - name: Detect changed packages and create changesets
         id: detect
         run: |
-          # ⚠️ 테스트 모드: 변경사항이 없어도 모든 패키지 배포
-          echo "🧪 테스트 모드: 모든 패키지를 배포합니다"
+          # .changeset 디렉토리 확인 및 생성
+          mkdir -p .changeset
 
-          # 항상 두 패키지 모두 배포
-          CHANGED_PACKAGES="@harryk-ds/ui @harryk-ds/motion"
-          HAS_CHANGES="true"
+          # 변경된 패키지 감지
+          # HEAD^가 없을 경우 (첫 번째 커밋) 처리
+          if git rev-parse --verify HEAD^ >/dev/null 2>&1; then
+            PREV_SHA=$(git rev-parse HEAD^)
+          else
+            # 첫 번째 커밋인 경우, 빈 트리와 비교
+            PREV_SHA=$(git hash-object -t tree /dev/null)
+          fi
+
+          CURRENT_SHA=$(git rev-parse HEAD)
+
+          CHANGED_FILES=$(git diff --name-only $PREV_SHA $CURRENT_SHA 2>/dev/null || echo "")
+
+          if [ -z "$CHANGED_FILES" ]; then
+            echo "⚠️ 변경된 파일이 없습니다."
+            echo "has-changes=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          CHANGED_PACKAGES=""
+
+          # packages/ui 변경 확인
+          if echo "$CHANGED_FILES" | grep -q "^packages/ui/"; then
+            UI_CHANGED=$(echo "$CHANGED_FILES" | grep "^packages/ui/" | grep -v "/dist/" | grep -v "/node_modules/" | grep -v "\.log$" || true)
+            if [ -n "$UI_CHANGED" ]; then
+              CHANGED_PACKAGES="$CHANGED_PACKAGES @harryk-ds/ui"
+            fi
+          fi
+
+          # packages/motion 변경 확인
+          if echo "$CHANGED_FILES" | grep -q "^packages/motion/"; then
+            MOTION_CHANGED=$(echo "$CHANGED_FILES" | grep "^packages/motion/" | grep -v "/dist/" | grep -v "/node_modules/" | grep -v "\.log$" || true)
+            if [ -n "$MOTION_CHANGED" ]; then
+              CHANGED_PACKAGES="$CHANGED_PACKAGES @harryk-ds/motion"
+            fi
+          fi
+
+          # 테스트 모드: 변경이 없어도 모든 패키지 배포 (필요 시 활성화)
+          # if [ -z "$CHANGED_PACKAGES" ]; then
+          #   CHANGED_PACKAGES="@harryk-ds/ui @harryk-ds/motion"
+          # fi
+
+          # 공백 제거 (xargs는 빈 문자열일 때 문제 발생 가능)
+          CHANGED_PACKAGES=$(echo "$CHANGED_PACKAGES" | tr -s ' ' | xargs)
+
+          if [ -z "$CHANGED_PACKAGES" ]; then
+            echo "has-changes=false" >> $GITHUB_OUTPUT
+            echo "⚠️ 변경된 패키지가 없습니다."
+            exit 0
+          fi
 
           echo "packages=$CHANGED_PACKAGES" >> $GITHUB_OUTPUT
-          echo "has-changes=$HAS_CHANGES" >> $GITHUB_OUTPUT
+          echo "has-changes=true" >> $GITHUB_OUTPUT
+          echo "변경된 패키지: $CHANGED_PACKAGES"
 
-          echo "배포할 패키지: $CHANGED_PACKAGES"
-          echo "배포를 진행할게요"
+          # 변경된 패키지에 대해 자동으로 changeset 생성 (patch 버전)
+          for pkg in $CHANGED_PACKAGES; do
+            echo "changeset 생성: $pkg (patch)"
 
-          # 원래 변경 감지 로직 (주석 처리 - 필요시 재활성화)
-          # # 이전 커밋 찾기 (main 브랜치의 최신 커밋)
-          # PREV_SHA=$(git rev-parse HEAD^)
-          # CURRENT_SHA=$(git rev-parse HEAD)
-          #
-          # echo "이전 커밋: $PREV_SHA"
-          # echo "현재 커밋: $CURRENT_SHA"
-          #
-          # # 변경된 파일 목록
-          # CHANGED_FILES=$(git diff --name-only $PREV_SHA $CURRENT_SHA || echo "")
-          #
-          # if [ -z "$CHANGED_FILES" ]; then
-          #   echo "변경된 파일이 없어요"
-          #   echo "has-changes=false" >> $GITHUB_OUTPUT
-          #   exit 0
-          # fi
-          #
-          # echo "변경된 파일:"
-          # echo "$CHANGED_FILES"
-          #
-          # # 변경된 패키지 감지
-          # CHANGED_PACKAGES=""
-          # HAS_CHANGES="false"
-          #
-          # # packages/ui 변경 확인
-          # if echo "$CHANGED_FILES" | grep -q "^packages/ui/"; then
-          #   # dist나 node_modules 제외
-          #   UI_CHANGED=$(echo "$CHANGED_FILES" | grep "^packages/ui/" | grep -v "/dist/" | grep -v "/node_modules/" | grep -v "\.log$" || true)
-          #   if [ -n "$UI_CHANGED" ]; then
-          #     CHANGED_PACKAGES="$CHANGED_PACKAGES @harryk-ds/ui"
-          #     HAS_CHANGES="true"
-          #     echo "::notice::@harryk-ds/ui 패키지 변경이 감지됐어요"
-          #   fi
-          # fi
-          #
-          # # packages/motion 변경 확인
-          # if echo "$CHANGED_FILES" | grep -q "^packages/motion/"; then
-          #   # dist나 node_modules 제외
-          #   MOTION_CHANGED=$(echo "$CHANGED_FILES" | grep "^packages/motion/" | grep -v "/dist/" | grep -v "/node_modules/" | grep -v "\.log$" || true)
-          #   if [ -n "$MOTION_CHANGED" ]; then
-          #     CHANGED_PACKAGES="$CHANGED_PACKAGES @harryk-ds/motion"
-          #     HAS_CHANGES="true"
-          #     echo "::notice::@harryk-ds/motion 패키지 변경이 감지됐어요"
-          #   fi
-          # fi
-          #
-          # # 공백 제거
-          # CHANGED_PACKAGES=$(echo "$CHANGED_PACKAGES" | xargs)
-          #
-          # echo "packages=$CHANGED_PACKAGES" >> $GITHUB_OUTPUT
-          # echo "has-changes=$HAS_CHANGES" >> $GITHUB_OUTPUT
-          #
-          # echo "변경된 패키지: $CHANGED_PACKAGES"
-          # if [ "$HAS_CHANGES" = "true" ]; then
-          #   echo "배포를 진행할게요"
-          # else
-          #   echo "배포할 패키지가 없어 배포를 건너뛸게요"
-          # fi
+            # changeset 파일명: 타임스탬프 + 랜덤값
+            CHANGESET_ID=$(date +%s)-$$-$(shuf -i 1000-9999 -n 1 2>/dev/null || echo $RANDOM)
+            CHANGESET_FILE=".changeset/auto-${CHANGESET_ID}.md"
 
-      - name: Build changed packages
+            # changeset 파일 생성
+            # Changesets는 패키지 전체 이름 사용 (스코프 포함)
+            {
+              echo "---"
+              echo "\"$pkg\": patch"
+              echo "---"
+              echo ""
+              echo "자동 생성된 changeset: 패키지 변경사항에 따른 패치 버전 업데이트"
+            } > "$CHANGESET_FILE"
+
+            echo "✅ changeset 파일 생성: $CHANGESET_FILE"
+            cat "$CHANGESET_FILE"
+          done
+
+      - name: Version packages with Changesets
         if: steps.detect.outputs.has-changes == 'true'
         run: |
-          CHANGED_PACKAGES="${{ steps.detect.outputs.packages }}"
+          # Changesets로 버전 업데이트
+          pnpm changeset version
 
-          # 변경된 패키지만 빌드
-          for pkg in $CHANGED_PACKAGES; do
-            echo "빌드 중이에요...: $pkg"
-            pnpm --filter "$pkg" build
-          done
+          # 변경된 버전 확인
+          git diff --name-only
 
       - name: Publish to npm
         if: steps.detect.outputs.has-changes == 'true'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          CHANGED_PACKAGES="${{ steps.detect.outputs.packages }}"
-
-          # Git 설정 (태그 생성을 위해)
+          # Git 설정
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # npm 인증 다시 확인 및 설정
-          echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
-          echo "@harryk-ds:registry=https://registry.npmjs.org/" >> ~/.npmrc
-          echo "//registry.npmjs.org/:always-auth=true" >> ~/.npmrc
+          # Changesets를 사용하여 배포 (workspace 의존성 자동 처리)
+          pnpm changeset publish
 
-          # 변경된 패키지만 배포
-          for pkg in $CHANGED_PACKAGES; do
-            echo "배포 중이에요...: $pkg"
-
-            # 패키지 이름에서 디렉토리 이름 추출
-            PACKAGE_DIR=$(echo $pkg | sed 's/@harryk-ds\///')
-
-            # package.json에서 현재 버전 확인
-            CURRENT_VERSION=$(node -p "require('./packages/$PACKAGE_DIR/package.json').version")
-            echo "현재 버전: $CURRENT_VERSION"
-
-            # npm에 이미 배포된 버전인지 확인 (스코프가 없으면 404 에러 발생 가능)
-            PUBLISHED_VERSION=$(npm view "$pkg" version 2>/dev/null || echo "")
-
-            if [ "$?" != "0" ] && [ -z "$PUBLISHED_VERSION" ]; then
-              echo "⚠️ 패키지 조회 실패 (스코프가 아직 생성되지 않았을 수 있음, 계속 진행)"
-            fi
-
-            if [ -n "$PUBLISHED_VERSION" ]; then
-              echo "배포된 버전: $PUBLISHED_VERSION"
-              if [ "$CURRENT_VERSION" = "$PUBLISHED_VERSION" ]; then
-                echo "버전 $CURRENT_VERSION이 이미 npm에 배포되어 있습니다. 패치 버전을 증가시킵니다."
-                # 패치 버전 증가 (0.1.0 -> 0.1.1)
-                cd "packages/$PACKAGE_DIR"
-                npm version patch --no-git-tag-version
-                CURRENT_VERSION=$(node -p "require('./package.json').version")
-                echo "새 버전: $CURRENT_VERSION"
-                cd ../..
-              fi
-            fi
-
-            # npm을 사용하여 배포 (pnpm 대신 npm 사용 - 더 안정적)
-            # 스코프 패키지의 경우 --access public 명시 필수
-            cd "packages/$PACKAGE_DIR"
-
-            echo "📦 배포 시작: $pkg@$CURRENT_VERSION"
-            echo "npm registry 확인: $(npm config get registry)"
-            echo "npm 인증 확인: $(npm whoami || echo '인증 실패')"
-
-            # npm publish 실행
-            npm publish --access public --dry-run || echo "⚠️ dry-run 실패, 계속 진행"
-            npm publish --access public
-
-            cd ../..
-
-            # Git 태그 생성
-            git tag "${pkg}@${CURRENT_VERSION}" || true
-          done
+          # 버전 업데이트 및 배포 결과 커밋
+          git add .
+          git commit -m "chore: version packages" || echo "⚠️ 커밋할 변경사항 없음"
+          git push || echo "⚠️ 푸시 실패 (이미 푸시됨)"
 
           # 태그 푸시
-          git push --tags || true
+          git push --tags || echo "⚠️ 태그 푸시 실패"
 
-      - name: Publish summary
+      - name: Summary
         if: steps.detect.outputs.has-changes == 'true'
         run: |
           CHANGED_PACKAGES="${{ steps.detect.outputs.packages }}"
-          echo "🚀 배포 완료" >> $GITHUB_STEP_SUMMARY
+          echo "## 🚀 배포 완료" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "다음 패키지가 npm에 배포되었습니다:" >> $GITHUB_STEP_SUMMARY
+          echo "다음 패키지가 Changesets를 통해 배포되었습니다:" >> $GITHUB_STEP_SUMMARY
           for pkg in $CHANGED_PACKAGES; do
             echo "- \`$pkg\`" >> $GITHUB_STEP_SUMMARY
           done
