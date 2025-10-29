@@ -9,6 +9,7 @@ on:
       - ".changeset/**"
       - "package.json"
       - "pnpm-lock.yaml"
+      - ".github/workflows/publish.yml"
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
