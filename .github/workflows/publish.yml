@@ -1,0 +1,169 @@
+name: Publish Packages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "packages/**"
+      - ".changeset/**"
+      - "package.json"
+      - "pnpm-lock.yaml"
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  # 변경된 패키지 감지 및 배포
+  detect-and-publish:
+    name: Detect and Publish Changed Packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # 전체 히스토리 필요
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 8
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Detect changed packages
+        id: detect
+        run: |
+          # 이전 커밋 찾기 (main 브랜치의 최신 커밋)
+          PREV_SHA=$(git rev-parse HEAD^)
+          CURRENT_SHA=$(git rev-parse HEAD)
+
+          echo "이전 커밋: $PREV_SHA"
+          echo "현재 커밋: $CURRENT_SHA"
+
+          # 변경된 파일 목록
+          CHANGED_FILES=$(git diff --name-only $PREV_SHA $CURRENT_SHA || echo "")
+
+          if [ -z "$CHANGED_FILES" ]; then
+            echo "변경된 파일이 없어요"
+            echo "has-changes=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          echo "변경된 파일:"
+          echo "$CHANGED_FILES"
+
+          # 변경된 패키지 감지
+          CHANGED_PACKAGES=""
+          HAS_CHANGES="false"
+
+          # packages/ui 변경 확인
+          if echo "$CHANGED_FILES" | grep -q "^packages/ui/"; then
+            # dist나 node_modules 제외
+            UI_CHANGED=$(echo "$CHANGED_FILES" | grep "^packages/ui/" | grep -v "/dist/" | grep -v "/node_modules/" | grep -v "\.log$" || true)
+            if [ -n "$UI_CHANGED" ]; then
+              CHANGED_PACKAGES="$CHANGED_PACKAGES @harryk-ds/ui"
+              HAS_CHANGES="true"
+              echo "::notice::@harryk-ds/ui 패키지 변경이 감지됐어요"
+            fi
+          fi
+
+          # packages/motion 변경 확인
+          if echo "$CHANGED_FILES" | grep -q "^packages/motion/"; then
+            # dist나 node_modules 제외
+            MOTION_CHANGED=$(echo "$CHANGED_FILES" | grep "^packages/motion/" | grep -v "/dist/" | grep -v "/node_modules/" | grep -v "\.log$" || true)
+            if [ -n "$MOTION_CHANGED" ]; then
+              CHANGED_PACKAGES="$CHANGED_PACKAGES @harryk-ds/motion"
+              HAS_CHANGES="true"
+              echo "::notice::@harryk-ds/motion 패키지 변경이 감지됐어요"
+            fi
+          fi
+
+          # 공백 제거
+          CHANGED_PACKAGES=$(echo "$CHANGED_PACKAGES" | xargs)
+
+          echo "packages=$CHANGED_PACKAGES" >> $GITHUB_OUTPUT
+          echo "has-changes=$HAS_CHANGES" >> $GITHUB_OUTPUT
+
+          echo "변경된 패키지: $CHANGED_PACKAGES"
+          if [ "$HAS_CHANGES" = "true" ]; then
+            echo "배포를 진행할게요"
+          else
+            echo "배포할 패키지가 없어 배포를 건너뛸게요"
+          fi
+
+      - name: Build changed packages
+        if: steps.detect.outputs.has-changes == 'true'
+        run: |
+          CHANGED_PACKAGES="${{ steps.detect.outputs.packages }}"
+
+          # 변경된 패키지만 빌드
+          for pkg in $CHANGED_PACKAGES; do
+            echo "빌드 중이에요...: $pkg"
+            pnpm --filter "$pkg" build
+          done
+
+      - name: Publish to npm
+        if: steps.detect.outputs.has-changes == 'true'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          CHANGED_PACKAGES="${{ steps.detect.outputs.packages }}"
+
+          # Git 설정 (태그 생성을 위해)
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # 변경된 패키지만 배포
+          for pkg in $CHANGED_PACKAGES; do
+            echo "배포 중이에요...: $pkg"
+
+            # 패키지 이름에서 디렉토리 이름 추출
+            PACKAGE_DIR=$(echo $pkg | sed 's/@harryk-ds\///')
+
+            # package.json에서 현재 버전 확인
+            CURRENT_VERSION=$(node -p "require('./packages/$PACKAGE_DIR/package.json').version")
+            echo "현재 버전: $CURRENT_VERSION"
+
+            # npm에 이미 배포된 버전인지 확인
+            PUBLISHED_VERSION=$(npm view "$pkg" version 2>/dev/null || echo "")
+
+            if [ -n "$PUBLISHED_VERSION" ]; then
+              if [ "$CURRENT_VERSION" = "$PUBLISHED_VERSION" ]; then
+                echo "버전 $CURRENT_VERSION이 이미 npm에 배포되어 있습니다. 패치 버전을 증가시킵니다."
+                # 패치 버전 증가 (0.1.0 -> 0.1.1)
+                cd "packages/$PACKAGE_DIR"
+                npm version patch --no-git-tag-version
+                CURRENT_VERSION=$(node -p "require('./package.json').version")
+                echo "새 버전: $CURRENT_VERSION"
+                cd ../..
+              fi
+            fi
+
+            # pnpm을 사용하여 배포 (각 패키지의 publishConfig 사용)
+            pnpm --filter "$pkg" publish --access public --no-git-checks
+
+            # Git 태그 생성
+            git tag "${pkg}@${CURRENT_VERSION}" || true
+          done
+
+          # 태그 푸시
+          git push --tags || true
+
+      - name: Publish summary
+        if: steps.detect.outputs.has-changes == 'true'
+        run: |
+          CHANGED_PACKAGES="${{ steps.detect.outputs.packages }}"
+          echo "🚀 배포 완료" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "다음 패키지가 npm에 배포되었습니다:" >> $GITHUB_STEP_SUMMARY
+          for pkg in $CHANGED_PACKAGES; do
+            echo "- \`$pkg\`" >> $GITHUB_STEP_SUMMARY
+          done
+
