@@ -16,7 +16,12 @@
   },
   "files": [
     "dist",
+    "dist/**/*.css",
     "README.md"
+  ],
+  "sideEffects": [
+    "*.css",
+    "*.css.ts"
   ],
   "scripts": {
     "build": "vite build",
