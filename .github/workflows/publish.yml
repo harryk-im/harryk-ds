@@ -39,9 +39,17 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          # setup-node가 이미 기본 인증을 설정하지만, 스코프 패키지를 위해 추가 설정
+          # .npmrc 파일 생성 (setup-node가 이미 생성했지만 재확인)
+          echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
           echo "@harryk-ds:registry=https://registry.npmjs.org/" >> ~/.npmrc
           echo "//registry.npmjs.org/:always-auth=true" >> ~/.npmrc
+
+          # .npmrc 내용 확인 (디버깅용, 토큰은 마스킹)
+          echo "✅ .npmrc 설정 완료"
+          cat ~/.npmrc | sed 's/_authToken=.*/_authToken=***/'
+
+          # npm 인증 확인
+          npm whoami || echo "⚠️ npm whoami 실패 (토큰 확인 필요)"
 
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
@@ -143,6 +151,11 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
+          # npm 인증 다시 확인 및 설정
+          echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
+          echo "@harryk-ds:registry=https://registry.npmjs.org/" >> ~/.npmrc
+          echo "//registry.npmjs.org/:always-auth=true" >> ~/.npmrc
+
           # 변경된 패키지만 배포
           for pkg in $CHANGED_PACKAGES; do
             echo "배포 중이에요...: $pkg"
@@ -154,10 +167,15 @@ jobs:
             CURRENT_VERSION=$(node -p "require('./packages/$PACKAGE_DIR/package.json').version")
             echo "현재 버전: $CURRENT_VERSION"
 
-            # npm에 이미 배포된 버전인지 확인
+            # npm에 이미 배포된 버전인지 확인 (스코프가 없으면 404 에러 발생 가능)
             PUBLISHED_VERSION=$(npm view "$pkg" version 2>/dev/null || echo "")
 
+            if [ "$?" != "0" ] && [ -z "$PUBLISHED_VERSION" ]; then
+              echo "⚠️ 패키지 조회 실패 (스코프가 아직 생성되지 않았을 수 있음, 계속 진행)"
+            fi
+
             if [ -n "$PUBLISHED_VERSION" ]; then
+              echo "배포된 버전: $PUBLISHED_VERSION"
               if [ "$CURRENT_VERSION" = "$PUBLISHED_VERSION" ]; then
                 echo "버전 $CURRENT_VERSION이 이미 npm에 배포되어 있습니다. 패치 버전을 증가시킵니다."
                 # 패치 버전 증가 (0.1.0 -> 0.1.1)
@@ -169,10 +187,18 @@ jobs:
               fi
             fi
 
-            # pnpm을 사용하여 배포 (각 패키지의 publishConfig 사용)
-            # 스코프 패키지의 경우 --access public 명시 필요
+            # npm을 사용하여 배포 (pnpm 대신 npm 사용 - 더 안정적)
+            # 스코프 패키지의 경우 --access public 명시 필수
             cd "packages/$PACKAGE_DIR"
-            pnpm publish --access public --no-git-checks
+
+            echo "📦 배포 시작: $pkg@$CURRENT_VERSION"
+            echo "npm registry 확인: $(npm config get registry)"
+            echo "npm 인증 확인: $(npm whoami || echo '인증 실패')"
+
+            # npm publish 실행
+            npm publish --access public --dry-run || echo "⚠️ dry-run 실패, 계속 진행"
+            npm publish --access public
+
             cd ../..
 
             # Git 태그 생성
