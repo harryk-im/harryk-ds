@@ -40,63 +40,77 @@ jobs:
       - name: Detect changed packages
         id: detect
         run: |
-          # 이전 커밋 찾기 (main 브랜치의 최신 커밋)
-          PREV_SHA=$(git rev-parse HEAD^)
-          CURRENT_SHA=$(git rev-parse HEAD)
+          # ⚠️ 테스트 모드: 변경사항이 없어도 모든 패키지 배포
+          echo "🧪 테스트 모드: 모든 패키지를 배포합니다"
 
-          echo "이전 커밋: $PREV_SHA"
-          echo "현재 커밋: $CURRENT_SHA"
-
-          # 변경된 파일 목록
-          CHANGED_FILES=$(git diff --name-only $PREV_SHA $CURRENT_SHA || echo "")
-
-          if [ -z "$CHANGED_FILES" ]; then
-            echo "변경된 파일이 없어요"
-            echo "has-changes=false" >> $GITHUB_OUTPUT
-            exit 0
-          fi
-
-          echo "변경된 파일:"
-          echo "$CHANGED_FILES"
-
-          # 변경된 패키지 감지
-          CHANGED_PACKAGES=""
-          HAS_CHANGES="false"
-
-          # packages/ui 변경 확인
-          if echo "$CHANGED_FILES" | grep -q "^packages/ui/"; then
-            # dist나 node_modules 제외
-            UI_CHANGED=$(echo "$CHANGED_FILES" | grep "^packages/ui/" | grep -v "/dist/" | grep -v "/node_modules/" | grep -v "\.log$" || true)
-            if [ -n "$UI_CHANGED" ]; then
-              CHANGED_PACKAGES="$CHANGED_PACKAGES @harryk-ds/ui"
-              HAS_CHANGES="true"
-              echo "::notice::@harryk-ds/ui 패키지 변경이 감지됐어요"
-            fi
-          fi
-
-          # packages/motion 변경 확인
-          if echo "$CHANGED_FILES" | grep -q "^packages/motion/"; then
-            # dist나 node_modules 제외
-            MOTION_CHANGED=$(echo "$CHANGED_FILES" | grep "^packages/motion/" | grep -v "/dist/" | grep -v "/node_modules/" | grep -v "\.log$" || true)
-            if [ -n "$MOTION_CHANGED" ]; then
-              CHANGED_PACKAGES="$CHANGED_PACKAGES @harryk-ds/motion"
-              HAS_CHANGES="true"
-              echo "::notice::@harryk-ds/motion 패키지 변경이 감지됐어요"
-            fi
-          fi
-
-          # 공백 제거
-          CHANGED_PACKAGES=$(echo "$CHANGED_PACKAGES" | xargs)
+          # 항상 두 패키지 모두 배포
+          CHANGED_PACKAGES="@harryk-ds/ui @harryk-ds/motion"
+          HAS_CHANGES="true"
 
           echo "packages=$CHANGED_PACKAGES" >> $GITHUB_OUTPUT
           echo "has-changes=$HAS_CHANGES" >> $GITHUB_OUTPUT
 
-          echo "변경된 패키지: $CHANGED_PACKAGES"
-          if [ "$HAS_CHANGES" = "true" ]; then
-            echo "배포를 진행할게요"
-          else
-            echo "배포할 패키지가 없어 배포를 건너뛸게요"
-          fi
+          echo "배포할 패키지: $CHANGED_PACKAGES"
+          echo "배포를 진행할게요"
+
+          # 원래 변경 감지 로직 (주석 처리 - 필요시 재활성화)
+          # # 이전 커밋 찾기 (main 브랜치의 최신 커밋)
+          # PREV_SHA=$(git rev-parse HEAD^)
+          # CURRENT_SHA=$(git rev-parse HEAD)
+          #
+          # echo "이전 커밋: $PREV_SHA"
+          # echo "현재 커밋: $CURRENT_SHA"
+          #
+          # # 변경된 파일 목록
+          # CHANGED_FILES=$(git diff --name-only $PREV_SHA $CURRENT_SHA || echo "")
+          #
+          # if [ -z "$CHANGED_FILES" ]; then
+          #   echo "변경된 파일이 없어요"
+          #   echo "has-changes=false" >> $GITHUB_OUTPUT
+          #   exit 0
+          # fi
+          #
+          # echo "변경된 파일:"
+          # echo "$CHANGED_FILES"
+          #
+          # # 변경된 패키지 감지
+          # CHANGED_PACKAGES=""
+          # HAS_CHANGES="false"
+          #
+          # # packages/ui 변경 확인
+          # if echo "$CHANGED_FILES" | grep -q "^packages/ui/"; then
+          #   # dist나 node_modules 제외
+          #   UI_CHANGED=$(echo "$CHANGED_FILES" | grep "^packages/ui/" | grep -v "/dist/" | grep -v "/node_modules/" | grep -v "\.log$" || true)
+          #   if [ -n "$UI_CHANGED" ]; then
+          #     CHANGED_PACKAGES="$CHANGED_PACKAGES @harryk-ds/ui"
+          #     HAS_CHANGES="true"
+          #     echo "::notice::@harryk-ds/ui 패키지 변경이 감지됐어요"
+          #   fi
+          # fi
+          #
+          # # packages/motion 변경 확인
+          # if echo "$CHANGED_FILES" | grep -q "^packages/motion/"; then
+          #   # dist나 node_modules 제외
+          #   MOTION_CHANGED=$(echo "$CHANGED_FILES" | grep "^packages/motion/" | grep -v "/dist/" | grep -v "/node_modules/" | grep -v "\.log$" || true)
+          #   if [ -n "$MOTION_CHANGED" ]; then
+          #     CHANGED_PACKAGES="$CHANGED_PACKAGES @harryk-ds/motion"
+          #     HAS_CHANGES="true"
+          #     echo "::notice::@harryk-ds/motion 패키지 변경이 감지됐어요"
+          #   fi
+          # fi
+          #
+          # # 공백 제거
+          # CHANGED_PACKAGES=$(echo "$CHANGED_PACKAGES" | xargs)
+          #
+          # echo "packages=$CHANGED_PACKAGES" >> $GITHUB_OUTPUT
+          # echo "has-changes=$HAS_CHANGES" >> $GITHUB_OUTPUT
+          #
+          # echo "변경된 패키지: $CHANGED_PACKAGES"
+          # if [ "$HAS_CHANGES" = "true" ]; then
+          #   echo "배포를 진행할게요"
+          # else
+          #   echo "배포할 패키지가 없어 배포를 건너뛸게요"
+          # fi
 
       - name: Build changed packages
         if: steps.detect.outputs.has-changes == 'true'
