@@ -34,6 +34,14 @@ jobs:
         with:
           version: 8
 
+      - name: Configure npm for scoped packages
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          # setup-node가 이미 기본 인증을 설정하지만, 스코프 패키지를 위해 추가 설정
+          echo "@harryk-ds:registry=https://registry.npmjs.org/" >> ~/.npmrc
+          echo "//registry.npmjs.org/:always-auth=true" >> ~/.npmrc
+
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
 
@@ -161,7 +169,10 @@ jobs:
             fi
 
             # pnpm을 사용하여 배포 (각 패키지의 publishConfig 사용)
-            pnpm --filter "$pkg" publish --access public --no-git-checks
+            # 스코프 패키지의 경우 --access public 명시 필요
+            cd "packages/$PACKAGE_DIR"
+            pnpm publish --access public --no-git-checks
+            cd ../..
 
             # Git 태그 생성
             git tag "${pkg}@${CURRENT_VERSION}" || true
