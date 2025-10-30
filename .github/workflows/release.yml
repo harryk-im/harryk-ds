@@ -47,7 +47,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add .
           git commit -m "ci: version bump [skip ci]"
-          git push origin main
+          git push origin main || true
 
       # 실제 npm 배포 단계
       - name: Publish to npm
