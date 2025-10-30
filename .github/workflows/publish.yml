@@ -56,45 +56,42 @@ jobs:
       - name: Detect changed packages and create changesets
         id: detect
         run: |
-          # .changeset 디렉토리 확인 및 생성
-          mkdir -p .changeset
+          # # 변경된 패키지 감지
+          # # HEAD^가 없을 경우 (첫 번째 커밋) 처리
+          # if git rev-parse --verify HEAD^ >/dev/null 2>&1; then
+          #   PREV_SHA=$(git rev-parse HEAD^)
+          # else
+          #   # 첫 번째 커밋인 경우, 빈 트리와 비교
+          #   PREV_SHA=$(git hash-object -t tree /dev/null)
+          # fi
 
-          # 변경된 패키지 감지
-          # HEAD^가 없을 경우 (첫 번째 커밋) 처리
-          if git rev-parse --verify HEAD^ >/dev/null 2>&1; then
-            PREV_SHA=$(git rev-parse HEAD^)
-          else
-            # 첫 번째 커밋인 경우, 빈 트리와 비교
-            PREV_SHA=$(git hash-object -t tree /dev/null)
-          fi
+          # CURRENT_SHA=$(git rev-parse HEAD)
 
-          CURRENT_SHA=$(git rev-parse HEAD)
+          # CHANGED_FILES=$(git diff --name-only $PREV_SHA $CURRENT_SHA 2>/dev/null || echo "")
 
-          CHANGED_FILES=$(git diff --name-only $PREV_SHA $CURRENT_SHA 2>/dev/null || echo "")
+          # if [ -z "$CHANGED_FILES" ]; then
+          #   echo "⚠️ 변경된 파일이 없습니다."
+          #   echo "has-changes=false" >> $GITHUB_OUTPUT
+          #   exit 0
+          # fi
 
-          if [ -z "$CHANGED_FILES" ]; then
-            echo "⚠️ 변경된 파일이 없습니다."
-            echo "has-changes=false" >> $GITHUB_OUTPUT
-            exit 0
-          fi
+          # CHANGED_PACKAGES=""
 
-          CHANGED_PACKAGES=""
+          # # packages/ui 변경 확인
+          # if echo "$CHANGED_FILES" | grep -q "^packages/ui/"; then
+          #   UI_CHANGED=$(echo "$CHANGED_FILES" | grep "^packages/ui/" | grep -v "/dist/" | grep -v "/node_modules/" | grep -v "\.log$" || true)
+          #   if [ -n "$UI_CHANGED" ]; then
+          #     CHANGED_PACKAGES="$CHANGED_PACKAGES @harryk-ds/ui"
+          #   fi
+          # fi
 
-          # packages/ui 변경 확인
-          if echo "$CHANGED_FILES" | grep -q "^packages/ui/"; then
-            UI_CHANGED=$(echo "$CHANGED_FILES" | grep "^packages/ui/" | grep -v "/dist/" | grep -v "/node_modules/" | grep -v "\.log$" || true)
-            if [ -n "$UI_CHANGED" ]; then
-              CHANGED_PACKAGES="$CHANGED_PACKAGES @harryk-ds/ui"
-            fi
-          fi
-
-          # packages/motion 변경 확인
-          if echo "$CHANGED_FILES" | grep -q "^packages/motion/"; then
-            MOTION_CHANGED=$(echo "$CHANGED_FILES" | grep "^packages/motion/" | grep -v "/dist/" | grep -v "/node_modules/" | grep -v "\.log$" || true)
-            if [ -n "$MOTION_CHANGED" ]; then
-              CHANGED_PACKAGES="$CHANGED_PACKAGES @harryk-ds/motion"
-            fi
-          fi
+          # # packages/motion 변경 확인
+          # if echo "$CHANGED_FILES" | grep -q "^packages/motion/"; then
+          #   MOTION_CHANGED=$(echo "$CHANGED_FILES" | grep "^packages/motion/" | grep -v "/dist/" | grep -v "/node_modules/" | grep -v "\.log$" || true)
+          #   if [ -n "$MOTION_CHANGED" ]; then
+          #     CHANGED_PACKAGES="$CHANGED_PACKAGES @harryk-ds/motion"
+          #   fi
+          # fi
 
           # 테스트 모드: 변경이 없어도 모든 패키지 배포 (필요 시 활성화)
           # if [ -z "$CHANGED_PACKAGES" ]; then
