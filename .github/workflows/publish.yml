@@ -93,7 +93,7 @@ jobs:
           #   fi
           # fi
 
-          테스트 모드: 변경이 없어도 모든 패키지 배포 (필요 시 활성화)
+          # 테스트 모드: 변경이 없어도 모든 패키지 배포 (필요 시 활성화)
           if [ -z "$CHANGED_PACKAGES" ]; then
             CHANGED_PACKAGES="@harryk-ds/ui @harryk-ds/motion"
           fi
