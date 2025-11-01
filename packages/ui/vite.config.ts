@@ -16,7 +16,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
-      name: "HarrykUI",
+      name: "@harryk-ds/ui",
       formats: ["es", "cjs"],
       fileName: (format) => `index.${format === "es" ? "js" : "cjs"}`,
     },
@@ -27,6 +27,7 @@ export default defineConfig({
           react: "React",
           "react-dom": "ReactDOM",
         },
+        banner: `import './ui.css';`,
       },
     },
   },

@@ -1,6 +1,6 @@
 {
   "name": "@harryk-ds/ui",
-  "version": "0.1.0",
+  "version": "0.0.0-20251101111514",
   "description": "UI components for Harryk Design System",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -10,7 +10,8 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "require": "./dist/index.cjs",
+      "style": "./dist/ui.css"
     },
     "./package.json": "./package.json"
   },
