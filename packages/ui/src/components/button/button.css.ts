@@ -1,4 +1,4 @@
-import { styleVariants } from "@vanilla-extract/css";
+import { style, styleVariants } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 
 /**
@@ -57,6 +57,42 @@ export const buttonSizes = styleVariants({
 });
 
 /**
+ * 버튼의 기본 스타일이에요.
+ * 모든 버튼에 공통으로 적용되는 스타일과 인터랙션을 정의해요.
+ */
+const buttonBase = style({
+  borderRadius: "8px",
+  fontWeight: "500",
+  cursor: "pointer",
+  transition: "all 0.1s ease-in-out",
+  outline: "none",
+
+  /** hover 시 opacity가 낮아져요. */
+  ":hover": {
+    opacity: 0.8,
+  },
+
+  /** press(active) 시 살짝 작아져요. */
+  ":active": {
+    transform: "scale(0.96)",
+  },
+
+  /** disabled 상태에서는 인터랙션이 비활성화돼요. */
+  selectors: {
+    "&:disabled": {
+      cursor: "not-allowed",
+      opacity: 0.6,
+    },
+    "&:disabled:hover": {
+      opacity: 0.6,
+    },
+    "&:disabled:active": {
+      transform: "none",
+    },
+  },
+});
+
+/**
  * Button 컴포넌트의 스타일 recipe예요.
  * color, variant, size 옵션을 조합해서 버튼 스타일을 생성해요.
  *
@@ -70,19 +106,7 @@ export const buttonSizes = styleVariants({
  * ```
  */
 export const buttonStyle = recipe({
-  /** 모든 버튼에 공통으로 적용되는 기본 스타일이에요. */
-  base: {
-    borderRadius: "8px",
-    fontWeight: "500",
-    cursor: "pointer",
-    transition: "all 0.2s ease",
-    outline: "none",
-
-    ":disabled": {
-      cursor: "not-allowed",
-      opacity: 0.6,
-    },
-  },
+  base: buttonBase,
 
   /** 버튼의 스타일 옵션이에요. */
   variants: {
