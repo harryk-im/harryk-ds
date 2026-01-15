@@ -1,6 +1,6 @@
-export { colors } from "./colors.css";
+export { COLORS } from "./colors.css";
 export {
-  fontSizes,
-  fontWeights,
-  lineHeights,
+  FONT_SIZES,
+  FONT_WEIGHTS,
+  LINE_HEIGHTS,
 } from "./typography.css";

@@ -3,7 +3,7 @@ const black = "#000000";
 const white = "#FFFFFF";
 const typography = "#1D1D1D";
 
-export const colors = {
+export const COLORS = {
   primary,
   black,
   white,
