@@ -1,6 +1,8 @@
 import { style, styleVariants } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 
+import { COLORS, FONT_SIZES, FONT_WEIGHTS } from "../../styles";
+
 /**
  * 버튼의 색상 토큰이에요.
  * primary와 secondary 두 가지 색상을 제공해요.
@@ -8,13 +10,13 @@ import { recipe } from "@vanilla-extract/recipes";
 export const buttonColors = styleVariants({
   /** 주요 액션에 사용하는 색상이에요. */
   primary: {
-    backgroundColor: "#3b82f6",
-    color: "white",
+    backgroundColor: COLORS.primary,
+    color: COLORS.white,
   },
   /** 보조 액션에 사용하는 색상이에요. */
   secondary: {
-    backgroundColor: "#f3f4f6",
-    color: "#374151",
+    backgroundColor: COLORS.gray[300],
+    color: COLORS.typography,
   },
 });
 
@@ -42,17 +44,17 @@ export const buttonSizes = styleVariants({
   /** 작은 크기예요. */
   sm: {
     padding: "8px 16px",
-    fontSize: "14px",
+    fontSize: FONT_SIZES.md,
   },
   /** 기본 크기예요. */
   md: {
     padding: "12px 24px",
-    fontSize: "16px",
+    fontSize: FONT_SIZES.lg,
   },
   /** 큰 크기예요. */
   lg: {
     padding: "16px 32px",
-    fontSize: "18px",
+    fontSize: FONT_SIZES.xl,
   },
 });
 
@@ -62,7 +64,7 @@ export const buttonSizes = styleVariants({
  */
 const buttonBase = style({
   borderRadius: "8px",
-  fontWeight: "500",
+  fontWeight: FONT_WEIGHTS.bold,
   cursor: "pointer",
   transition: "all 0.1s ease-in-out",
   outline: "none",
@@ -124,8 +126,8 @@ export const buttonStyle = recipe({
       },
       style: {
         backgroundColor: "transparent",
-        color: "#3b82f6",
-        borderColor: "#3b82f6",
+        color: COLORS.primary,
+        borderColor: COLORS.primary,
       },
     },
     {
@@ -135,8 +137,8 @@ export const buttonStyle = recipe({
       },
       style: {
         backgroundColor: "transparent",
-        color: "#374151",
-        borderColor: "#374151",
+        color: COLORS.gray[300],
+        borderColor: COLORS.gray[300],
       },
     },
   ],
