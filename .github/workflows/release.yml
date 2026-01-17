@@ -5,13 +5,16 @@ on:
     branches:
       - main
 
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
 permissions:
   contents: write
-  packages: write
+  pull-requests: write
+  id-token: write # npm provenance를 위해 필요
 
 jobs:
   release:
-    name: Publish Changed Packages
+    name: Release
     runs-on: ubuntu-latest
 
     steps:
@@ -23,34 +26,51 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           registry-url: https://registry.npmjs.org/
 
-      - name: Install Dependencies
-        run: |
-          corepack enable
-          pnpm install --no-frozen-lockfile
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 8
 
-      # (선택사항) 빌드 단계 - 각 패키지를 빌드하는 과정이 필요하다면 추가
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+
       - name: Build Packages
         run: pnpm build
 
-      # changeset 버전 업데이트 (변경된 패키지만 감지 후 version bump)
-      - name: Version Packages
+      # changesets/action 사용
+      # - changeset 파일이 있으면: "Version Packages" PR 자동 생성
+      # - changeset 파일이 없으면 (Version Packages PR 머지 후): npm 배포 실행
+      - name: Create Release Pull Request or Publish
         id: changesets
-        run: npx changeset version
-
-      # 변경사항이 있다면 git commit & push
-      - name: Commit and Push version changes
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
-          git commit -m "ci: version bump [skip ci]" || echo "No changes to commit"
-          git push origin main || true
-
-      # 실제 npm 배포 단계
-      - name: Publish to npm
+        uses: changesets/action@v1
+        with:
+          version: pnpm changeset:version
+          publish: pnpm changeset:publish
+          commit: "chore(release): version packages"
+          title: "chore(release): version packages"
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npx changeset publish
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      # 배포 완료 후 요약 출력
+      - name: Release Summary
+        if: steps.changesets.outputs.published == 'true'
+        run: |
+          echo "🚀 패키지가 성공적으로 배포됐어요!"
+          echo "배포된 패키지: ${{ steps.changesets.outputs.publishedPackages }}"

@@ -1,4 +1,4 @@
-export const fontSizes = {
+export const FONT_SIZES = {
   xs: "10px",
   sm: "12px",
   md: "14px",
@@ -7,7 +7,7 @@ export const fontSizes = {
   "2xl": "20px",
 } as const;
 
-export const lineHeights = {
+export const LINE_HEIGHTS = {
   xs: "13px",
   sm: "16px",
   md: "18px",
@@ -16,7 +16,7 @@ export const lineHeights = {
   "2xl": "33.55px",
 } as const;
 
-export const fontWeights = {
+export const FONT_WEIGHTS = {
   normal: "400",
   bold: "600",
 } as const;

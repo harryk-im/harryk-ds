@@ -1,40 +1,36 @@
-# Harryk 디자인 시스템 📚
+# harryk-ds: harrykim-design-system
 
 [![CI Pipeline](https://github.com/harryk-im/harryk-ds/actions/workflows/quality-check.yml/badge.svg)](https://github.com/harryk-im/harryk-ds/actions/workflows/quality-check.yml)
 [![Chromatic](https://github.com/harryk-im/harryk-ds/actions/workflows/chromatic.yml/badge.svg)](https://github.com/harryk-im/harryk-ds/actions/workflows/chromatic.yml)
 
-**Harryk 디자인 시스템**은 일관성 있고 재사용 가능한 UI 컴포넌트들을 제공하는 모노레포 기반 디자인 시스템입니다.
+**harryk-ds**는 재사용과 유지보수에 용이한 UI 컴포넌트 & Motion 컴포넌트를 제공하는 디자인 시스템이에요.
 
 ## 🏗️ 프로젝트 구조
 
 ```
 harryk-ds/
-├── packages/                    # 컴포넌트 패키지들
+├── packages/                   # 컴포넌트 패키지
 │   ├── ui/                     # UI 컴포넌트 (@harryk-ds/ui)
 │   │   └── src/components/
-│   │       └── Button/         # 버튼 컴포넌트
+│   │       └── button/
 │   └── motion/                 # 모션 컴포넌트 (@harryk-ds/motion)
 │       └── src/components/
-│           └── FadeIn/         # 페이드인 애니메이션
-└── apps/                       # 애플리케이션들
+│           └── FadeIn/
+└── apps/                       # 애플리케이션
     └── storybook/              # Storybook 문서화 (@harryk-ds/storybook)
-        └── src/stories/        # 모든 스토리 파일
+        └── src/stories/
 ```
 
 ### 아키텍처 원칙
 
-이 프로젝트는 **중앙 집중형 스토리 관리** 방식을 채택했습니다:
+이 프로젝트는 **중앙 집중형 스토리 관리** 방식을 채택했어요.
 
 - **컴포넌트 패키지** (`packages/*`): 순수한 컴포넌트 라이브러리
-
-  - Storybook 의존성 없음
-  - 가벼운 번들 크기
-  - 독립적인 배포 가능
+  - 가벼운 번들 크기의 디자인 시스템을 만들어요.
+  - 각 패키지별 독립적인 배포가 가능해요.
 
 - **Storybook 앱** (`apps/storybook`): 문서화 전용
-  - 모든 스토리 파일 포함
-  - Storybook 의존성 집중
-  - 의존성 중복 제거
+  - 패키지의 Storybook을 작성하고 시각적 문서화에 집중해요.
 
 ## 🚀 시작하기
 
@@ -52,7 +48,7 @@ pnpm install
 pnpm storybook
 ```
 
-http://localhost:6006 에서 컴포넌트들을 확인할 수 있습니다.
+http://localhost:6006 에서 컴포넌트를 확인할 수 있어요.
 
 #### 컴포넌트 개발 모드
 
@@ -70,15 +66,15 @@ pnpm build
 pnpm build-storybook
 ```
 
-## 📦 패키지들
+## 📦 패키지
 
 ### @harryk-ds/ui
 
-기본 UI 컴포넌트들을 포함합니다.
+기본 UI 컴포넌트를 제공해요.
 
 **컴포넌트:**
 
-- `Button` - 다양한 variant와 size를 지원하는 버튼
+- `Button` - color, variant, size 옵션으로 다양한 형태의 버튼을 만들 수 있어요.
 
 **기술 스택:**
 
@@ -89,11 +85,11 @@ pnpm build-storybook
 
 ### @harryk-ds/motion
 
-애니메이션 컴포넌트들을 포함합니다.
+애니메이션 컴포넌트를 제공해요.
 
 **컴포넌트:**
 
-- `FadeIn` - 다양한 방향과 설정을 지원하는 페이드인 애니메이션
+- `FadeIn` - duration, delay, direction, distance 옵션으로 다양한 페이드인 애니메이션을 적용할 수 있어요.
 
 **기술 스택:**
 
@@ -122,8 +118,8 @@ import { FadeIn } from "@harryk-ds/motion";
 
 function App() {
   return (
-    <FadeIn direction="up" duration={0.6}>
-      <Button variant="primary" size="lg">
+    <FadeIn direction="up" delay={0.2} duration={0.6} distance={20}>
+      <Button color="primary" variant="fill" size="lg">
         안녕하세요!
       </Button>
     </FadeIn>
@@ -133,37 +129,18 @@ function App() {
 
 ## 📖 문서화
 
-모든 컴포넌트의 상세한 문서는 Storybook에서 확인할 수 있습니다:
+모든 컴포넌트의 상세한 문서는 Storybook에서 확인할 수 있어요.
 
 ```bash
 pnpm storybook
 ```
 
-각 컴포넌트별로 다음을 제공합니다:
+각 컴포넌트별로 다음을 제공해요:
 
 - 사용법 및 예시
 - Props API 문서
 - 인터랙티브 컨트롤
 - 접근성 가이드라인
-
-## 🎨 디자인 토큰
-
-### 색상
-
-- Primary: `#2196f3`
-- Secondary: `#9e9e9e`
-- Success: `#4caf50`
-- Warning: `#ff9800`
-- Error: `#f44336`
-
-### 타이포그래피
-
-- Font Family: system-ui, -apple-system, sans-serif
-- Font Sizes: 12px, 14px, 16px, 18px, 24px, 32px
-
-### 간격
-
-- Spacing Scale: 4px, 8px, 12px, 16px, 24px, 32px, 48px, 64px
 
 ## 🔧 개발
 
@@ -209,15 +186,16 @@ pnpm clean              # 빌드 파일 및 node_modules 정리
 - **CI/CD**: GitHub Actions
 - **Node.js**: 22
 
-## 🚀 배포
+## 🚀 배포 (maintainer only)
 
 ### Chromatic 설정
 
 1. **Chromatic 계정 생성**
-   - [chromatic.com](https://www.chromatic.com/)에서 계정 생성
-   - GitHub 저장소 연결
+   - [chromatic.com](https://www.chromatic.com/)에서 계정을 생성해요.
+   - GitHub 저장소를 연결해요.
 
 2. **프로젝트 토큰 설정**
+
    ```bash
    # 환경 변수 파일 생성
    cp env.example .env
@@ -229,6 +207,7 @@ pnpm clean              # 빌드 파일 및 node_modules 정리
    - `CHROMATIC_PROJECT_TOKEN` 추가
 
 4. **Chromatic 배포**
+
    ```bash
    pnpm chromatic
    ```
@@ -248,6 +227,7 @@ pnpm clean              # 빌드 파일 및 node_modules 정리
    - Root Directory: `/`
 
 3. **환경 변수** (필요시)
+
    ```
    NODE_VERSION=22
    ```
@@ -266,13 +246,14 @@ npm publish
 
 ### CI/CD 파이프라인
 
-GitHub Actions를 통해 자동화된 CI/CD 파이프라인이 구성되어 있습니다:
+GitHub Actions를 통해 자동화된 CI/CD 파이프라인이 구성되어 있어요.
 
 #### CI Pipeline (`.github/workflows/ci.yml`)
 
 **트리거**: main, develop 브랜치로의 push 또는 PR
 
 **작업 내용**:
+
 1. **Lint and Type Check**
    - Biome를 통한 코드 린팅
    - TypeScript 타입 체크
@@ -287,24 +268,22 @@ GitHub Actions를 통해 자동화된 CI/CD 파이프라인이 구성되어 있�
 **트리거**: main, develop 브랜치로의 PR 생성 시
 
 **작업 내용**:
+
 - Storybook 빌드 및 Chromatic 배포
 - TurboSnap 활성화 (변경된 스토리만 처리)
 - 시각적 회귀 테스트는 스킵 (`skip: 'chromatic'`)
 - PR 리뷰용 Storybook 미리보기 제공
 
 **특징**:
+
 - ✅ 의존성 캐싱으로 빌드 시간 단축
 - ✅ Node.js 22 환경에서 실행
 - ✅ 병렬 처리로 효율적인 CI 실행
 - ✅ PR에서 자동 실패 방지 (`exitZeroOnChanges`)
 
-## 🤝 기여하기
+## 💬 피드백
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+아직 정식 오픈 전이에요. 아이디어나 피드백이 있다면 [GitHub Issues](https://github.com/harryk-im/harryk-ds/issues)에서 공유해 주세요!
 
 ## 📝 License
 
@@ -313,7 +292,3 @@ MIT License - 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
 ## 👥 Authors
 
 - **harryk-im** - _Initial work_
-
----
-
-**Happy Coding! 🎉**
