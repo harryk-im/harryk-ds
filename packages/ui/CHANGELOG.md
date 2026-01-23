@@ -1,5 +1,12 @@
 # @harryk-ds/ui
 
+## 0.1.3
+
+### Patch Changes
+
+- 54ab5e2: Add hover, active, disabled interactions to Button component and refactor styles
+- 2be9ba4: Add Badge UI Component
+
 ## 0.1.2
 
 ### Patch Changes
