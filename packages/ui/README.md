@@ -3,7 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/@harryk-ds/ui.svg)](https://www.npmjs.com/package/@harryk-ds/ui)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-Harryk 디자인 시스템의 핵심 UI 컴포넌트 라이브러리입니다.
+Harryk 디자인 시스템의 핵심 UI 컴포넌트 라이브러리예요.
 
 ## 📦 설치
 
@@ -20,17 +20,10 @@ yarn add @harryk-ds/ui
 
 ### Peer Dependencies
 
-이 패키지는 다음 의존성들이 필요합니다:
+이 패키지를 사용하려면 다음 의존성이 필요해요.
 
 ```bash
-# npm
 npm install react@^19.0.0 react-dom@^19.0.0
-
-# pnpm
-pnpm add react@^19.0.0 react-dom@^19.0.0
-
-# yarn
-yarn add react@^19.0.0 react-dom@^19.0.0
 ```
 
 ## 🚀 사용법
@@ -38,12 +31,11 @@ yarn add react@^19.0.0 react-dom@^19.0.0
 ### 기본 사용
 
 ```tsx
-import { Button } from '@harryk-ds/ui';
-import '@harryk-ds/ui/dist/ui.css'; // 스타일 import
+import { Button } from "@harryk-ds/ui";
 
 function App() {
   return (
-    <Button variant="primary" size="md">
+    <Button color="primary" variant="fill" size="md">
       클릭하세요
     </Button>
   );
@@ -52,10 +44,10 @@ function App() {
 
 ### TypeScript 지원
 
-완전한 TypeScript 지원을 제공합니다:
+완전한 TypeScript 지원을 제공해요.
 
 ```tsx
-import type { ButtonProps } from '@harryk-ds/ui';
+import type { ButtonProps } from "@harryk-ds/ui";
 
 const MyButton: React.FC<ButtonProps> = (props) => {
   return <Button {...props} />;
@@ -66,72 +58,92 @@ const MyButton: React.FC<ButtonProps> = (props) => {
 
 ### Button
 
-다양한 스타일과 크기를 지원하는 버튼 컴포넌트입니다.
+다양한 색상, 스타일, 크기를 선택할 수 있는 버튼 컴포넌트예요.
 
 #### Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `variant` | `'primary' \| 'secondary' \| 'outline'` | `'primary'` | 버튼 스타일 변형 |
-| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | 버튼 크기 |
-| `children` | `React.ReactNode` | - | 버튼 내용 |
-| `...props` | `ButtonHTMLAttributes` | - | 기본 button HTML 속성 |
+| `color` | `'primary' \| 'secondary'` | `'primary'` | 버튼의 색상을 선택해요. |
+| `variant` | `'fill' \| 'outline'` | `'fill'` | 버튼의 스타일을 선택해요. |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | 버튼의 크기를 선택해요. |
+| `children` | `React.ReactNode` | - | 버튼에 표시할 내용이에요. |
+| `...props` | `ButtonHTMLAttributes` | - | HTML button 요소의 모든 속성을 지원해요. |
+
+#### 색상 옵션
+
+- `primary`: 주요 액션에 사용하는 파란색이에요.
+- `secondary`: 보조 액션에 사용하는 회색이에요.
+
+#### 스타일 옵션
+
+- `fill`: 배경색이 채워진 기본 스타일이에요.
+- `outline`: 테두리만 있는 스타일이에요.
+
+#### 크기 옵션
+
+- `sm`: 작은 크기예요.
+- `md`: 기본 크기예요.
+- `lg`: 큰 크기예요.
 
 #### 예시
 
 ```tsx
-import { Button } from '@harryk-ds/ui';
+import { Button } from "@harryk-ds/ui";
 
-// Primary 버튼
-<Button variant="primary" size="lg">
-  Primary Button
+// 기본 버튼
+<Button>기본 버튼</Button>
+
+// 색상과 스타일 지정
+<Button color="primary" variant="fill" size="lg">
+  Primary Fill 버튼
 </Button>
 
-// Secondary 버튼
-<Button variant="secondary" size="md">
-  Secondary Button
+<Button color="primary" variant="outline" size="md">
+  Primary Outline 버튼
 </Button>
 
-// Outline 버튼
-<Button variant="outline" size="sm">
-  Outline Button
+<Button color="secondary" variant="fill" size="sm">
+  Secondary 버튼
 </Button>
 
 // 이벤트 핸들러
-<Button onClick={() => console.log('clicked')}>
-  Click Me
+<Button onClick={() => console.log("clicked")}>
+  클릭하세요
 </Button>
 
-// Disabled 상태
-<Button disabled>
-  Disabled
-</Button>
+// 비활성화 상태
+<Button disabled>비활성화된 버튼</Button>
 ```
 
 ## 🎨 스타일링
 
-이 패키지는 **Vanilla Extract**를 사용하여 타입 안전한 CSS-in-JS를 제공합니다.
-
-### CSS Import
-
-```tsx
-// 필수: 스타일 파일을 import 해야 합니다
-import '@harryk-ds/ui/dist/ui.css';
-```
+이 패키지는 **Vanilla Extract**를 사용해 타입 안전한 CSS-in-JS를 제공해요.
 
 ### 커스텀 스타일
 
-컴포넌트는 `className` prop을 통해 추가 스타일링이 가능합니다:
 
-```tsx
-<Button className="my-custom-class" variant="primary">
-  Custom Styled Button
+1. `인라인 스타일` 통해 커스터 마이징이 가능해요.
+
+``` tsx
+<Button style={{ backgroundColor: 'blue' }} color="primary">
+  커스텀 스타일 버튼
 </Button>
 ```
 
+2. `className` prop을 통해 커스터 마이징이 가능해요.
+
+```tsx
+<Button className="my-custom-class" color="primary">
+  커스텀 스타일 버튼
+</Button>
+```
+
+
+
 ## 📚 문서
 
-더 자세한 문서와 인터랙티브 예제는 Storybook에서 확인하세요:
+더 자세한 문서와 인터랙티브 예제는 Storybook에서 확인할 수 있어요.
 
 - [Storybook 문서](https://github.com/harryk-im/harryk-ds#readme)
 - [컴포넌트 가이드라인](../../ARCHITECTURE.md)
@@ -168,9 +180,10 @@ pnpm --filter @harryk-ds/ui type-check
 1. **컴포넌트 파일 생성**
 
 ```bash
-packages/ui/src/components/YourComponent/
-├── YourComponent.tsx
-├── YourComponent.css.ts  # Vanilla Extract 스타일
+packages/ui/src/components/ui-component/
+├── ui-component.tsx
+├── ui-component.css.ts  # Vanilla Extract 스타일
+├── ui-component.types.ts # 타입 정의
 └── index.ts
 ```
 
@@ -178,7 +191,7 @@ packages/ui/src/components/YourComponent/
 
 ```typescript
 // packages/ui/src/components/index.ts
-export { YourComponent } from './YourComponent';
+export { UiComponent } from "./ui-component";
 ```
 
 3. **빌드 및 테스트**
@@ -190,7 +203,7 @@ pnpm build:ui
 4. **Storybook 스토리 작성**
 
 ```bash
-# apps/storybook/src/stories/YourComponent.stories.tsx
+# apps/storybook/src/stories/ui/ui-component.stories.tsx
 ```
 
 ## 🔧 기술 스택
@@ -206,26 +219,24 @@ pnpm build:ui
 packages/ui/
 ├── src/
 │   ├── components/
-│   │   ├── Button/
-│   │   │   ├── Button.tsx
-│   │   │   ├── Button.css.ts
+│   │   ├── button/
+│   │   │   ├── button.tsx
+│   │   │   ├── button.css.ts
+│   │   │   ├── button.types.ts
 │   │   │   └── index.ts
 │   │   └── index.ts
-│   ├── styles/           # 공통 스타일 (향후 확장)
+│   ├── styles/           # 공통 스타일 토큰
+│   │   └── tokens/
+│   │       ├── colors.css.ts
+│   │       └── typography.css.ts
 │   └── index.ts
 ├── dist/                 # 빌드 결과물
 └── package.json
 ```
 
-## 🤝 기여하기
+## 💬 피드백
 
-기여를 환영합니다! 다음 단계를 따라주세요:
-
-1. 저장소 Fork
-2. Feature 브랜치 생성 (`git checkout -b feature/amazing-feature`)
-3. 변경사항 커밋 (`git commit -m 'Add amazing feature'`)
-4. 브랜치에 Push (`git push origin feature/amazing-feature`)
-5. Pull Request 생성
+아직 정식 오픈 전이에요. 아이디어나 피드백이 있다면 [GitHub Issues](https://github.com/harryk-im/harryk-ds/issues)에서 공유해 주세요!
 
 ## 📝 라이선스
 
@@ -241,8 +252,4 @@ MIT License - 자세한 내용은 [LICENSE](../../LICENSE) 파일을 참조하�
 - **Author**: harryk-im
 - **Repository**: [github.com/harryk-im/harryk-ds](https://github.com/harryk-im/harryk-ds)
 - **Issues**: [github.com/harryk-im/harryk-ds/issues](https://github.com/harryk-im/harryk-ds/issues)
-
----
-
-**Happy Coding! 🎉**
 
