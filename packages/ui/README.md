@@ -152,7 +152,7 @@ import { Button } from "@harryk-ds/ui";
 
 ### 요구사항
 
-- Node.js 22+
+- Node.js 24+
 - pnpm 8+
 
 ### 로컬 개발

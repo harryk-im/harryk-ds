@@ -184,7 +184,7 @@ pnpm clean              # 빌드 파일 및 node_modules 정리
 - **린터/포맷터**: Biome 2.2
 - **Git Hooks**: Husky 9
 - **CI/CD**: GitHub Actions
-- **Node.js**: 22
+- **Node.js**: 24
 
 ## 🚀 배포 (maintainer only)
 
@@ -229,7 +229,7 @@ pnpm clean              # 빌드 파일 및 node_modules 정리
 3. **환경 변수** (필요시)
 
    ```
-   NODE_VERSION=22
+   NODE_VERSION=24
    ```
 
 ### npm 패키지 배포
@@ -277,7 +277,7 @@ GitHub Actions를 통해 자동화된 CI/CD 파이프라인이 구성되어 있�
 **특징**:
 
 - ✅ 의존성 캐싱으로 빌드 시간 단축
-- ✅ Node.js 22 환경에서 실행
+- ✅ Node.js 24.12.0 환경에서 실행
 - ✅ 병렬 처리로 효율적인 CI 실행
 - ✅ PR에서 자동 실패 방지 (`exitZeroOnChanges`)
 
