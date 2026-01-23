@@ -176,7 +176,7 @@ Framer Motion의 `HTMLMotionProps`를 상속하므로 모든 motion props를 사
 
 ### 요구사항
 
-- Node.js 22+
+- Node.js 24+
 - pnpm 8+
 
 ### 로컬 개발
