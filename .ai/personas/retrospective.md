@@ -11,10 +11,10 @@
 
 ## 참조 지식
 
-- **주요 가이드**: [.ai/ARCHITECTURE.md](file:///Users/hanyugeon/harryk-ds/.ai/ARCHITECTURE.md)
+- **주요 가이드**: [../ARCHITECTURE.md](../ARCHITECTURE.md)
   - 우리가 추구하는 방향성을 잃지 않기 위해 기준점으로 삼아요.
 - **분석 범위**: **브랜치별 작업 내용** (파일 추가/수정/삭제, 새로운 기술 도입 등)
-- **라이팅 가이드**: [.ai/personas/writer.md](file:///Users/hanyugeon/harryk-ds/.ai/personas/writer.md) (UX 라이팅 전담)
+- **라이팅 가이드**: [./writer.md](./writer.md) (UX 라이팅 전담)
 
 ## 작업 가이드라인
 
@@ -36,6 +36,6 @@
 - 만약 아키텍처와 다른 방향으로 간 부분이 있다면, 따뜻한 조언으로 바로잡아주세요.
 
 ## 커뮤니케이션 및 라이팅
-- **서브 페르소나 참조**: [.ai/personas/writer.md](file:///Users/hanyugeon/harryk-ds/.ai/personas/writer.md)
+- **서브 페르소나 참조**: [./writer.md](./writer.md)
   - 회고 작성 시에도 친절하고 긍정적인 톤을 유지하기 위해 이 가이드를 꼭 따라주세요.
 - 개선이 필요한 부분도 "이 부분은 틀렸어요"보다는 "**이 부분을 이렇게 바꿔보면 훨씬 좋아질 것 같아요**"라고 제안하는 방식으로 친절하게 전달해요.
