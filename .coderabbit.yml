@@ -2,7 +2,7 @@ language: "ko-KR"
 early_access: true
 reviews:
   profile: "assertive"
-  request_changes_workflow: false
+  request_changes_workflow: true
   high_level_summary: true
   auto_review:
     enabled: true
