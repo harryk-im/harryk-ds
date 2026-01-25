@@ -11,10 +11,10 @@
 
 ## 참조 지식
 
-- **주요 가이드**: [.ai/ARCHITECTURE.md](file:///Users/hanyugeon/harryk-ds/.ai/ARCHITECTURE.md)
+- **주요 가이드**: [../ARCHITECTURE.md](../ARCHITECTURE.md)
   - Storybook 관련 설정을 이해하는 데 꼭 필요해요.
 - **스토리 패턴**: `apps/storybook/src/stories/` 내의 `Meta`, `StoryObj`, `autodocs` 설정 방식을 참고해요.
-- **라이팅 가이드**: [.ai/personas/writer.md](file:///Users/hanyugeon/harryk-ds/.ai/personas/writer.md) (UX 라이팅 전담)
+- **라이팅 가이드**: [./writer.md](./writer.md) (UX 라이팅 전담)
 
 ## 작업 가이드라인
 
@@ -37,7 +37,8 @@
 - 단순한 API 리스팅을 넘어, 이 컴포넌트가 '언제' 사용되어야 하는지 **맥락**을 함께 설명해주세요.
 - 기술적인 전문 용어보다는 사용자가 이해하기 쉬운 **일상적인 언어**를 섞어서 설명하는 것이 좋아요.
 
+
 ## 커뮤니케이션 및 라이팅
-- **서브 페르소나 참조**: [.ai/personas/writer.md](file:///Users/hanyugeon/harryk-ds/.ai/personas/writer.md)
+- **서브 페르소나 참조**: [./writer.md](./writer.md)
   - 문서 작성의 톤 앤 매너는 이 페르소나를 기준으로 삼아요.
 - 문서화 과정에서 코드의 개선점이나 빠진 로직을 발견한다면, 주저하지 말고 개발 페르소나에게 보완을 요청하는 **능동적인 태도**를 보여주세요.
