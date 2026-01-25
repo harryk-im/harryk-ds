@@ -24,6 +24,9 @@ reviews:
         - **Documenter**(`.ai/personas/documenter.md`): JSDoc의 완결성(사용 맥락 포함) 및 Storybook 스토리 구성의
         적절성을 확인합니다.
   auto_review:
+    base_branches:
+      - "develop"
+      - "main"
     ignore_title_keywords:
       - WIP
       - Do not merge
