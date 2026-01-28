@@ -10,13 +10,13 @@ import { COLORS, FONT_SIZES, FONT_WEIGHTS } from "../../styles";
 export const buttonColors = styleVariants({
   /** 주요 액션에 사용하는 색상이에요. */
   primary: {
-    backgroundColor: COLORS.primary,
+    backgroundColor: COLORS.blue[500],
     color: COLORS.white,
   },
   /** 보조 액션에 사용하는 색상이에요. */
   secondary: {
-    backgroundColor: COLORS.gray[300],
-    color: COLORS.typography,
+    backgroundColor: COLORS.lightGray[200],
+    color: COLORS.dark[800],
   },
 });
 
@@ -126,8 +126,8 @@ export const buttonStyle = recipe({
       },
       style: {
         backgroundColor: "transparent",
-        color: COLORS.primary,
-        borderColor: COLORS.primary,
+        color: COLORS.blue[500],
+        borderColor: COLORS.blue[500],
       },
     },
     {
@@ -137,8 +137,8 @@ export const buttonStyle = recipe({
       },
       style: {
         backgroundColor: "transparent",
-        color: COLORS.gray[300],
-        borderColor: COLORS.gray[300],
+        color: COLORS.lightGray[200],
+        borderColor: COLORS.lightGray[200],
       },
     },
   ],

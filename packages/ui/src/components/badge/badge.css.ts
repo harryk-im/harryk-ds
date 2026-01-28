@@ -10,15 +10,15 @@ import { COLORS, FONT_SIZES, FONT_WEIGHTS } from "../../styles";
 export const badgeColors = styleVariants({
   /** 주요 정보에 사용하는 색상이에요. */
   primary: {
-    backgroundColor: COLORS.blue[600],
+    backgroundColor: COLORS.blue[500],
     color: COLORS.white,
-    borderColor: COLORS.blue[600],
+    borderColor: COLORS.blue[500],
   },
   /** 보조 정보에 사용하는 색상이에요. */
   secondary: {
-    backgroundColor: COLORS.gray[300],
-    color: COLORS.gray[600],
-    borderColor: COLORS.gray[300],
+    backgroundColor: COLORS.lightGray[200],
+    color: COLORS.gray[700],
+    borderColor: COLORS.lightGray[200],
   },
 });
 
@@ -110,8 +110,8 @@ export const badgeStyle = recipe({
       },
       style: {
         backgroundColor: "transparent",
-        color: COLORS.blue[600],
-        borderColor: COLORS.blue[600],
+        color: COLORS.blue[500],
+        borderColor: COLORS.blue[500],
       },
     },
     // secondary + outline
@@ -122,8 +122,8 @@ export const badgeStyle = recipe({
       },
       style: {
         backgroundColor: "transparent",
-        color: COLORS.gray[600],
-        borderColor: COLORS.gray[300],
+        color: COLORS.gray[700],
+        borderColor: COLORS.lightGray[200],
       },
     },
     // primary + weak
@@ -133,9 +133,9 @@ export const badgeStyle = recipe({
         variant: "weak",
       },
       style: {
-        backgroundColor: `${COLORS.blue[600]}40`,
-        color: COLORS.blue[600],
-        borderColor: `${COLORS.blue[600]}80`,
+        backgroundColor: COLORS.blue[300],
+        color: COLORS.blue[500],
+        borderColor: COLORS.blue[700],
       },
     },
     // secondary + weak
@@ -145,9 +145,9 @@ export const badgeStyle = recipe({
         variant: "weak",
       },
       style: {
-        backgroundColor: `${COLORS.gray[300]}40`,
-        color: COLORS.gray[600],
-        borderColor: `${COLORS.gray[300]}80`,
+        backgroundColor: COLORS.lightGray[100],
+        color: COLORS.gray[700],
+        borderColor: COLORS.lightGray[400],
       },
     },
   ],
