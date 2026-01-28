@@ -1,29 +1,36 @@
-const primary = "#678EDC";
-const black = "#000000";
-const white = "#FFFFFF";
-const typography = "#1D1D1D";
-
 export const COLORS = {
-  primary,
-  black,
-  white,
-  typography,
-  gray: {
-    900: typography,
-    600: "#515151",
-    300: "#E1E1E1",
-  },
+  // blue color
   blue: {
-    900: "#466DFE",
-    600: primary,
+    700: "oklch(0.500 0.177 264.4)",
+    500: "oklch(0.639 0.125 262.7)",
+    300: "oklch(0.831 0.055 262.1)",
   },
-  red: {
-    600: "#FF6B6B",
+
+  // black color
+  black: "oklch(0.096 0 0)",
+
+  // dark color
+  dark: {
+    900: "oklch(0.183 0 0)",
+    800: "oklch(0.214 0 0)",
+    700: "oklch(0.266 0 0)",
   },
-  yellow: {
-    600: "#FFD93D",
+
+  // gray color
+  gray: {
+    900: "oklch(0.354 0 0)",
+    700: "oklch(0.426 0 0)",
+    600: "oklch(0.515 0 0)",
+    500: "oklch(0.633 0 0)",
   },
-  green: {
-    600: "#A8E6CF",
+
+  // lightGray color
+  lightGray: {
+    400: "oklch(0.735 0 0)",
+    200: "oklch(0.902 0 0)",
+    100: "oklch(0.973 0 0)",
   },
-} as const;
+
+  // white color
+  white: "oklch(1 0 0)",
+};
