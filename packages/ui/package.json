@@ -9,9 +9,9 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
+      "style": "./dist/ui.css",
       "import": "./dist/index.js",
-      "require": "./dist/index.cjs",
-      "style": "./dist/ui.css"
+      "require": "./dist/index.cjs"
     },
     "./package.json": "./package.json"
   },
