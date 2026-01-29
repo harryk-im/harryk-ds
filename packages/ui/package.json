@@ -13,6 +13,10 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
+    "./styles/global": {
+      "types": "./dist/styles/foundation/global.css.d.ts",
+      "import": "./src/styles/foundation/global.css.ts"
+    },
     "./package.json": "./package.json"
   },
   "files": [
