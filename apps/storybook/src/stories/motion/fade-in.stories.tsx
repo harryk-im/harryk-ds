@@ -10,7 +10,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "FadeIn 컴포넌트는 Framer Motion을 사용한 페이드 인 애니메이션 컴포넌트입니다. 다양한 방향과 설정을 지원하며, `Button` 등의 UI 요소에 생동감을 더할 때 유용합니다.",
+          "FadeIn 컴포넌트는 화면에 요소가 부드럽게 나타나도록 도와줘요. 여러 방향과 속도를 조절할 수 있어, 버튼 같은 UI 요소에 생동감을 더하고 싶을 때 사용하면 좋아요.",
       },
     },
   },
@@ -18,20 +18,22 @@ const meta = {
   argTypes: {
     duration: {
       control: { type: "range", min: 0.1, max: 2, step: 0.1 },
-      description: "애니메이션 지속 시간 (초)",
+      description: "애니메이션이 지속되는 시간이에요. (초 단위)",
     },
     delay: {
       control: { type: "range", min: 0, max: 2, step: 0.1 },
-      description: "애니메이션 시작 전 지연 시간 (초)",
+      description:
+        "애니메이션이 시작되기 전까지 기다리는 시간이에요. (초 단위)",
     },
     direction: {
       control: { type: "select" },
       options: ["up", "down", "left", "right", "none"],
-      description: "나타날 방향",
+      description: "요소가 어느 방향에서 나타날지 선택해주세요.",
     },
     distance: {
       control: { type: "range", min: 0, max: 100, step: 5 },
-      description: "초기 이동 거리 (px)",
+      description:
+        "처음 위치에서 얼마나 떨어져서 시작할지 정해주세요. (픽셀 단위)",
     },
   },
   decorators: [
@@ -62,7 +64,7 @@ export const Default: Story = {
   parameters: {
     docs: {
       description: {
-        story: "기본적인 FadeIn 효과입니다.",
+        story: "가장 기본적인 페이드인 효과예요.",
       },
     },
   },
@@ -105,7 +107,7 @@ export const NoMovement: Story = {
   parameters: {
     docs: {
       description: {
-        story: "움직임 없이 제자리에서 투명도만 변화하는 효과입니다.",
+        story: "위치 이동 없이 제자리에서 투명도만 부드럽게 변해요.",
       },
     },
   },
@@ -133,13 +135,13 @@ export const GroupAnimation: Story = {
   },
   render: (_args) => (
     <div style={{ display: "flex", gap: "10px" }}>
-      <FadeIn delay={0.1} direction="up">
+      <FadeIn delay={0.06} direction="up">
         <Button size="sm">First</Button>
       </FadeIn>
-      <FadeIn delay={0.2} direction="up">
+      <FadeIn delay={0.12} direction="up">
         <Button size="sm">Second</Button>
       </FadeIn>
-      <FadeIn delay={0.3} direction="up">
+      <FadeIn delay={0.18} direction="up">
         <Button size="sm">Third</Button>
       </FadeIn>
     </div>
@@ -148,7 +150,7 @@ export const GroupAnimation: Story = {
     docs: {
       description: {
         story:
-          "여러 요소에 순차적인 딜레이를 주어 리듬감 있는 UI를 구성할 수 있습니다.",
+          "여러 요소에 시간차를 두고 효과를 적용하면, 화면이 더욱 리듬감 있고 풍성해 보여요.",
       },
     },
   },
