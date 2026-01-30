@@ -97,19 +97,25 @@ export const buttonStyle = recipe({
 
 ### `packages/motion` 컴포넌트 구조
 
-> ⚠️ Motion 패키지의 파일 구조는 아직 다듬고 있는 단계예요.
-
-현재 구조는 이래요.
+Motion 컴포넌트는 아래와 같은 파일 구조 패턴을 사용해요.
 
 ```
 packages/motion/src/
 ├── components/
 │   └── {component-name}/
-│       ├── {component-name}.tsx    # React FC 컴포넌트
-│       └── index.ts
+│       ├── {component-name}.tsx        # React 컴포넌트 (forwardRef 패턴)
+│       ├── {component-name}.motion.ts  # 애니메이션 Variants 및 토큰
+│       ├── {component-name}.types.ts   # TypeScript 타입 정의
+│       └── index.ts                    # export
 ├── hooks/                      # 애니메이션 훅을 준비 중이에요
 └── utils/                      # 유틸리티 함수를 준비 중이에요
 ```
+
+#### 컴포넌트 작성 규칙
+
+1. **forwardRef 패턴**을 사용해요.
+2. **Variants 분리**: 애니메이션 로직(`Variants`)은 `{component-name}.motion.ts`에 정의해요.
+3. **토큰화**: 거리, 시간 등의 값은 하드코딩하지 않고 변수나 객체로 관리해요.
 
 ---
 
@@ -126,7 +132,7 @@ apps/storybook/src/stories/
 ├── ui/
 │   ├── button.stories.tsx
 │   └── badge.stories.tsx
-└── motion/    # 만드는 중이에요
+└── motion/
     └── fade-in.stories.tsx
 ```
 
