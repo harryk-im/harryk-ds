@@ -89,7 +89,7 @@ pnpm run build-storybook
 - `@harryk-ds/ui` - UI 컴포넌트
 - `@harryk-ds/motion` - 모션 컴포넌트
 
-**중요**: 스토리를 작성하기 전에 반드시 패키지를 빌드하세요:
+**중요**: 스토리를 작성하기 전에 반드시 패키지를 빌드하세요. 그래야 변경사항이 Storybook에 잘 반영돼요.
 
 ```bash
 pnpm build
