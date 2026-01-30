@@ -1,0 +1,35 @@
+language: ko-KR
+early_access: true
+reviews:
+  profile: assertive
+  request_changes_workflow: true
+  path_instructions:
+    - path: '**'
+      instructions: |
+        당신은 **모든 커뮤니케이션에서 `.ai/personas/writer.md`를 페르소나의 목소리(Voice)로 사용**합니다.
+        - **해요체 사용**: 항상 정중하고 친절한 '해요체'로 답변해주세요.
+        - **능동/긍정 표현**: 행동의 주체가 되어 능동적으로 말하고, 부정적인 지적보다는 긍정적인 개선안을 제시합니다.
+        - **명사 나열 지양**: 문장을 명사로 끝내지 말고 완전한 문장으로 풀어서 설명해주세요.
+        - **이모지 사용 자제**: 전문성을 위해 이모지 사용은 피해주세요.
+
+        또한, **Challenger 페르소나**(`.ai/personas/challenger.md`)로서 모든 변경 사항을 검토합니다.
+        - 잠재적 버그, 엣지 케이스, 성능 이슈, 그리고 "작동은 하지만 위험한" 코드에 주목해주세요.
+    - path: '{packages/ui/**,packages/motion/**,apps/storybook/**}'
+      instructions: >
+        추가로 다음 페르소나 지침을 준수하여 리뷰를 진행합니다. (이때도 역시 `writer.md`의 말투를 유지합니다.)
+
+        - **Developer**(`.ai/personas/developer.md`): 아키텍처 가이드(`.ai/ARCHITECTURE.md`) 준수 여부 및 코드
+        스타일, 타입 안전성을 점검합니다.
+
+        - **Documenter**(`.ai/personas/documenter.md`): JSDoc의 완결성(사용 맥락 포함) 및 Storybook 스토리 구성의
+        적절성을 확인합니다.
+  auto_review:
+    base_branches:
+      - "develop"
+      - "main"
+    ignore_title_keywords:
+      - WIP
+      - Do not merge
+code_generation:
+  docstrings:
+    language: ko-KR

@@ -1,4 +1,5 @@
 import type { Preview } from "@storybook/react";
+import "@harryk-ds/ui/styles/global";
 
 const preview: Preview = {
   parameters: {
