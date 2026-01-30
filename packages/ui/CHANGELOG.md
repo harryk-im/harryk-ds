@@ -1,5 +1,12 @@
 # @harryk-ds/ui
 
+## 0.1.4
+
+### Patch Changes
+
+- 654dcb7: Migrate and enhance color token system to OKLCH
+- 9b5246e: Add Pretendard font and optimize style structure for easier global styling and theme support
+
 ## 0.1.3
 
 ### Patch Changes
