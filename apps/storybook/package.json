@@ -19,8 +19,7 @@
   "license": "MIT",
   "dependencies": {
     "@harryk-ds/ui": "workspace:*",
-    "@harryk-ds/motion": "workspace:*",
-    "framer-motion": "^11.0.0"
+    "@harryk-ds/motion": "workspace:*"
   },
   "devDependencies": {
     "@storybook/addon-docs": "^8.4.7",
