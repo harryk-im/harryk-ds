@@ -9,28 +9,21 @@ Harryk 디자인 시스템의 애니메이션 및 모션 컴포넌트 라이브�
 
 ```bash
 # npm
-npm install @harryk-ds/motion framer-motion
+npm install @harryk-ds/motion
 
 # pnpm
-pnpm add @harryk-ds/motion framer-motion
+pnpm add @harryk-ds/motion
 
 # yarn
-yarn add @harryk-ds/motion framer-motion
+yarn add @harryk-ds/motion
 ```
 
 ### Peer Dependencies
 
-이 패키지는 다음 의존성들이 필요합니다:
+이 패키지를 사용하려면 다음 의존성이 필요해요.
 
 ```bash
-# npm
-npm install react@^19.0.0 react-dom@^19.0.0 framer-motion@^11.0.0
-
-# pnpm
-pnpm add react@^19.0.0 react-dom@^19.0.0 framer-motion@^11.0.0
-
-# yarn
-yarn add react@^19.0.0 react-dom@^19.0.0 framer-motion@^11.0.0
+npm install react@^19.0.0 react-dom@^19.0.0
 ```
 
 ## 🚀 사용법

@@ -32,16 +32,17 @@
   ],
   "author": "harryk-im",
   "license": "MIT",
+  "dependencies": {
+    "framer-motion": "^11.0.0"
+  },
   "peerDependencies": {
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "framer-motion": "^11.0.0"
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@types/react": "^19.1.16",
     "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react-swc": "^4.1.0",
-    "framer-motion": "^11.0.0",
     "typescript": "~5.9.3",
     "vite": "^7.1.7",
     "vite-plugin-dts": "^4.3.0"

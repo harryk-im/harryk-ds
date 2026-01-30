@@ -170,10 +170,12 @@ apps/storybook/src/stories/
 
 ```json
 {
+  "dependencies": {
+    "framer-motion": "^11.0.0"
+  },
   "peerDependencies": {
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "framer-motion": "^11.0.0"
+    "react-dom": "^19.0.0"
   }
 }
 ```
@@ -184,8 +186,7 @@ apps/storybook/src/stories/
 {
   "dependencies": {
     "@harryk-ds/ui": "workspace:*",
-    "@harryk-ds/motion": "workspace:*",
-    "framer-motion": "^11.0.0"
+    "@harryk-ds/motion": "workspace:*"
   }
 }
 ```
