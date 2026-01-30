@@ -21,6 +21,14 @@ const config: StorybookConfig = {
       ...config.resolve,
       alias: {
         ...config.resolve?.alias,
+        "@harryk-ds/ui/styles/fonts": resolve(
+          __dirname,
+          "../../../packages/ui/src/styles/foundation/fonts.css.ts"
+        ),
+        "@harryk-ds/ui/styles/global": resolve(
+          __dirname,
+          "../../../packages/ui/src/styles/foundation/global.css.ts"
+        ),
         "@harryk-ds/ui": resolve(__dirname, "../../../packages/ui/src"),
         "@harryk-ds/motion": resolve(__dirname, "../../../packages/motion/src"),
       },

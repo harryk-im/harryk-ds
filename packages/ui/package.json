@@ -9,9 +9,13 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
+      "style": "./dist/ui.css",
       "import": "./dist/index.js",
-      "require": "./dist/index.cjs",
-      "style": "./dist/ui.css"
+      "require": "./dist/index.cjs"
+    },
+    "./styles/global": {
+      "types": "./dist/styles/foundation/global.css.d.ts",
+      "import": "./dist/styles/foundation/global.css.js"
     },
     "./package.json": "./package.json"
   },
