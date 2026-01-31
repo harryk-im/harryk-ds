@@ -1,7 +1,7 @@
 import { style, styleVariants } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 
-import { COLORS, FONT_SIZES, FONT_WEIGHTS } from "../../styles";
+import { COLORS, FONT_WEIGHTS, getTypography } from "../../styles";
 
 /**
  * 버튼의 색상 토큰이에요.
@@ -44,17 +44,17 @@ export const buttonSizes = styleVariants({
   /** 작은 크기예요. */
   sm: {
     padding: "8px 16px",
-    fontSize: FONT_SIZES.md,
+    ...getTypography("md"),
   },
   /** 기본 크기예요. */
   md: {
     padding: "12px 24px",
-    fontSize: FONT_SIZES.lg,
+    ...getTypography("lg"),
   },
   /** 큰 크기예요. */
   lg: {
     padding: "16px 32px",
-    fontSize: FONT_SIZES.xl,
+    ...getTypography("xl"),
   },
 });
 
