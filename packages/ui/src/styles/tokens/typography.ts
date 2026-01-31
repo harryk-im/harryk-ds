@@ -11,9 +11,9 @@ export const LINE_HEIGHTS = {
   xs: "13px",
   sm: "16px",
   md: "18px",
-  lg: "27.5px",
-  xl: "31px",
-  "2xl": "33.55px",
+  lg: "21px",
+  xl: "25px",
+  "2xl": "30px",
 } as const;
 
 export const FONT_WEIGHTS = {
