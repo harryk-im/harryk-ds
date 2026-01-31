@@ -33,4 +33,4 @@ export const COLORS = {
 
   // white color
   white: "oklch(1 0 0)",
-};
+} as const;
