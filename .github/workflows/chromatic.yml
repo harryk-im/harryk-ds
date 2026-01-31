@@ -3,8 +3,26 @@ name: "Chromatic Deployment"
 on:
   push:
     branches: [main, develop]
+    paths:
+      - "packages/ui/**"
+      - "packages/motion/**"
+      - "apps/storybook/**"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - ".github/workflows/chromatic.yml"
   pull_request:
     branches: [main, develop]
+    paths:
+      - "packages/ui/**"
+      - "packages/motion/**"
+      - "apps/storybook/**"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - ".github/workflows/chromatic.yml"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
+  cancel-in-progress: true
 
 jobs:
   chromatic:
