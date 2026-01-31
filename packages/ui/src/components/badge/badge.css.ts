@@ -1,7 +1,7 @@
 import { style, styleVariants } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 
-import { COLORS, FONT_SIZES, FONT_WEIGHTS } from "../../styles";
+import { COLORS, FONT_WEIGHTS, getTypography } from "../../styles";
 
 /**
  * 뱃지의 색상 토큰이에요.
@@ -45,17 +45,17 @@ export const badgeSizes = styleVariants({
   /** 작은 크기예요. */
   sm: {
     padding: "2px 4px",
-    fontSize: FONT_SIZES.xs,
+    ...getTypography("xs"),
   },
   /** 기본 크기예요. */
   md: {
     padding: "4px 8px",
-    fontSize: FONT_SIZES.sm,
+    ...getTypography("sm"),
   },
   /** 큰 크기예요. */
   lg: {
     padding: "6px 12px",
-    fontSize: FONT_SIZES.md,
+    ...getTypography("md"),
   },
 });
 
