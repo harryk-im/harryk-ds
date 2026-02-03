@@ -10,15 +10,15 @@ import { COLORS, FONT_WEIGHTS, getTypography } from "../../styles";
 export const badgeColors = styleVariants({
   /** 주요 정보에 사용하는 색상이에요. */
   primary: {
-    backgroundColor: COLORS.blue[500],
+    backgroundColor: COLORS.blue[300],
     color: COLORS.white,
-    borderColor: COLORS.blue[500],
+    borderColor: COLORS.blue[300],
   },
   /** 보조 정보에 사용하는 색상이에요. */
   secondary: {
-    backgroundColor: COLORS.lightGray[200],
-    color: COLORS.gray[700],
-    borderColor: COLORS.lightGray[200],
+    backgroundColor: COLORS.grey[200],
+    color: COLORS.grey[800],
+    borderColor: COLORS.grey[200],
   },
 });
 
@@ -110,8 +110,8 @@ export const badgeStyle = recipe({
       },
       style: {
         backgroundColor: "transparent",
-        color: COLORS.blue[500],
-        borderColor: COLORS.blue[500],
+        color: COLORS.blue[300],
+        borderColor: COLORS.blue[300],
       },
     },
     // secondary + outline
@@ -122,8 +122,8 @@ export const badgeStyle = recipe({
       },
       style: {
         backgroundColor: "transparent",
-        color: COLORS.gray[700],
-        borderColor: COLORS.lightGray[200],
+        color: COLORS.grey[800],
+        borderColor: COLORS.grey[200],
       },
     },
     // primary + weak
@@ -133,9 +133,9 @@ export const badgeStyle = recipe({
         variant: "weak",
       },
       style: {
-        backgroundColor: COLORS.blue[300],
-        color: COLORS.blue[500],
-        borderColor: COLORS.blue[700],
+        backgroundColor: COLORS.blue[200],
+        color: COLORS.white,
+        borderColor: COLORS.blue[100],
       },
     },
     // secondary + weak
@@ -145,9 +145,9 @@ export const badgeStyle = recipe({
         variant: "weak",
       },
       style: {
-        backgroundColor: COLORS.lightGray[100],
-        color: COLORS.gray[700],
-        borderColor: COLORS.lightGray[400],
+        backgroundColor: COLORS.grey[200],
+        color: COLORS.grey[800],
+        borderColor: COLORS.grey[100],
       },
     },
   ],
