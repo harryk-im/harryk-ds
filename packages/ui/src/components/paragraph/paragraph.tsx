@@ -131,7 +131,13 @@ export const ParagraphLink = React.forwardRef<
     .join(" ");
 
   return (
-    <a ref={ref} className={classes} {...props}>
+    <a
+      target="_blank"
+      rel="noreferrer"
+      ref={ref}
+      className={classes}
+      {...props}
+    >
       {children}
     </a>
   );
