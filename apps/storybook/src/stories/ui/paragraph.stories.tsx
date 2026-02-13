@@ -35,9 +35,6 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/**
- * 가장 기본적인 Paragraph 사용법이에요.
- */
 export const Default: Story = {
   args: {
     children: "이것은 기본적인 Paragraph 컴포넌트입니다.",
@@ -51,12 +48,6 @@ export const Default: Story = {
   },
 };
 
-/**
- * Paragraph.Text와 Paragraph.Link를 조합한 복합적인 구성이에요.
- *
- * - 부모 `Paragraph`에서 정의한 `size="md"`, `color="black"` 스타일이 하위 `Text` 요소들에게 **상속**돼요.
- * - `Link` 컴포넌트는 부모의 색상을 무시하고 **고유의 링크 색상(blue)**을 유지해요.
- */
 export const Composition: Story = {
   parameters: {
     docs: {
@@ -86,12 +77,6 @@ export const Composition: Story = {
   },
 };
 
-/**
- * 하위 요소에서 개별적으로 스타일을 덮어쓸(Override) 수 있어요.
- *
- * - 첫 번째 `Text`는 `color="grey"`와 `bold`를 적용해 부모 스타일과 차별화를 뒀어요.
- * - `Link`에도 `color="black"`을 직접 지정하면, 기본 링크 색상인 파란색 대신 **검은색 링크**를 만들 수 있어요.
- */
 export const Overrides: Story = {
   parameters: {
     docs: {
@@ -122,9 +107,6 @@ export const Overrides: Story = {
   },
 };
 
-/**
- * 제공되는 다양한 사이즈를 한눈에 확인해보세요.
- */
 export const AllSizes: Story = {
   parameters: {
     docs: {
@@ -145,9 +127,6 @@ export const AllSizes: Story = {
   ),
 };
 
-/**
- * 제공되는 4가지 색상이에요.
- */
 export const AllColors: Story = {
   parameters: {
     docs: {
@@ -166,9 +145,6 @@ export const AllColors: Story = {
   ),
 };
 
-/**
- * Paragraph.Text와 Paragraph.Link는 독립적으로도 사용 가능해요.
- */
 export const Standalone: Story = {
   parameters: {
     docs: {
