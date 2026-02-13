@@ -11,13 +11,13 @@ export type ParagraphBold = NonNullable<ParagraphVariants>["bold"];
 export interface ParagraphContextType {
   size?: ParagraphSize;
   color?: ParagraphColor;
-  bold?: boolean;
+  bold?: ParagraphBold;
 }
 
 export interface BaseParagraphProps {
   size?: ParagraphSize;
   color?: ParagraphColor;
-  bold?: boolean;
+  bold?: ParagraphBold;
   children?: React.ReactNode;
   className?: string;
 }
