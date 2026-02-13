@@ -1,5 +1,5 @@
 import type { RecipeVariants } from "@vanilla-extract/recipes";
-import type { AnchorHTMLAttributes, HTMLAttributes } from "react";
+import type { AnchorHTMLAttributes, HTMLAttributes, ReactNode } from "react";
 import type { paragraphStyle } from "./paragraph.css";
 
 type ParagraphVariants = RecipeVariants<typeof paragraphStyle>;
@@ -40,7 +40,7 @@ export interface BaseParagraphProps {
    * @default false
    */
   bold?: ParagraphBold;
-  children?: React.ReactNode;
+  children?: ReactNode;
   className?: string;
 }
 
