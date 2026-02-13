@@ -1,17 +1,14 @@
-import React, { createContext, useContext } from "react";
+import React from "react";
+import {
+  ParagraphContext,
+  useResolvedParagraphStyle,
+} from "./paragraph.context";
 import { paragraphLinkStyle, paragraphStyle } from "./paragraph.css";
 import type {
-  ParagraphContextType,
   ParagraphLinkProps,
   ParagraphProps,
   ParagraphTextProps,
 } from "./paragraph.types";
-
-const ParagraphContext = createContext<ParagraphContextType>({});
-
-const useParagraphContext = () => {
-  return useContext(ParagraphContext);
-};
 
 export const ParagraphRoot = React.forwardRef<
   HTMLParagraphElement,
@@ -60,16 +57,13 @@ export const ParagraphText = React.forwardRef<
   HTMLSpanElement,
   ParagraphTextProps
 >(({ size, color, bold, className, children, ...props }, ref) => {
-  const context = useParagraphContext();
-  const fontSize = size ?? context.size ?? "md";
-  const fontColor = color ?? context.color ?? "black";
-  const fontWeight = bold ?? context.bold ?? false;
+  const resolvedStyle = useResolvedParagraphStyle({ size, color, bold });
 
   const classes = [
     paragraphStyle({
-      size: fontSize,
-      color: fontColor,
-      bold: fontWeight,
+      size: resolvedStyle.size,
+      color: resolvedStyle.color,
+      bold: resolvedStyle.bold,
     }),
     className,
   ]
@@ -89,16 +83,16 @@ export const ParagraphLink = React.forwardRef<
   HTMLAnchorElement,
   ParagraphLinkProps
 >(({ size, color, bold, className, children, ...props }, ref) => {
-  const context = useParagraphContext();
-  const fontSize = size ?? context.size ?? "md";
-  const fontColor = color ?? "blue";
-  const fontWeight = bold ?? context.bold ?? false;
+  const resolvedStyle = useResolvedParagraphStyle(
+    { size, color, bold },
+    { color: "blue" }
+  );
 
   const classes = [
     paragraphStyle({
-      size: fontSize,
-      color: fontColor,
-      bold: fontWeight,
+      size: resolvedStyle.size,
+      color: resolvedStyle.color,
+      bold: resolvedStyle.bold,
     }),
     paragraphLinkStyle(),
     className,
