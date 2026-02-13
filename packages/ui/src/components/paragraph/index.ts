@@ -1,0 +1,8 @@
+export { Paragraph } from "./paragraph";
+export type {
+  ParagraphColor,
+  ParagraphLinkProps,
+  ParagraphProps,
+  ParagraphSize,
+  ParagraphTextProps,
+} from "./paragraph.types";
