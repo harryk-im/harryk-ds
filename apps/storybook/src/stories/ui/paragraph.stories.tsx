@@ -77,7 +77,7 @@ export const Composition: Story = {
       <Paragraph.Text color="grey" bold>
         가 포함된 문단입니다.
       </Paragraph.Text>
-      밖에 써도 적용되지롱
+      Paragraph 컴포넌트만 내부에서 Text, Link 컴포넌트 없이도 사용이 가능해요.
     </Paragraph>
   ),
   args: {
