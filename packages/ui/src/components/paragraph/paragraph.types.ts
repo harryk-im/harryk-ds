@@ -8,15 +8,37 @@ export type ParagraphSize = NonNullable<ParagraphVariants>["size"];
 export type ParagraphColor = NonNullable<ParagraphVariants>["color"];
 export type ParagraphBold = NonNullable<ParagraphVariants>["bold"];
 
+/**
+ * Paragraph 컴포넌트 내부에서 공유되는 컨텍스트 타입이에요.
+ * 상위 Paragraph에서 설정한 스타일 값을 하위 컴포넌트가 참조할 때 사용해요.
+ */
 export interface ParagraphContextType {
+  /** 텍스트의 크기예요. */
   size?: ParagraphSize;
+  /** 텍스트의 색상이에요. */
   color?: ParagraphColor;
+  /** 텍스트의 굵기예요. */
   bold?: ParagraphBold;
 }
 
+/**
+ * Paragraph 컴포넌트들의 공통 Props 정의예요.
+ */
 export interface BaseParagraphProps {
+  /**
+   * 텍스트의 크기를 설정해요.
+   * @default "md"
+   */
   size?: ParagraphSize;
+  /**
+   * 텍스트의 색상을 설정해요.
+   * @default "black"
+   */
   color?: ParagraphColor;
+  /**
+   * 텍스트의 굵기를 설정해요. true일 경우 600(Bold), false일 경우 400(Normal)이 적용돼요.
+   * @default false
+   */
   bold?: ParagraphBold;
   children?: React.ReactNode;
   className?: string;
