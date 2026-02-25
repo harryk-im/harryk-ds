@@ -1,5 +1,13 @@
 # @harryk-ds/ui
 
+## 0.1.5
+
+### Patch Changes
+
+- d6cdc35: Introduce getTypography foundation utility to bundle font size and line height tokens, and refactor UI components for consistent typography.
+- 11372c0: Add "paragraph" component with compound sub-components and robust style resolution logic via custom hooks.
+- d6cdc35: Refactor and expand color tokens with a more granular OKLCH-based scale.
+
 ## 0.1.4
 
 ### Patch Changes
