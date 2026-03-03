@@ -24,3 +24,13 @@ storybook-static
 *.njsproj
 *.sln
 *.sw?
+
+# RETROSPECTIVE
+.ai/retrospectives
+
+# AI Tool rules
+AGENTS.md
+GEMINI.md
+CLAUDE.md
+.cursor/rules/persona-router.mdc
+.github/copilot-instructions.md
