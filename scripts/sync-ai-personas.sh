@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Harryk AI Persona Sync Script (Shell Version)
-# 외부 의존성(tsx, ts-node 등) 없이 동작하도록 구현했습니다.
-
 PERSONA_DIR=".ai/personas"
 ROUTER_FILE="$PERSONA_DIR/router.md"
 TARGET_FILES=(
@@ -19,7 +16,7 @@ if [ ! -f "$ROUTER_FILE" ]; then
   exit 1
 fi
 
-echo "🔄 Syncing AI Personas (Shell Mode)..."
+echo "🔄 AI 페르소나 동기화를 진행할게요..."
 
 # 2. 모든 페르소나 파일 내용 병합
 COMBINED_CONTENT=$(cat "$ROUTER_FILE")
@@ -44,8 +41,8 @@ for target in "${TARGET_FILES[@]}"; do
   fi
 
   printf "%s" "$COMBINED_CONTENT" > "$target"
-  echo "✅ Updated: $target"
+  echo "✅ 동기화 완료: $target"
 done
 
-echo "🚀 AI Persona sync completed!"
+echo "🚀 AI 페르소나 변경사항을 성공적으로 동기화 했어요!"
 chmod +x "$0"
