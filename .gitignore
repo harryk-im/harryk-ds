@@ -29,8 +29,8 @@ storybook-static
 .ai/retrospectives
 
 # AI Tool rules
-AGENTS.md
 GEMINI.md
 CLAUDE.md
+.agent/rules/persona-router.md
 .cursor/rules/persona-router.mdc
 .github/copilot-instructions.md

@@ -3,9 +3,9 @@
 PERSONA_DIR=".ai/personas"
 ROUTER_FILE="$PERSONA_DIR/router.md"
 TARGET_FILES=(
-  "AGENTS.md"
   "GEMINI.md"
   "CLAUDE.md"
+  ".agent/rules/persona-router.md"
   ".cursor/rules/persona-router.mdc"
   ".github/copilot-instructions.md"
 )
@@ -18,18 +18,8 @@ fi
 
 echo "🔄 AI 페르소나 동기화를 진행할게요..."
 
-# 2. 모든 페르소나 파일 내용 병합
+# 2. 내용 준비
 COMBINED_CONTENT=$(cat "$ROUTER_FILE")
-COMBINED_CONTENT+=$'\n\n## Personas Reference\n'
-
-for file in "$PERSONA_DIR"/*.md; do
-  filename=$(basename "$file")
-  if [ "$filename" != "router.md" ]; then
-    COMBINED_CONTENT+=$'\n--- FILE: '"$filename"$' ---\n'
-    COMBINED_CONTENT+="$(cat "$file")"
-    COMBINED_CONTENT+=$'\n'
-  fi
-done
 
 # 3. 대상 파일 업데이트
 for target in "${TARGET_FILES[@]}"; do
@@ -40,6 +30,7 @@ for target in "${TARGET_FILES[@]}"; do
     mkdir -p "$target_dir"
   fi
 
+  # 기존 내용을 완전히 삭제하고 새로운 내용을 다시 작성합니다.
   printf "%s" "$COMBINED_CONTENT" > "$target"
   echo "✅ 동기화 완료: $target"
 done
