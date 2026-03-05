@@ -12,14 +12,15 @@ TARGET_FILES=(
 
 # 1. router.md 존재 확인
 if [ ! -f "$ROUTER_FILE" ]; then
-  echo "❌ Error: $ROUTER_FILE file not found."
+  echo "❌ $ROUTER_FILE 파일이 존재하지 않아요."
   exit 1
 fi
 
-echo "🔄 AI 페르소나 동기화를 진행할게요..."
-
 # 2. 내용 준비
-COMBINED_CONTENT=$(cat "$ROUTER_FILE")
+if ! COMBINED_CONTENT=$(cat "$ROUTER_FILE") || [ -z "$COMBINED_CONTENT" ]; then
+  echo "❌ $ROUTER_FILE 파일을 읽을 수 없거나 내용이 비어있어요."
+  exit 1
+fi
 
 # 3. 대상 파일 업데이트
 for target in "${TARGET_FILES[@]}"; do
@@ -28,14 +29,14 @@ for target in "${TARGET_FILES[@]}"; do
   # 디렉토리가 없으면 생성
   if [ ! -d "$target_dir" ]; then
     if ! mkdir -p "$target_dir"; then
-      echo "❌ Error: $target_dir 디렉토리를 생성할 수 없어요."
+      echo "❌ $target_dir 디렉토리를 생성할 수 없어요."
       exit 1
     fi
   fi
 
   # 기존 내용을 완전히 삭제하고 새로운 내용을 다시 작성합니다.
   if ! printf "%s" "$COMBINED_CONTENT" > "$target"; then
-    echo "❌ Error: $target 파일을 작성할 수 없어요."
+    echo "❌ $target 파일을 작성할 수 없어요."
     exit 1
   fi
 
