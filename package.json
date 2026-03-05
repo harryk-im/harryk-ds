@@ -23,7 +23,7 @@
     "changeset": "changeset",
     "changeset:version": "changeset version",
     "changeset:publish": "changeset publish",
-    "ai:sync": "./scripts/sync-ai-personas.sh",
+    "ai:sync": "bash ./scripts/sync-ai-personas.sh",
     "postinstall": "pnpm ai:sync"
   },
   "author": "harryk-im",
