@@ -15,7 +15,7 @@ else
 fi
 
 # AI 페르소나 변경사항 확인
-if git diff --name-only HEAD@{1} HEAD | grep -q ".ai/personas/"; then
+if git diff --name-only HEAD@{1} HEAD | grep -qF ".ai/personas/"; then
   echo "🤖 AI 페르소나 변경사항을 감지했어요. 동기화를 진행할게요..."
   pnpm ai:sync
 fi

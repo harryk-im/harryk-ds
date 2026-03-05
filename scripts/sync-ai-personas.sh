@@ -27,13 +27,19 @@ for target in "${TARGET_FILES[@]}"; do
 
   # 디렉토리가 없으면 생성
   if [ ! -d "$target_dir" ]; then
-    mkdir -p "$target_dir"
+    if ! mkdir -p "$target_dir"; then
+      echo "❌ Error: $target_dir 디렉토리를 생성할 수 없어요."
+      exit 1
+    fi
   fi
 
   # 기존 내용을 완전히 삭제하고 새로운 내용을 다시 작성합니다.
-  printf "%s" "$COMBINED_CONTENT" > "$target"
+  if ! printf "%s" "$COMBINED_CONTENT" > "$target"; then
+    echo "❌ Error: $target 파일을 작성할 수 없어요."
+    exit 1
+  fi
+
   echo "✅ 동기화 완료: $target"
 done
 
 echo "🚀 AI 페르소나 변경사항을 성공적으로 동기화 했어요!"
-chmod +x "$0"
