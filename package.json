@@ -22,7 +22,9 @@
     "prepare": "husky",
     "changeset": "changeset",
     "changeset:version": "changeset version",
-    "changeset:publish": "changeset publish"
+    "changeset:publish": "changeset publish",
+    "ai:sync": "bash ./scripts/sync-ai-personas.sh",
+    "postinstall": "pnpm ai:sync"
   },
   "author": "harryk-im",
   "license": "MIT",
