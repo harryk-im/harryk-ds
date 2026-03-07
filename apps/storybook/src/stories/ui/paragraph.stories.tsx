@@ -17,7 +17,7 @@ const meta = {
   argTypes: {
     size: {
       control: { type: "select" },
-      options: ["xs", "sm", "md", "lg", "xl", "2xl"],
+      options: ["2xs", "xs", "sm", "md", "lg", "xl", "2xl", "3xl"],
       description: "텍스트의 크기를 선택해요.",
     },
     color: {
@@ -115,12 +115,14 @@ export const AllSizes: Story = {
   },
   render: () => (
     <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+      <Paragraph size="2xs">2XS (2xs)</Paragraph>
       <Paragraph size="xs">Extra Small (xs)</Paragraph>
       <Paragraph size="sm">Small (sm)</Paragraph>
       <Paragraph size="md">Medium (md)</Paragraph>
       <Paragraph size="lg">Large (lg)</Paragraph>
       <Paragraph size="xl">Extra Large (xl)</Paragraph>
       <Paragraph size="2xl">2XL</Paragraph>
+      <Paragraph size="3xl">3XL</Paragraph>
     </div>
   ),
 };

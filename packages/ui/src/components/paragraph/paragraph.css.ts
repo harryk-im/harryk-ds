@@ -9,6 +9,7 @@ export const paragraphStyle = recipe({
   },
   variants: {
     size: {
+      "2xs": getTypography("2xs"),
       xs: getTypography("xs"),
       sm: getTypography("sm"),
       md: getTypography("md"),
