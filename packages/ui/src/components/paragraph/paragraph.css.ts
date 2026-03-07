@@ -15,6 +15,7 @@ export const paragraphStyle = recipe({
       lg: getTypography("lg"),
       xl: getTypography("xl"),
       "2xl": getTypography("2xl"),
+      "3xl": getTypography("3xl"),
     },
     color: {
       black: { color: COLORS.black },
