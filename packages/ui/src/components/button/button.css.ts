@@ -44,17 +44,17 @@ export const buttonSizes = styleVariants({
   /** 작은 크기예요. */
   sm: {
     padding: "8px 16px",
-    ...getTypography("md"),
+    ...getTypography("sm"),
   },
   /** 기본 크기예요. */
   md: {
     padding: "12px 24px",
-    ...getTypography("lg"),
+    ...getTypography("md"),
   },
   /** 큰 크기예요. */
   lg: {
     padding: "16px 32px",
-    ...getTypography("xl"),
+    ...getTypography("lg"),
   },
 });
 
