@@ -1,19 +1,23 @@
 export const FONT_SIZES = {
-  xs: "10px",
-  sm: "12px",
-  md: "14px",
-  lg: "16px",
-  xl: "18px",
-  "2xl": "20px",
+  "2xs": "10px",
+  xs: "12px",
+  sm: "14px",
+  md: "16px",
+  lg: "18px",
+  xl: "20px",
+  "2xl": "22px",
+  "3xl": "24px",
 } as const;
 
 export const LINE_HEIGHTS = {
-  xs: "13px",
-  sm: "16px",
-  md: "18px",
-  lg: "21px",
+  "2xs": "13px",
+  xs: "16px",
+  sm: "18px",
+  md: "21px",
+  lg: "23px",
   xl: "25px",
-  "2xl": "30px",
+  "2xl": "28px",
+  "3xl": "30px",
 } as const;
 
 export const FONT_WEIGHTS = {
