@@ -1,5 +1,5 @@
 export const COLORS = {
-  // blue color
+  // blue
   blue: {
     900: "oklch(25% 0.125 263.18)",
     800: "oklch(31.25% 0.125 263.18)",
@@ -12,7 +12,7 @@ export const COLORS = {
     100: "oklch(75% 0.125 263.18)",
   },
 
-  // black & color
+  // black & white
   black: "oklch(14% 0 263.18)",
   white: "oklch(100% 0 263.18)",
 
