@@ -3,7 +3,7 @@ import type {
   headingColors,
   headingSizes,
   headingWeights,
-} from "./heading.css.ts";
+} from "./heading.css";
 
 /**
  * Heading 컴포넌트에서 지원하는 HTML 태그 목록이에요.
