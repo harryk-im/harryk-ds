@@ -1,9 +1,9 @@
 export { Paragraph } from "./paragraph";
 export type {
-  ParagraphBold,
   ParagraphColor,
   ParagraphLinkProps,
   ParagraphProps,
   ParagraphSize,
   ParagraphTextProps,
+  ParagraphWeight,
 } from "./paragraph.types";

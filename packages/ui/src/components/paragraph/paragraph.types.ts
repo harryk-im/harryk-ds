@@ -1,13 +1,25 @@
-import type { RecipeVariants } from "@vanilla-extract/recipes";
 import type { AnchorHTMLAttributes, HTMLAttributes, ReactNode } from "react";
 
-import type { paragraphStyle } from "./paragraph.css";
+import type {
+  paragraphColors,
+  paragraphSizes,
+  paragraphWeights,
+} from "./paragraph.css";
 
-type ParagraphVariants = RecipeVariants<typeof paragraphStyle>;
+/**
+ * Paragraph 컴포넌트의 가용한 크기예요.
+ */
+export type ParagraphSize = keyof typeof paragraphSizes;
 
-export type ParagraphSize = NonNullable<ParagraphVariants>["size"];
-export type ParagraphColor = NonNullable<ParagraphVariants>["color"];
-export type ParagraphBold = NonNullable<ParagraphVariants>["bold"];
+/**
+ * Paragraph 컴포넌트의 가용한 색상이에요.
+ */
+export type ParagraphColor = keyof typeof paragraphColors;
+
+/**
+ * Paragraph 컴포넌트의 가용한 굵기예요.
+ */
+export type ParagraphWeight = keyof typeof paragraphWeights;
 
 /**
  * Paragraph 컴포넌트 내부에서 공유되는 컨텍스트 타입이에요.
@@ -19,7 +31,7 @@ export interface ParagraphContextType {
   /** 텍스트의 색상이에요. */
   color?: ParagraphColor;
   /** 텍스트의 굵기예요. */
-  bold?: ParagraphBold;
+  weight?: ParagraphWeight;
 }
 
 /**
@@ -37,10 +49,10 @@ export interface BaseParagraphProps {
    */
   color?: ParagraphColor;
   /**
-   * 텍스트의 굵기를 설정해요. true일 경우 600(Bold), false일 경우 400(Normal)이 적용돼요.
-   * @default false
+   * 텍스트의 굵기를 설정해요.
+   * @default "normal"
    */
-  bold?: ParagraphBold;
+  weight?: ParagraphWeight;
   children?: ReactNode;
   className?: string;
 }
