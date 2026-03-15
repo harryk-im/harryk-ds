@@ -3,18 +3,12 @@ import { recipe } from "@vanilla-extract/recipes";
 
 import { COLORS, FONT_WEIGHTS, getTypography } from "../../styles";
 
-/**
- * 뱃지의 색상 토큰이에요.
- * primary와 secondary 두 가지 색상을 제공해요.
- */
 export const badgeColors = styleVariants({
-  /** 주요 정보에 사용하는 색상이에요. */
   primary: {
     backgroundColor: COLORS.blue[300],
     color: COLORS.white,
     borderColor: COLORS.blue[300],
   },
-  /** 보조 정보에 사용하는 색상이에요. */
   secondary: {
     backgroundColor: COLORS.grey[200],
     color: COLORS.grey[800],
@@ -22,47 +16,29 @@ export const badgeColors = styleVariants({
   },
 });
 
-/**
- * 뱃지의 스타일 토큰이에요.
- * fill, outline, weak 세 가지 스타일을 제공해요.
- */
 export const badgeVariants = styleVariants({
-  /** 배경색이 채워진 기본 스타일이에요. */
   fill: {},
-  /** 테두리만 있는 스타일이에요. */
   outline: {
     backgroundColor: COLORS.white,
   },
-  /** 배경색이 반투명한 스타일이에요. (배경 75% 투명, 테두리 50% 투명) */
   weak: {},
 });
 
-/**
- * 뱃지의 크기 토큰이에요.
- * sm, md, lg 세 가지 크기를 제공해요.
- */
 export const badgeSizes = styleVariants({
-  /** 작은 크기예요. */
   sm: {
     padding: "2px 4px",
     ...getTypography("xs"),
   },
-  /** 기본 크기예요. */
   md: {
     padding: "4px 8px",
     ...getTypography("sm"),
   },
-  /** 큰 크기예요. */
   lg: {
     padding: "6px 12px",
     ...getTypography("md"),
   },
 });
 
-/**
- * 뱃지의 기본 스타일이에요.
- * 모든 뱃지에 공통으로 적용되는 스타일을 정의해요.
- */
 const badgeBase = style({
   display: "inline-flex",
   alignItems: "center",
@@ -74,35 +50,16 @@ const badgeBase = style({
   whiteSpace: "nowrap",
 });
 
-/**
- * Badge 컴포넌트의 스타일 recipe예요.
- * color, variant, size 옵션을 조합해서 뱃지 스타일을 생성해요.
- *
- * @example
- * ```tsx
- * // 기본 사용법
- * badgeStyle({ color: "primary", variant: "fill", size: "md" })
- *
- * // Outline 스타일
- * badgeStyle({ color: "primary", variant: "outline", size: "lg" })
- *
- * // Weak 스타일 (반투명 배경)
- * badgeStyle({ color: "primary", variant: "weak", size: "sm" })
- * ```
- */
 export const badgeStyle = recipe({
   base: badgeBase,
 
-  /** 뱃지의 스타일 옵션이에요. */
   variants: {
     color: badgeColors,
     variant: badgeVariants,
     size: badgeSizes,
   },
 
-  /** color와 variant 조합에 따라 적용되는 스타일이에요. */
   compoundVariants: [
-    // primary + outline
     {
       variants: {
         color: "primary",
@@ -114,7 +71,6 @@ export const badgeStyle = recipe({
         borderColor: COLORS.blue[300],
       },
     },
-    // secondary + outline
     {
       variants: {
         color: "secondary",
@@ -126,7 +82,6 @@ export const badgeStyle = recipe({
         borderColor: COLORS.grey[200],
       },
     },
-    // primary + weak
     {
       variants: {
         color: "primary",
@@ -138,7 +93,6 @@ export const badgeStyle = recipe({
         borderColor: COLORS.blue[100],
       },
     },
-    // secondary + weak
     {
       variants: {
         color: "secondary",
