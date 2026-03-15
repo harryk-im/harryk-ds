@@ -1,12 +1,6 @@
 import React from "react";
 import { headingStyle } from "./heading.css";
-import type {
-  HeadingAlign,
-  HeadingColor,
-  HeadingSize,
-  HeadingTag,
-  HeadingWeight,
-} from "./heading.types";
+import type { HeadingProps, HeadingSize, HeadingTag } from "./heading.types";
 
 const TAG_TO_SIZE_MAP: Record<HeadingTag, HeadingSize> = {
   h1: "3xl",
@@ -17,45 +11,6 @@ const TAG_TO_SIZE_MAP: Record<HeadingTag, HeadingSize> = {
   h6: "sm",
   div: "3xl",
 } as const;
-
-/**
- * Heading 컴포넌트의 Props예요.
- * HTML heading 요소나 div 요소의 모든 속성을 지원해요.
- */
-export interface HeadingProps
-  extends Omit<
-    React.HTMLAttributes<HTMLHeadingElement | HTMLDivElement>,
-    "color" | "as"
-  > {
-  /**
-   * 사용할 HTML 태그를 설정해요.
-   * @default "h1"
-   */
-  as?: HeadingTag;
-
-  /**
-   * 제목의 크기를 설정해요. 기본적으로 as 태그에 따라 최적화된 사이즈가 적용돼요.
-   */
-  size?: HeadingSize;
-
-  /**
-   * 제목의 색상을 설정해요.
-   * @default "black"
-   */
-  color?: HeadingColor;
-
-  /**
-   * 제목의 굵기를 설정해요.
-   * @default "bold"
-   */
-  weight?: HeadingWeight;
-
-  /**
-   * 텍스트의 정렬을 설정해요.
-   * @default "left"
-   */
-  align?: HeadingAlign;
-}
 
 /**
  * 페이지나 섹션의 제목을 렌더링하는 컴포넌트예요.

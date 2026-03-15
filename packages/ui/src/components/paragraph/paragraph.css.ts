@@ -1,4 +1,5 @@
 import { recipe } from "@vanilla-extract/recipes";
+
 import { getTypography } from "../../styles/foundation";
 import { COLORS, FONT_WEIGHTS } from "../../styles/tokens";
 
