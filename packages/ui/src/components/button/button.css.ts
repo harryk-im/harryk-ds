@@ -1,9 +1,8 @@
-import { style, styleVariants } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 
 import { COLORS, FONT_WEIGHTS, getTypography } from "../../styles";
 
-export const buttonColors = styleVariants({
+export const buttonColors = {
   primary: {
     backgroundColor: COLORS.blue[300],
     color: COLORS.white,
@@ -12,9 +11,9 @@ export const buttonColors = styleVariants({
     backgroundColor: COLORS.grey[200],
     color: COLORS.grey[800],
   },
-});
+} as const;
 
-export const buttonVariants = styleVariants({
+export const buttonVariants = {
   fill: {
     border: "none",
   },
@@ -22,9 +21,9 @@ export const buttonVariants = styleVariants({
     backgroundColor: "transparent",
     border: "2px solid transparent",
   },
-});
+} as const;
 
-export const buttonSizes = styleVariants({
+export const buttonSizes = {
   sm: {
     padding: "8px 16px",
     ...getTypography("sm"),
@@ -37,9 +36,9 @@ export const buttonSizes = styleVariants({
     padding: "16px 32px",
     ...getTypography("lg"),
   },
-});
+} as const;
 
-const buttonBase = style({
+export const buttonBase = {
   borderRadius: "8px",
   fontWeight: FONT_WEIGHTS.bold,
   cursor: "pointer",
@@ -66,17 +65,15 @@ const buttonBase = style({
       transform: "none",
     },
   },
-});
+} as const;
 
 export const buttonStyle = recipe({
   base: buttonBase,
-
   variants: {
     color: buttonColors,
     variant: buttonVariants,
     size: buttonSizes,
   },
-
   compoundVariants: [
     {
       variants: {

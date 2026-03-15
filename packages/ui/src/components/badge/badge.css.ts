@@ -1,9 +1,8 @@
-import { style, styleVariants } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 
 import { COLORS, FONT_WEIGHTS, getTypography } from "../../styles";
 
-export const badgeColors = styleVariants({
+export const badgeColors = {
   primary: {
     backgroundColor: COLORS.blue[300],
     color: COLORS.white,
@@ -14,17 +13,17 @@ export const badgeColors = styleVariants({
     color: COLORS.grey[800],
     borderColor: COLORS.grey[200],
   },
-});
+} as const;
 
-export const badgeVariants = styleVariants({
+export const badgeVariants = {
   fill: {},
   outline: {
     backgroundColor: COLORS.white,
   },
   weak: {},
-});
+} as const;
 
-export const badgeSizes = styleVariants({
+export const badgeSizes = {
   sm: {
     padding: "2px 4px",
     ...getTypography("xs"),
@@ -37,9 +36,9 @@ export const badgeSizes = styleVariants({
     padding: "6px 12px",
     ...getTypography("md"),
   },
-});
+} as const;
 
-const badgeBase = style({
+export const badgeBase = {
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
@@ -48,17 +47,15 @@ const badgeBase = style({
   borderStyle: "solid",
   fontWeight: FONT_WEIGHTS.bold,
   whiteSpace: "nowrap",
-});
+} as const;
 
 export const badgeStyle = recipe({
   base: badgeBase,
-
   variants: {
     color: badgeColors,
     variant: badgeVariants,
     size: badgeSizes,
   },
-
   compoundVariants: [
     {
       variants: {
