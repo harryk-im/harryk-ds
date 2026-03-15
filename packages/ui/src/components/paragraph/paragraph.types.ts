@@ -8,16 +8,25 @@ import type {
 
 /**
  * Paragraph 컴포넌트의 가용한 크기예요.
+ * - `2xs`, `xs`, `sm`: 작은 텍스트 크기예요.
+ * - `md`: 기본 텍스트 크기예요.
+ * - `lg`, `xl`, `2xl`, `3xl`: 강조를 위한 큰 텍스트 크기예요.
  */
 export type ParagraphSize = keyof typeof paragraphSizes;
 
 /**
  * Paragraph 컴포넌트의 가용한 색상이에요.
+ * - `black`: 기본 검정색이에요.
+ * - `grey`: 짙은 회색이에요.
+ * - `lightGrey`: 연한 회색이에요.
+ * - `blue`: 강조용 파란색이에요.
  */
 export type ParagraphColor = keyof typeof paragraphColors;
 
 /**
  * Paragraph 컴포넌트의 가용한 굵기예요.
+ * - `bold`: 굵은 텍스트(600)예요.
+ * - `normal`: 일반 텍스트(400)예요.
  */
 export type ParagraphWeight = keyof typeof paragraphWeights;
 
