@@ -2,7 +2,7 @@ import { recipe } from "@vanilla-extract/recipes";
 
 import { COLORS, FONT_WEIGHTS, getTypography } from "../../styles";
 
-export const badgeColors = {
+export const badgeColor = {
   primary: {
     backgroundColor: COLORS.blue[300],
     color: COLORS.white,
@@ -15,7 +15,7 @@ export const badgeColors = {
   },
 } as const;
 
-export const badgeVariants = {
+export const badgeVariant = {
   fill: {},
   outline: {
     backgroundColor: COLORS.white,
@@ -23,7 +23,7 @@ export const badgeVariants = {
   weak: {},
 } as const;
 
-export const badgeSizes = {
+export const badgeSize = {
   sm: {
     padding: "2px 4px",
     ...getTypography("xs"),
@@ -52,9 +52,9 @@ export const badgeBase = {
 export const badgeStyle = recipe({
   base: badgeBase,
   variants: {
-    color: badgeColors,
-    variant: badgeVariants,
-    size: badgeSizes,
+    color: badgeColor,
+    variant: badgeVariant,
+    size: badgeSize,
   },
   compoundVariants: [
     {

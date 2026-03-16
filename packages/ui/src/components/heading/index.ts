@@ -5,5 +5,6 @@ export type {
   HeadingProps,
   HeadingSize,
   HeadingTag,
+  HeadingToken,
   HeadingWeight,
 } from "./heading.types";

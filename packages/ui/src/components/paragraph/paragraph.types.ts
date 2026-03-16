@@ -1,9 +1,11 @@
+import type { RecipeVariants } from "@vanilla-extract/recipes";
 import type { AnchorHTMLAttributes, HTMLAttributes, ReactNode } from "react";
 
 import type {
-  paragraphColors,
-  paragraphSizes,
-  paragraphWeights,
+  paragraphColor,
+  paragraphSize,
+  paragraphStyle,
+  paragraphWeight,
 } from "./paragraph.css";
 
 /**
@@ -12,7 +14,7 @@ import type {
  * - `md`: 기본 텍스트 크기예요.
  * - `lg`, `xl`, `2xl`, `3xl`: 강조를 위한 큰 텍스트 크기예요.
  */
-export type ParagraphSize = keyof typeof paragraphSizes;
+export type ParagraphSize = keyof typeof paragraphSize;
 
 /**
  * Paragraph 컴포넌트의 가용한 색상이에요.
@@ -21,14 +23,20 @@ export type ParagraphSize = keyof typeof paragraphSizes;
  * - `lightGrey`: 연한 회색이에요.
  * - `blue`: 강조용 파란색이에요.
  */
-export type ParagraphColor = keyof typeof paragraphColors;
+export type ParagraphColor = keyof typeof paragraphColor;
 
 /**
  * Paragraph 컴포넌트의 가용한 굵기예요.
  * - `bold`: 굵은 텍스트(600)예요.
  * - `normal`: 일반 텍스트(400)예요.
  */
-export type ParagraphWeight = keyof typeof paragraphWeights;
+export type ParagraphWeight = keyof typeof paragraphWeight;
+
+/**
+ * Paragraph 컴포넌트의 모든 스타일 옵션을 포함하는 타입이에요.
+ * recipe에서 자동으로 추론돼요.
+ */
+export type ParagraphToken = RecipeVariants<typeof paragraphStyle>;
 
 /**
  * Paragraph 컴포넌트 내부에서 공유되는 컨텍스트 타입이에요.

@@ -1,10 +1,10 @@
 import type { RecipeVariants } from "@vanilla-extract/recipes";
 import type React from "react";
 import type {
-  buttonColors,
-  buttonSizes,
+  buttonColor,
+  buttonSize,
   buttonStyle,
-  buttonVariants,
+  buttonVariant,
 } from "./button.css";
 
 /**
@@ -17,19 +17,19 @@ export interface ButtonProps
    * 버튼의 색상을 선택해요.
    * @default "primary"
    */
-  color?: ButtonColors;
+  color?: ButtonColor;
 
   /**
    * 버튼의 스타일을 선택해요.
    * @default "fill"
    */
-  variant?: ButtonVariants;
+  variant?: ButtonVariant;
 
   /**
    * 버튼의 크기를 선택해요.
    * @default "md"
    */
-  size?: ButtonSizes;
+  size?: ButtonSize;
 }
 
 /**
@@ -43,7 +43,7 @@ export type ButtonToken = RecipeVariants<typeof buttonStyle>;
  * - `primary`: 주요 액션에 사용하는 파란색이에요.
  * - `secondary`: 보조 액션에 사용하는 회색이에요.
  */
-export type ButtonColors = keyof typeof buttonColors;
+export type ButtonColor = keyof typeof buttonColor;
 
 /**
  * 버튼의 크기를 지정해요.
@@ -51,11 +51,11 @@ export type ButtonColors = keyof typeof buttonColors;
  * - `md`: 기본 크기예요.
  * - `lg`: 큰 크기예요.
  */
-export type ButtonSizes = keyof typeof buttonSizes;
+export type ButtonSize = keyof typeof buttonSize;
 
 /**
  * 버튼의 스타일을 지정해요.
  * - `fill`: 배경색이 채워진 스타일이에요.
  * - `outline`: 테두리만 있는 스타일이에요.
  */
-export type ButtonVariants = keyof typeof buttonVariants;
+export type ButtonVariant = keyof typeof buttonVariant;

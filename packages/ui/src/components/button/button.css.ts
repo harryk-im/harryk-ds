@@ -2,7 +2,7 @@ import { recipe } from "@vanilla-extract/recipes";
 
 import { COLORS, FONT_WEIGHTS, getTypography } from "../../styles";
 
-export const buttonColors = {
+export const buttonColor = {
   primary: {
     backgroundColor: COLORS.blue[300],
     color: COLORS.white,
@@ -13,7 +13,7 @@ export const buttonColors = {
   },
 } as const;
 
-export const buttonVariants = {
+export const buttonVariant = {
   fill: {
     border: "none",
   },
@@ -23,7 +23,7 @@ export const buttonVariants = {
   },
 } as const;
 
-export const buttonSizes = {
+export const buttonSize = {
   sm: {
     padding: "8px 16px",
     ...getTypography("sm"),
@@ -70,9 +70,9 @@ export const buttonBase = {
 export const buttonStyle = recipe({
   base: buttonBase,
   variants: {
-    color: buttonColors,
-    variant: buttonVariants,
-    size: buttonSizes,
+    color: buttonColor,
+    variant: buttonVariant,
+    size: buttonSize,
   },
   compoundVariants: [
     {

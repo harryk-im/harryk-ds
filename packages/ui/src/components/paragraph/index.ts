@@ -5,5 +5,6 @@ export type {
   ParagraphProps,
   ParagraphSize,
   ParagraphTextProps,
+  ParagraphToken,
   ParagraphWeight,
 } from "./paragraph.types";

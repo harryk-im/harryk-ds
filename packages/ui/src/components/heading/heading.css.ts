@@ -3,7 +3,7 @@ import { recipe } from "@vanilla-extract/recipes";
 import { getTypography } from "../../styles/foundation";
 import { COLORS, FONT_WEIGHTS } from "../../styles/tokens";
 
-export const headingSizes = {
+export const headingSize = {
   "2xs": getTypography("2xs"),
   xs: getTypography("xs"),
   sm: getTypography("sm"),
@@ -14,18 +14,18 @@ export const headingSizes = {
   "3xl": getTypography("3xl"),
 } as const;
 
-export const headingColors = {
+export const headingColor = {
   black: { color: COLORS.black },
   grey: { color: COLORS.grey[800] },
   lightGrey: { color: COLORS.grey[600] },
 } as const;
 
-export const headingWeights = {
+export const headingWeight = {
   bold: { fontWeight: FONT_WEIGHTS.bold },
   normal: { fontWeight: FONT_WEIGHTS.normal },
 } as const;
 
-export const headingAligns = {
+export const headingAlign = {
   left: { textAlign: "left" },
   center: { textAlign: "center" },
   right: { textAlign: "right" },
@@ -38,10 +38,10 @@ export const headingStyle = recipe({
     display: "block",
   },
   variants: {
-    size: headingSizes,
-    color: headingColors,
-    weight: headingWeights,
-    align: headingAligns,
+    size: headingSize,
+    color: headingColor,
+    weight: headingWeight,
+    align: headingAlign,
   },
   defaultVariants: {
     color: "black",

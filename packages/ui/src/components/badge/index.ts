@@ -1,7 +1,8 @@
 export { Badge } from "./badge";
 export type {
-  BadgeColors,
+  BadgeColor,
   BadgeProps,
-  BadgeSizes,
-  BadgeVariants,
+  BadgeSize,
+  BadgeToken,
+  BadgeVariant,
 } from "./badge.types";

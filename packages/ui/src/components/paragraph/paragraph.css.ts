@@ -3,7 +3,7 @@ import { recipe } from "@vanilla-extract/recipes";
 import { getTypography } from "../../styles/foundation";
 import { COLORS, FONT_WEIGHTS } from "../../styles/tokens";
 
-export const paragraphSizes = {
+export const paragraphSize = {
   "2xs": getTypography("2xs"),
   xs: getTypography("xs"),
   sm: getTypography("sm"),
@@ -14,14 +14,14 @@ export const paragraphSizes = {
   "3xl": getTypography("3xl"),
 } as const;
 
-export const paragraphColors = {
+export const paragraphColor = {
   black: { color: COLORS.black },
   grey: { color: COLORS.grey[900] },
   lightGrey: { color: COLORS.grey[800] },
   blue: { color: COLORS.blue[300] },
 } as const;
 
-export const paragraphWeights = {
+export const paragraphWeight = {
   bold: { fontWeight: FONT_WEIGHTS.bold },
   normal: { fontWeight: FONT_WEIGHTS.normal },
 } as const;
@@ -32,9 +32,9 @@ export const paragraphStyle = recipe({
     padding: 0,
   },
   variants: {
-    size: paragraphSizes,
-    color: paragraphColors,
-    weight: paragraphWeights,
+    size: paragraphSize,
+    color: paragraphColor,
+    weight: paragraphWeight,
   },
 });
 
