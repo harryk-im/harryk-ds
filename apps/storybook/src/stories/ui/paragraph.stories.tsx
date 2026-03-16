@@ -25,8 +25,9 @@ const meta = {
       options: ["black", "grey", "lightGrey", "blue"],
       description: "텍스트의 색상을 선택해요.",
     },
-    bold: {
-      control: { type: "boolean" },
+    weight: {
+      control: { type: "select" },
+      options: ["bold", "normal"],
       description: "텍스트의 굵기를 설정해요.",
     },
   },
@@ -65,7 +66,7 @@ export const Composition: Story = {
       <Paragraph.Link href="https://github.com/harryk-im/harryk-ds">
         링크
       </Paragraph.Link>
-      <Paragraph.Text bold>가 포함된 문단입니다.</Paragraph.Text>
+      <Paragraph.Text weight="bold">가 포함된 문단입니다.</Paragraph.Text>
       Paragraph 컴포넌트만 내부에서 Text, Link 컴포넌트 없이도 사용이 가능해요.
     </Paragraph>
   ),
@@ -81,14 +82,14 @@ export const Overrides: Story = {
       description: {
         story: `하위 요소에서 개별적으로 스타일을 덮어쓸(Override) 수 있어요.
 
-- 첫 번째 \`Text\`는 \`color="grey"\`와 \`bold\`를 적용해 부모 스타일과 차별화를 뒀어요.
+- 첫 번째 \`Text\`는 \`color="grey"\`와 \`weight="bold"\`를 적용해 부모 스타일과 차별화를 뒀어요.
 - \`Link\`에도 \`color="black"\`을 직접 지정하면, 기본 링크 색상인 파란색 대신 **검은색 링크**를 만들 수 있어요.`,
       },
     },
   },
   render: (args) => (
     <Paragraph {...args}>
-      <Paragraph.Text bold color="grey">
+      <Paragraph.Text weight="bold" color="grey">
         이 부분만 굵고 회색입니다.
       </Paragraph.Text>
       <br />
@@ -162,7 +163,7 @@ export const Standalone: Story = {
         gap: "10px",
       }}
     >
-      <Paragraph.Text size="lg" bold color="blue">
+      <Paragraph.Text size="lg" weight="bold" color="blue">
         독립적으로 사용된 Paragraph.Text
       </Paragraph.Text>
       <Paragraph.Link href="#" size="md">
