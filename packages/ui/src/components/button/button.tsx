@@ -1,31 +1,6 @@
 import React from "react";
 import { buttonStyle } from "./button.css";
-import type { ButtonColors, ButtonSizes, ButtonVariants } from "./button.types";
-
-/**
- * Button 컴포넌트의 Props예요.
- * HTML button 요소의 모든 속성을 지원해요.
- */
-export interface ButtonProps
-  extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "color"> {
-  /**
-   * 버튼의 색상을 선택해요.
-   * @default "primary"
-   */
-  color?: ButtonColors;
-
-  /**
-   * 버튼의 스타일을 선택해요.
-   * @default "fill"
-   */
-  variant?: ButtonVariants;
-
-  /**
-   * 버튼의 크기를 선택해요.
-   * @default "md"
-   */
-  size?: ButtonSizes;
-}
+import type { ButtonProps } from "./button.types";
 
 /**
  * 다양한 색상, 스타일, 크기를 선택할 수 있는 버튼이에요.
