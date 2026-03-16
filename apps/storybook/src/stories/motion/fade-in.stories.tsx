@@ -71,28 +71,28 @@ export const Default: Story = {
 };
 
 // 방향별 스토리
-export const FromBottom: Story = {
+export const Up: Story = {
   args: {
     direction: "up",
     children: <Button>Up Direction</Button>,
   },
 };
 
-export const FromTop: Story = {
+export const Down: Story = {
   args: {
     direction: "down",
     children: <Button>Down Direction</Button>,
   },
 };
 
-export const FromLeft: Story = {
+export const Left: Story = {
   args: {
     direction: "left",
     children: <Button>Left Direction</Button>,
   },
 };
 
-export const FromRight: Story = {
+export const Right: Story = {
   args: {
     direction: "right",
     children: <Button>Right Direction</Button>,
