@@ -1,5 +1,14 @@
 # @harryk-ds/ui
 
+## 0.1.6
+
+### Patch Changes
+
+- 532c7b1: Optimize dependency structure and enhance version compatibility
+- 521d033: Rename bold prop to weight in Paragraph component for architectural consistency.
+- 6dc4bac: Implement Heading component with polymorphic tag support and refined type architecture.
+- 45e01e8: add 2xs, 3xl typography tokens and expand Paragraph component sizes
+
 ## 0.1.5
 
 ### Patch Changes
