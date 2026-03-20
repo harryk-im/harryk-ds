@@ -1,6 +1,6 @@
 {
   "name": "@harryk-ds/motion",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Motion components and animations for Harryk Design System",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
