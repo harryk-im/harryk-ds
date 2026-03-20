@@ -18,7 +18,7 @@ import type {
  * ```tsx
  * // 기본 사용법
  * <Paragraph size="md" color="black">
- *   안녕하세요! <Paragraph.Text bold>Harryk 디자인 시스템</Paragraph.Text>입니다.
+ *   안녕하세요! <Paragraph.Text weight="bold">Harryk 디자인 시스템</Paragraph.Text>입니다.
  * </Paragraph>
  * ```
  */
@@ -30,7 +30,7 @@ export const ParagraphRoot = React.forwardRef<
     {
       size = "md",
       color = "black",
-      bold = false,
+      weight = "normal",
       className,
       children,
       ...props
@@ -41,7 +41,7 @@ export const ParagraphRoot = React.forwardRef<
       paragraphStyle({
         size,
         color,
-        bold,
+        weight,
       }),
       className,
     ]
@@ -49,8 +49,8 @@ export const ParagraphRoot = React.forwardRef<
       .join(" ");
 
     const contextValue = React.useMemo(
-      () => ({ size, color, bold }),
-      [size, color, bold]
+      () => ({ size, color, weight }),
+      [size, color, weight]
     );
 
     return (
@@ -71,20 +71,20 @@ ParagraphRoot.displayName = "Paragraph";
  *
  * @example
  * ```tsx
- * <Paragraph.Text color="blue" bold>강조된 텍스트</Paragraph.Text>
+ * <Paragraph.Text color="blue" weight="bold">강조된 텍스트</Paragraph.Text>
  * ```
  */
 export const ParagraphText = React.forwardRef<
   HTMLSpanElement,
   ParagraphTextProps
->(({ size, color, bold, className, children, ...props }, ref) => {
-  const resolvedStyle = useResolvedParagraphStyle({ size, color, bold });
+>(({ size, color, weight, className, children, ...props }, ref) => {
+  const resolvedStyle = useResolvedParagraphStyle({ size, color, weight });
 
   const classes = [
     paragraphStyle({
       size: resolvedStyle.size,
       color: resolvedStyle.color,
-      bold: resolvedStyle.bold,
+      weight: resolvedStyle.weight,
     }),
     className,
   ]
@@ -112,9 +112,9 @@ ParagraphText.displayName = "Paragraph.Text";
 export const ParagraphLink = React.forwardRef<
   HTMLAnchorElement,
   ParagraphLinkProps
->(({ size, color, bold, className, children, ...props }, ref) => {
+>(({ size, color, weight, className, children, ...props }, ref) => {
   const resolvedStyle = useResolvedParagraphStyle(
-    { size, color, bold },
+    { size, color, weight },
     { color: "blue" }
   );
 
@@ -122,7 +122,7 @@ export const ParagraphLink = React.forwardRef<
     paragraphStyle({
       size: resolvedStyle.size,
       color: resolvedStyle.color,
-      bold: resolvedStyle.bold,
+      weight: resolvedStyle.weight,
     }),
     paragraphLinkStyle(),
     className,

@@ -1,7 +1,21 @@
-echo "🔍 커밋 전 lint check를 실행할게요..."
-pnpm lint
+echo "🔄 AI 페르소나 동기화 여부를 확인할게요..."
 
-if [ $? -ne 0 ]; then
+if git diff --cached --name-only | grep -qF ".ai/personas/"; then
+  echo "🚀 .ai/personas에 변경사항을 감지했어요. ai:sync를 실행할게요."
+
+  if ! pnpm ai:sync; then
+    echo "❌ AI 페르소나 동기화 중 에러가 발생했어요. 커밋을 취소할게요."
+    exit 1
+  fi
+
+  echo "✅ AI 페르소나 동기화가 성공적으로 완료되었어요!"
+else
+  echo "✨ AI 페르소나 변경사항이 없어요. 동기화를 건너뛸게요."
+fi
+
+echo "🔍 커밋 전 lint check를 실행할게요..."
+
+if ! pnpm lint; then
   echo "❌ lint check 중 에러가 발생했어요. 커밋을 취소할게요"
   exit 1
 fi

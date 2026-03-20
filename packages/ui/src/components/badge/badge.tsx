@@ -1,27 +1,6 @@
 import React from "react";
 import { badgeStyle } from "./badge.css";
-import type { BadgeColors, BadgeSizes, BadgeVariants } from "./badge.types";
-
-export interface BadgeProps
-  extends Omit<React.HTMLAttributes<HTMLSpanElement>, "color"> {
-  /**
-   * 뱃지의 색상을 선택해요.
-   * @default "primary"
-   */
-  color?: BadgeColors;
-
-  /**
-   * 뱃지의 스타일을 선택해요.
-   * @default "fill"
-   */
-  variant?: BadgeVariants;
-
-  /**
-   * 뱃지의 크기를 선택해요.
-   * @default "sm"
-   */
-  size?: BadgeSizes;
-}
+import type { BadgeProps } from "./badge.types";
 
 /**
  * 다양한 색상, 스타일, 크기를 선택할 수 있는 뱃지예요.
