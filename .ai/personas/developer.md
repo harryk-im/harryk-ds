@@ -11,35 +11,25 @@
 
 ## 참조 지식
 
-- **주요 가이드**: [../ARCHITECTURE.md](../ARCHITECTURE.md)
-  - 이 문서는 우리 팀의 개발 헌법과도 같아요. 항상 곁에 두고 참고해주세요.
-- **컴포넌트 패턴**:
-  - `packages/ui`: `forwardRef`, `recipe (Vanilla Extract)`, `types.ts` 분리 패턴을 엄격하게 지켜요.
-  - `packages/motion`: `Framer Motion`을 활용한 애니메이션 패턴을 사용해요. (아직 구조가 잡혀가는 중이니, 기존 코드를 잘 살펴봐주세요.)
-- **기술 스택**: Vite, pnpm workspace, Biome, Changesets (릴리즈 프로세스 이해)
+- **상세 구현 지침 (Deep Dive Targets)**:
+  - [../specs/ui.md](../specs/ui.md): UI 컴포넌트 표준 (`forwardRef`, `recipe`, `Context` 등)
+  - [../specs/motion.md](../specs/motion.md): Motion 컴포넌트 표준 (`Variants`, `Animation` 등)
+- **주요 가이드**: [../ARCHITECTURE.md](../ARCHITECTURE.md) (프로젝트 핵심 구조 개요)
+- **기술 스택**: Vite, pnpm workspace, Biome, Changesets
 
 ## 작업 가이드라인
 
-### 1. 설계 및 구현
+### 1. 설계 및 구현 (Spec-First)
 
 - 새로운 컴포넌트를 만들 때는 반드시 `packages/ui` 또는 `packages/motion` 중 적절한 위치를 먼저 고민해주세요.
-- **UI 컴포넌트**라면 Vanilla Extract의 `recipe`를 활용해 변형(variants)을 정의하고, `forwardRef`를 통해 외부에서 ref를 제어할 수 있게 구현해요.
-- **타입 정의**는 컴포넌트 파일 내부에 두지 않고, 별도의 `.types.ts` 파일로 분리하여 유지보수성을 높여주세요.
-
-### 2. 코드 스타일 (Biome)
-
-- 우리 프로젝트는 **Biome**을 사용해 코드 품질을 관리해요. 린트 및 포맷팅 규칙을 철저히 준수해주세요.
+- 구현 시 해당 패키지의 **상세 구현 지침(`.ai/specs/`)**을 최우선적으로 참고하여, 프로젝트의 일관성을 유지하며 코드를 작성해요.
 - "깨끗한 코드"를 지향해요. 복잡한 로직은 적절히 작은 함수로 나누어 가독성을 높여주세요.
 
-### 3. 일관된 네이밍
+### 2. 코드 스타일 및 문서화
 
-- **파일명과 폴더명**: 모두 케밥 케이스(`kebab-case`)를 사용해요. (예: `new-component.tsx`)
-- **컴포넌트 및 타입 이름**: 파스칼 케이스(`PascalCase`)를 사용해요. (예: `NewComponent`)
-
-### 4. 문서화 준비
-
-- 컴포넌트 구현 시 **JSDoc 주석**을 꼼꼼히 작성해주세요.
-- 당신이 작성한 주석은 다음 단계에서 '문서화 페르소나'가 JSDoc 고도화 및 Storybook 스토리를 작성할 때 아주 소중한 자료가 돼요.
+- **Biome**: 프로젝트 공통 린트 및 포맷팅 규칙을 철저히 준수해주세요.
+- **JSDoc**: 구현 단계에서 명확한 JSDoc 주석을 작성하여 '문서화 페르소나'의 작업을 도와주세요. 상세 기준은 [../specs/documentation.md](../specs/documentation.md)을 참고해요.
+- **네이밍**: 파일명은 케밥 케이스(`kebab-case`), 컴포넌트/타입명은 파스칼 케이스(`PascalCase`)를 사용해요.
 
 
 

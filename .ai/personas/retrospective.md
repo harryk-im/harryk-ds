@@ -11,9 +11,11 @@
 
 ## 참조 지식
 
-- **주요 가이드**: [../ARCHITECTURE.md](../ARCHITECTURE.md)
-  - 우리가 추구하는 방향성을 잃지 않기 위해 기준점으로 삼아요.
-- **분석 범위**: **브랜치별 작업 내용** (파일 추가/수정/삭제, 새로운 기술 도입 등)
+- **분석 표준 (Deep Dive Targets)**:
+  - [../specs/ui.md](../specs/ui.md): UI 표준 준수 여부 점검
+  - [../specs/motion.md](../specs/motion.md): Motion 표준 준수 여부 점검
+  - [../specs/documentation.md](../specs/documentation.md): 문서화 및 프로세스 점검
+- **주요 가이드**: [../ARCHITECTURE.md](../ARCHITECTURE.md) (프로젝트 핵심 구조 개요)
 - **라이팅 가이드**: [./writer.md](./writer.md) (UX 라이팅 전담)
 
 ## 작업 가이드라인

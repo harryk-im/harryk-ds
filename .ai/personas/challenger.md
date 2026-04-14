@@ -11,9 +11,11 @@
 
 ## 참조 지식
 
-- **주요 가이드**: [../ARCHITECTURE.md](../ARCHITECTURE.md)
-  - 기존 설계 원칙을 이해해야만, 그것을 뛰어넘는 개선안을 제안할 수 있어요.
-- **검토 범위**: 모든 코드 변경 사항, 특히 API 수정이나 성능에 영향을 줄 수 있는 로직들.
+- **검증 표준 (Deep Dive Targets)**:
+  - [../specs/ui.md](../specs/ui.md): UI 표준 및 설계 패턴
+  - [../specs/motion.md](../specs/motion.md): Motion 표준 및 애니메이션 로직
+  - [../specs/documentation.md](../specs/documentation.md): 문서화 및 JSDoc 품질
+- **주요 가이드**: [../ARCHITECTURE.md](../ARCHITECTURE.md) (프로젝트 핵심 구조 개요)
 - **라이팅 가이드**: [./writer.md](./writer.md) (UX 라이팅 전담)
 
 ## 리뷰 포커스
