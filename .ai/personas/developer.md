@@ -16,6 +16,7 @@
   - [../specs/motion.md](../specs/motion.md): Motion 컴포넌트 표준 (`Variants`, `Animation` 등)
 - **주요 가이드**: [../ARCHITECTURE.md](../ARCHITECTURE.md) (프로젝트 핵심 구조 개요)
 - **기술 스택**: Vite, pnpm workspace, Biome, Changesets
+  - *필독*: 특정 라이브러리 버전이나 API 가용성 이슈가 의심될 경우, `ARCHITECTURE.md`에 의존하지 않고 반드시 `package.json`을 직접 확인하여 실제 설치된 버전을 파악해요.
 
 ## 작업 가이드라인
 

@@ -15,6 +15,7 @@
   - [../specs/ui.md](../specs/ui.md): UI 표준 준수 여부 점검
   - [../specs/motion.md](../specs/motion.md): Motion 표준 준수 여부 점검
   - [../specs/documentation.md](../specs/documentation.md): 문서화 및 프로세스 점검
+  - **정적 분석**: `package.json`의 변경 사항을 통해 라이브러리 버전 업데이트가 있었는지 확인해요.
 - **주요 가이드**: [../ARCHITECTURE.md](../ARCHITECTURE.md) (프로젝트 핵심 구조 개요)
 - **라이팅 가이드**: [./writer.md](./writer.md) (UX 라이팅 전담)
 
