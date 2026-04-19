@@ -48,16 +48,45 @@ export interface Props extends React.HTMLAttributes<HTMLDivElement> {
 - 위치: `packages/ui/src/styles/tokens/colors.ts`
 
 ### 2. recipe 패턴
-컴포넌트의 변형(Variants)은 `recipe` 함수를 이용해 선언적으로 관리해요.
+컴포넌트의 변형(Variants)은 `recipe` 함수를 이용해 선언적으로 관리해요. 이때, 타입 추론 최적화와 가독성을 위해 스타일 객체를 `as const`로 먼저 상언하는 패턴을 권장해요.
 
 ```typescript
 // {name}.css.ts
+import { recipe } from "@vanilla-extract/recipes";
+import { COLORS } from "../../styles";
+
+// 1. 스타일 객체를 as const로 별도 선언
+export const buttonBase = {
+  transition: '0.2s',
+  borderRadius: '8px',
+  cursor: 'pointer',
+} as const;
+
+export const buttonColor = {
+  primary: { color: COLORS.blue[500] },
+  secondary: { color: COLORS.grey[500] },
+} as const;
+
+// 2. recipe 함수에서 조합
 export const myStyle = recipe({
-  base: { transition: '0.2s' },
+  base: buttonBase,
   variants: {
-    color: {
-      primary: { color: COLORS.blue[500] },
+    color: buttonColor,
+    size: {
+      sm: { fontSize: '12px' },
+      md: { fontSize: '16px' },
     }
+  },
+  // 3. 복합 변형(Compound Variants) 처리
+  compoundVariants: [
+    {
+      variants: { color: 'primary', size: 'sm' },
+      style: { fontWeight: 'bold' }
+    }
+  ],
+  defaultVariants: {
+    color: 'primary',
+    size: 'md',
   }
 });
 ```
