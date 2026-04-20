@@ -23,8 +23,8 @@
     "changeset": "changeset",
     "changeset:version": "changeset version",
     "changeset:publish": "changeset publish",
-    "ai:sync": "bash ./scripts/sync-ai-personas.sh",
-    "postinstall": "pnpm ai:sync"
+    "ai:init": "bash ./scripts/init-ai-launchers.sh",
+    "postinstall": "pnpm ai:init"
   },
   "author": "harryk-im",
   "license": "MIT",
