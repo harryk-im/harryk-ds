@@ -22,7 +22,7 @@
 모든 컴포넌트는 외부에서 DOM 요소에 직접 접근할 수 있도록 `React.forwardRef`를 사용해 구현해요.
 
 ```tsx
-export const MyComponent = React.forwardRef<HTMLElement, Props>(
+export const MyComponent = React.forwardRef<HTMLDivElement, Props>(
   ({ children, ...props }, ref) => {
     return <div ref={ref} {...props}>{children}</div>;
   }
@@ -48,7 +48,7 @@ export interface Props extends React.HTMLAttributes<HTMLDivElement> {
 - 위치: `packages/ui/src/styles/tokens/colors.ts`
 
 ### 2. recipe 패턴
-컴포넌트의 변형(Variants)은 `recipe` 함수를 이용해 선언적으로 관리해요. 이때, 타입 추론 최적화와 가독성을 위해 스타일 객체를 `as const`로 먼저 상언하는 패턴을 권장해요.
+컴포넌트의 변형(Variants)은 `recipe` 함수를 이용해 선언적으로 관리해요. 이때, 타입 추론 최적화와 가독성을 위해 스타일 객체를 `as const`로 먼저 선언하는 패턴을 권장해요.
 
 ```typescript
 // {name}.css.ts
