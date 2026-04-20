@@ -21,16 +21,50 @@
 
 ## JSDoc 가이드
 
-컴포넌트와 Props에는 항상 JSDoc 주석을 달아주세요. 이는 IDE에서의 힌트와 자동화된 문서 생성의 원천이 돼요.
+컴포넌트 파일과 타입 파일 두 곳에 항상 JSDoc 주석을 달아주세요. 이는 IDE에서의 힌트와 자동화된 문서 생성의 원천이 돼요.
 
-- **컴포넌트**: 전체적인 역할과 예제 코드를 포함해요.
-- **Props**: 각 속성이 어떤 역할을 하는지 정중한 '해요체'로 설명해요.
+### 1. 컴포넌트 (`.tsx`)
+컴포넌트 상단에는 전체적인 역할 설명과 친절한 `@example` 기반의 사용 예시 코드를 포함해요.
 
 ```tsx
 /**
- * 클릭 시 이벤트를 발생시키는 기본 버튼이에요.
- * @param color - 버튼의 주 테마 색상을 결정해요.
+ * 다양한 색상, 스타일, 크기를 선택할 수 있는 버튼이에요.
+ *
+ * @example
+ * ```tsx
+ * // 기본 사용법
+ * <Button>클릭하세요</Button>
+ *
+ * // 크기 지정
+ * <Button size="lg">큰 버튼</Button>
+ * ```
  */
+export const Button = React.forwardRef(...)
+```
+
+### 2. 컴포넌트 타입 및 Props (`.types.ts`)
+Props 인터페이스의 각 속성과 리터럴 유니온 타입에 구체적인 역할을 명시해요.
+선택적 속성(Optional Prop)의 경우 `@default` 태그를 사용하여 기본값을 반드시 적어주세요.
+
+```tsx
+/**
+ * 버튼의 크기를 지정해요.
+ * - `sm`: 작은 크기예요.
+ * - `md`: 기본 크기예요.
+ * - `lg`: 큰 크기예요.
+ */
+export type ButtonSize = keyof typeof buttonSize;
+
+/**
+ * Button 컴포넌트의 Props예요.
+ */
+export interface ButtonProps {
+  /**
+   * 버튼의 크기를 선택해요.
+   * @default "md"
+   */
+  size?: ButtonSize;
+}
 ```
 
 ---
