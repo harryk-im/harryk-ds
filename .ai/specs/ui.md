@@ -4,7 +4,7 @@
 
 ---
 
-## 🏗️ 파일 구조 및 네이밍
+## 파일 구조 및 네이밍
 
 컴포넌트 폴더(`packages/ui/src/components/{name}/`)는 아래 구조를 엄격히 따라야 해요.
 
@@ -16,7 +16,7 @@
 
 ---
 
-## ⚛️ React 구현 패턴
+## React 구현 패턴
 
 ### 1. forwardRef (Ref 전달)
 모든 컴포넌트는 외부에서 DOM 요소에 직접 접근할 수 있도록 `React.forwardRef`를 사용해 구현해요.
@@ -41,7 +41,7 @@ export interface Props extends React.HTMLAttributes<HTMLDivElement> {
 
 ---
 
-## 🎨 스타일링 (Vanilla Extract)
+## 스타일링 (Vanilla Extract)
 
 ### 1. oklch 색상 토큰
 색상은 하드코딩하지 않고 `oklch` 기반의 `COLORS` 토큰을 사용해요.
@@ -93,7 +93,7 @@ export const myStyle = recipe({
 
 ---
 
-## 🔄 스타일 상속 (Context)
+## 스타일 상속 (Context)
 
 복합 컴포넌트(Compound Components)에서는 상위 컴포넌트의 스타일 설정을 하위 요소가 자동으로 물려받을 수 있도록 **Context 패턴**을 권장해요.
 
