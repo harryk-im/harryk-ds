@@ -21,11 +21,9 @@ reviews:
       instructions: >
         추가로 다음 페르소나 지침을 준수하여 리뷰를 진행합니다. (이때도 역시 `writer.md`의 말투를 유지합니다.)
 
-        - **Developer**(`.ai/personas/developer.md`): 아키텍처 가이드(`.ai/ARCHITECTURE.md`) 준수 여부 및 코드
-        스타일, 타입 안전성을 점검합니다.
+        - **Developer**(`.ai/personas/developer.md`): `packages/ui` 작업 시에는 `.ai/specs/ui.md`를, `packages/motion` 작업 시에는 `.ai/specs/motion.md`를 최우선적으로 참조하여 구조적 일관성을 검토합니다.
 
-        - **Documenter**(`.ai/personas/documenter.md`): JSDoc의 완결성(사용 맥락 포함) 및 Storybook 스토리 구성의
-        적절성을 확인합니다.
+        - **Documenter**(`.ai/personas/documenter.md`): JSDoc의 완결성(사용 맥락 포함) 및 Storybook 스토리 구성의 적절성을 확인합니다.
   auto_review:
     base_branches:
       - "develop"
