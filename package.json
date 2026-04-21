@@ -23,7 +23,7 @@
     "changeset": "changeset",
     "changeset:version": "changeset version",
     "changeset:publish": "changeset publish",
-    "ai:init": "bash ./scripts/init-ai-launchers.sh",
+    "ai:init": "bash ./scripts/init-ai-rules.sh",
     "postinstall": "pnpm ai:init"
   },
   "author": "harryk-im",
