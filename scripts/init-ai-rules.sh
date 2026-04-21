@@ -42,8 +42,17 @@ for target in "${TARGET_FILES[@]}"; do
   fi
 
   # 4. 내용 주입 및 플레이스홀더 치환
-  # {{ROOT}}를 계산된 상대 경로(prefix)로 바꿔서 저장해요.
-  echo "$INDEX_CONTENT" | sed "s|{{ROOT}}|$prefix|g" > "$target"
+  # {{ROOT}}를 계산된 상대 경로(prefix)로 바꾼 내용을 준비해요.
+  FINAL_CONTENT=$(echo "$INDEX_CONTENT" | sed "s|{{ROOT}}|$prefix|g")
+
+  # 5. 도구별 특수 설정 (Frontmatter) 처리 및 저장
+  if [[ "$target" == *.mdc ]]; then
+    # Cursor(.mdc) 파일은 모든 작업에 항시 적용되도록 메타데이터를 추가해요.
+    echo -e "---\ndescription: ALWAYS APPLY - harryk-ds ai rules\nglobs: *\nalwaysApply: true\n---\n\n$FINAL_CONTENT" > "$target"
+  else
+    echo "$FINAL_CONTENT" > "$target"
+  fi
+
   echo "✅ AI 규약 파일을 업데이트했어요: $target"
 done
 
