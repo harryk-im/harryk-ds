@@ -13,7 +13,7 @@ TARGET_FILES=(
 
 # 1. 마스터 허브 파일 존재 확인
 if [ ! -f "$INDEX_FILE" ]; then
-  echo "❌ $INDEX_FILE 파일이 존재하지 않아요. 먼저 허브 파일을 만들어주세요."
+  echo "❌ $INDEX_FILE 파일이 존재하지 않아요. 허브 파일을 먼저 만들어주세요."
   exit 1
 fi
 
@@ -44,7 +44,7 @@ for target in "${TARGET_FILES[@]}"; do
   # 4. 내용 주입 및 플레이스홀더 치환
   # {{ROOT}}를 계산된 상대 경로(prefix)로 바꿔서 저장해요.
   echo "$INDEX_CONTENT" | sed "s|{{ROOT}}|$prefix|g" > "$target"
-  echo "✅ Launcher를 업데이트했어요: $target"
+  echo "✅ AI 규약 파일을 업데이트했어요: $target"
 done
 
-echo "🚀 모든 AI Launcher가 마스터 허브와 동기화되었어요!"
+echo "🚀 모든 AI 규약 파일이 .ai/index.md와 동기화되었어요!"
