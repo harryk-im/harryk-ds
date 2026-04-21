@@ -1,6 +1,6 @@
 #!/bin/bash
-# AI 규약 진입점(Launcher) 자동 생성 및 동기화 스크립트
-# .ai/index.md의 내용을 각 도구별 규약 파일에 동적으로 주입해요.
+# AI 규약 파일 진입점(Launcher) 자동 생성 스크립트
+# 마스터 허브(.ai/index.md)의 내용을 각 AI 도구 규약 파일에 동기화해요.
 
 INDEX_FILE=".ai/index.md"
 TARGET_FILES=(
@@ -11,21 +11,24 @@ TARGET_FILES=(
   ".github/copilot-instructions.md"
 )
 
-# 1. 마스터 허브 파일 존재 확인
+# 1. 마스터 파일 존재 확인
+# 패키지 설치(postinstall)가 실패하는 것을 막기 위해 에러 없이 부드럽게 종료해요 (exit 0).
 if [ ! -f "$INDEX_FILE" ]; then
-  echo "❌ $INDEX_FILE 파일이 존재하지 않아요. 허브 파일을 먼저 만들어주세요."
-  exit 1
+  echo "⚠️ $INDEX_FILE 파일을 찾을 수 없어요. AI 규약 동기화를 건너뛸게요."
+  exit 0
 fi
 
-# 2. 내용 읽기
-# index.md의 내용을 변수에 담아 모든 파일에 동일하게 주입해요.
 INDEX_CONTENT=$(cat "$INDEX_FILE")
 
 for target in "${TARGET_FILES[@]}"; do
   target_dir=$(dirname "$target")
 
-  # 3. 상대 경로 계산 ({{ROOT}} 치환용)
-  # 파일의 깊이(Depth)에 따라 . 또는 ../.. 등을 결정해요.
+  # 디렉토리가 없으면 생성
+  if [ ! -d "$target_dir" ]; then
+    mkdir -p "$target_dir"
+  fi
+
+  # 2. 파일 깊이에 따른 상대 경로(../) 계산
   if [[ "$target" == *"/"* ]]; then
     slash_count=$(echo "$target" | tr -cd '/' | wc -c | xargs)
     prefix=".."
@@ -36,24 +39,18 @@ for target in "${TARGET_FILES[@]}"; do
     prefix="."
   fi
 
-  # 디렉토리가 없으면 생성
-  if [ ! -d "$target_dir" ]; then
-    mkdir -p "$target_dir"
-  fi
-
-  # 4. 내용 주입 및 플레이스홀더 치환
-  # {{ROOT}}를 계산된 상대 경로(prefix)로 바꾼 내용을 준비해요.
+  # 3. 마스터 파일 내용에서 {{ROOT}}를 상대 경로로 치환
   FINAL_CONTENT=$(echo "$INDEX_CONTENT" | sed "s|{{ROOT}}|$prefix|g")
 
-  # 5. 도구별 특수 설정 (Frontmatter) 처리 및 저장
+  # 4. 파일 쓰기 및 Cursor 전용 규칙 추가
   if [[ "$target" == *.mdc ]]; then
-    # Cursor(.mdc) 파일은 모든 작업에 항시 적용되도록 메타데이터를 추가해요.
+    # Cursor 툴은 항시 적용되도록 메타데이터(alwaysApply)가 필요해요.
     echo -e "---\ndescription: ALWAYS APPLY - harryk-ds ai rules\nglobs: *\nalwaysApply: true\n---\n\n$FINAL_CONTENT" > "$target"
   else
     echo "$FINAL_CONTENT" > "$target"
   fi
 
-  echo "✅ AI 규약 파일을 업데이트했어요: $target"
+  echo "✅ 동기화 완료: $target"
 done
 
-echo "🚀 모든 AI 규약 파일이 .ai/index.md와 동기화되었어요!"
+echo "🚀 모든 AI 규약 파일 동기화를 마쳤어요!"
