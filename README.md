@@ -177,7 +177,7 @@ pnpm clean              # 빌드 파일 및 node_modules 정리
 - **언어**: TypeScript 5.9
 - **UI 라이브러리**: React 19
 - **빌드 도구**: Vite 7
-- **패키지 매니저**: pnpm 8 (workspace)
+- **패키지 매니저**: pnpm 10 (workspace)
 - **CSS-in-JS**: Vanilla Extract (UI 패키지)
 - **애니메이션**: Framer Motion 11 (Motion 패키지)
 - **문서화**: Storybook 8 + Chromatic
@@ -234,21 +234,15 @@ pnpm clean              # 빌드 파일 및 node_modules 정리
 
 ### npm 패키지 배포
 
-```bash
-# UI 패키지 배포
-cd packages/ui
-npm publish
+우리는 **Changeset**을 기반으로 한 자동 배포 시스템을 사용해요. 상세한 배포 방법은 [배포 가이드](.github/workflows/RELEASE_GUIDE.md)를 참고해주세요.
 
-# Motion 패키지 배포
-cd packages/motion
-npm publish
-```
+> **주의**: 로컬에서의 `npm publish`는 지양하고, 모든 배포는 CI/CD 워크플로우를 통하는 것을 원칙으로 해요.
 
 ### CI/CD 파이프라인
 
 GitHub Actions를 통해 자동화된 CI/CD 파이프라인이 구성되어 있어요.
 
-#### CI Pipeline (`.github/workflows/ci.yml`)
+#### CI Pipeline (`.github/workflows/quality-check.yml`)
 
 **트리거**: main, develop 브랜치로의 push 또는 PR
 

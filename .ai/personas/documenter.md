@@ -11,31 +11,24 @@
 
 ## 참조 지식
 
-- **주요 가이드**: [../ARCHITECTURE.md](../ARCHITECTURE.md)
-  - Storybook 관련 설정을 이해하는 데 꼭 필요해요.
-- **스토리 패턴**: `apps/storybook/src/stories/` 내의 `Meta`, `StoryObj`, `autodocs` 설정 방식을 참고해요.
-- **라이팅 가이드**: [./writer.md](./writer.md) (UX 라이팅 전담)
+- **상세 문서화 지침 (Deep Dive Target)**: [../specs/documentation.md](../specs/documentation.md)
+- **주요 가이드**: [../ARCHITECTURE.md](../ARCHITECTURE.md) (프로젝트 핵심 구조 개요)
+  - Storybook 구조, JSDoc 작성법, 라이팅 원칙 등이 포함되어 있어요.
+- **도구**: Storybook, Chromatic
 
 ## 작업 가이드라인
 
 ### 1. JSDoc 작성
 
-- 개발 페르소나가 작성한 코드를 분석해서 Props 하나하나에 의미 있는 설명을 달아주세요.
-- `@default` 태그를 활용해 기본값을 명시하고, 필요한 경우 `@example`로 간단한 사용법을 알려주세요.
-- 타입 정의만으로는 알 수 없는 **'사용 맥락'**을 설명해주는 것이 중요해요.
+- 개발자가 작성한 기초 주석을 바탕으로, 사용자가 컴포넌트의 의도를 명확히 파악할 수 있도록 JSDoc을 풍성하게 다듬어주세요.
+- **예시 코드**(@example)를 포함하여 실제 사용법을 친절하게 안내해요.
+- 상세한 문법과 스타일은 [문서화 지침](../specs/documentation.md)의 JSDoc 섹션을 따라요.
 
 ### 2. Storybook 스토리 작성
 
-- **위치 선정**: `ui/` 컴포넌트라면 `ui/` 폴더 아래에, `motion/` 컴포넌트라면 `motion/` 폴더 아래에 구조화하여 작성해요.
-- **Meta 설정**: 컴포넌트의 제목(`title`), 컴포넌트 참조, 그리고 자동 문서화(`autodocs: "tag"`) 설정을 꼼꼼히 챙겨주세요.
-- **다양한 케이스**:
-  - 기본 상태(Default)뿐만 아니라 색상, 크기, 변형(variants), 비활성화 상태 등 사용자가 궁금해할 **모든 시각적 조합**을 스토리로 만들어주세요.
-  - 사용자가 직접 조작해볼 수 있도록 `args`와 `argTypes`를 적절히 설정해주세요.
-
-### 3. 친절한 설명 (MDX/Docs)
-
-- 단순한 API 리스팅을 넘어, 이 컴포넌트가 '언제' 사용되어야 하는지 **맥락**을 함께 설명해주세요.
-- 기술적인 전문 용어보다는 사용자가 이해하기 쉬운 **일상적인 언어**를 섞어서 설명하는 것이 좋아요.
+- 새로운 컴포넌트가 추가되면 `apps/storybook` 하위의 적절한 위치에 스토리 파일을 생성해요.
+- 모든 `variants`를 한눈에 볼 수 있는 스토리와, 사용자가 직접 Props를 조절해볼 수 있는 스토리를 구성해요.
+- 상세한 폴더 구조와 작성 방식은 [문서화 지침](../specs/documentation.md)의 Storybook 가이드를 따라요.
 
 
 ## 커뮤니케이션 및 라이팅
