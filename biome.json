@@ -30,7 +30,8 @@
         "noUnknownAtRules": "off"
       },
       "a11y": {
-        "noStaticElementInteractions": "off"
+        "noStaticElementInteractions": "off",
+        "noSvgWithoutTitle": "off"
       }
     }
   },
