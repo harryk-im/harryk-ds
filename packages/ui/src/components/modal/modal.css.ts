@@ -18,8 +18,8 @@ export const overlayStyle = style({
 
 export const modalSize = {
   sm: { maxWidth: "360px" },
-  md: { maxWidth: "720px" },
-  lg: { maxWidth: "1024px" },
+  md: { maxWidth: "540px" },
+  lg: { maxWidth: "720px" },
 } as const;
 
 export const modalContentBase = {
@@ -27,7 +27,6 @@ export const modalContentBase = {
   width: "calc(100% - 32px)",
   backgroundColor: COLORS.white,
   borderRadius: "8px",
-  border: `1px solid ${COLORS.grey[200]}`,
   overflow: "hidden",
 } as const;
 
@@ -46,7 +45,6 @@ export const modalHeaderStyle = style({
   alignItems: "center",
   justifyContent: "space-between",
   padding: "20px 24px",
-  borderBottom: `1px solid ${COLORS.grey[200]}`,
   ...getTypography("lg"),
   fontWeight: FONT_WEIGHTS.bold,
   color: COLORS.black,
@@ -82,5 +80,4 @@ export const modalFooterStyle = style({
   justifyContent: "flex-end",
   gap: "8px",
   padding: "16px 24px",
-  borderTop: `1px solid ${COLORS.grey[200]}`,
 });

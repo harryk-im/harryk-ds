@@ -58,7 +58,7 @@ export interface ModalFooterProps extends React.HTMLAttributes<HTMLDivElement> {
 /**
  * 모달의 너비를 지정해요.
  * - `sm`: 360px 너비예요.
- * - `md`: 720px 너비예요.
- * - `lg`: 1024px 너비예요.
+ * - `md`: 540px 너비예요.
+ * - `lg`: 720px 너비예요.
  */
 export type ModalSize = keyof typeof modalSize;
