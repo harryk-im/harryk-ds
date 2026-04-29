@@ -1,6 +1,6 @@
 import React from "react";
 import { createPortal } from "react-dom";
-
+import { IconClose } from "../../assets/icons";
 import { useCloseOnEsc } from "../../hooks/useCloseOnEsc";
 import { useScrollLock } from "../../hooks/useScrollLock";
 import {
@@ -71,7 +71,7 @@ const ModalHeader = React.forwardRef<HTMLDivElement, ModalHeaderProps>(
         <div>{children}</div>
         {onClose && (
           <button type="button" className={closeButtonStyle} onClick={onClose}>
-            X
+            <IconClose />
           </button>
         )}
       </div>
