@@ -37,16 +37,19 @@ import type {
  * ```
  */
 const ModalRoot = React.forwardRef<HTMLDivElement, ModalProps>(
-  ({ isOpen, onClose, size = "md", children, ...props }, ref) => {
+  ({ isOpen, onClose, size = "md", children, className, ...props }, ref) => {
     useCloseOnEsc(isOpen, onClose);
     useScrollLock(isOpen);
 
     if (!isOpen) return null;
 
     return createPortal(
-      <div ref={ref} className={overlayStyle} onMouseDown={onClose} {...props}>
+      <div className={overlayStyle} onMouseDown={onClose} {...props}>
         <div
-          className={modalContentStyle({ size })}
+          ref={ref}
+          className={[modalContentStyle({ size }), className]
+            .filter(Boolean)
+            .join(" ")}
           onMouseDown={(e) => e.stopPropagation()}
         >
           {children}
