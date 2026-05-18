@@ -6,9 +6,10 @@ type IconProps = {
   size?: number;
 };
 
-export const IconClose = React.forwardRef<SVGElement, IconProps>(
-  ({ color = COLORS.black, size = 24, ...props }) => (
+export const IconClose = React.forwardRef<SVGSVGElement, IconProps>(
+  ({ color = COLORS.black, size = 24, ...props }, ref) => (
     <svg
+      ref={ref}
       width={size}
       height={size}
       xmlns="http://www.w3.org/2000/svg"
@@ -18,9 +19,11 @@ export const IconClose = React.forwardRef<SVGElement, IconProps>(
     >
       <path
         fill={color}
-        fill-rule="evenodd"
+        fillRule="evenodd"
         d="M13.815 12l5.651-5.651a1.2 1.2 0 00-1.697-1.698l-5.651 5.652-5.652-5.652a1.201 1.201 0 00-1.697 1.698L10.421 12l-5.652 5.651a1.202 1.202 0 00.849 2.049c.307 0 .614-.117.848-.351l5.652-5.652 5.651 5.652a1.198 1.198 0 001.697 0 1.2 1.2 0 000-1.698L13.815 12z"
       />
     </svg>
   )
 );
+
+IconClose.displayName = "IconClose";
