@@ -23,8 +23,11 @@ export const modalSize = {
 } as const;
 
 export const modalContentBase = {
-  position: "relative" as const,
+  position: "relative",
+  display: "flex",
+  flexDirection: "column",
   width: "calc(100% - 32px)",
+  maxHeight: "90dvh",
   backgroundColor: COLORS.white,
   borderRadius: "8px",
   overflow: "hidden",
@@ -42,6 +45,7 @@ export const modalContentStyle = recipe({
 
 export const modalHeaderStyle = style({
   display: "flex",
+  flexShrink: 0,
   alignItems: "center",
   justifyContent: "space-between",
   padding: "20px 24px",
@@ -69,6 +73,9 @@ export const closeButtonStyle = style({
 });
 
 export const modalBodyStyle = style({
+  flex: 1,
+  minHeight: 0,
+  overflowY: "auto",
   padding: "24px",
   ...getTypography("md"),
   color: COLORS.black,
@@ -76,6 +83,7 @@ export const modalBodyStyle = style({
 
 export const modalFooterStyle = style({
   display: "flex",
+  flexShrink: 0,
   alignItems: "center",
   justifyContent: "flex-end",
   gap: "8px",
