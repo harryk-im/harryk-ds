@@ -6,20 +6,19 @@ export const buttonColor = {
   primary: {
     backgroundColor: COLORS.blue[300],
     color: COLORS.white,
+    borderColor: COLORS.blue[300],
   },
   secondary: {
     backgroundColor: COLORS.grey[200],
     color: COLORS.grey[800],
+    borderColor: COLORS.grey[200],
   },
 } as const;
 
 export const buttonVariant = {
-  fill: {
-    border: "none",
-  },
+  fill: {},
   outline: {
-    backgroundColor: "transparent",
-    border: "2px solid transparent",
+    backgroundColor: COLORS.white,
   },
 } as const;
 
@@ -39,7 +38,9 @@ export const buttonSize = {
 } as const;
 
 export const buttonBase = {
+  boxSizing: "border-box",
   borderRadius: "8px",
+  border: "2px solid",
   fontWeight: FONT_WEIGHTS.bold,
   cursor: "pointer",
   transition: "all 0.1s ease-in-out",
@@ -81,7 +82,6 @@ export const buttonStyle = recipe({
         variant: "outline",
       },
       style: {
-        backgroundColor: "transparent",
         color: COLORS.blue[300],
         borderColor: COLORS.blue[300],
       },
@@ -92,7 +92,6 @@ export const buttonStyle = recipe({
         variant: "outline",
       },
       style: {
-        backgroundColor: "transparent",
         color: COLORS.grey[800],
         borderColor: COLORS.grey[200],
       },
