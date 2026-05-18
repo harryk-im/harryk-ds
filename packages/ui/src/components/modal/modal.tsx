@@ -41,7 +41,9 @@ const ModalRoot = React.forwardRef<HTMLDivElement, ModalProps>(
     useCloseOnEsc(isOpen, onClose);
     useScrollLock(isOpen);
 
-    if (!isOpen) return null;
+    const portalTarget = typeof document !== "undefined" ? document.body : null;
+
+    if (!isOpen || !portalTarget) return null;
 
     return createPortal(
       <div className={overlayStyle} onMouseDown={onClose} {...props}>
@@ -55,7 +57,7 @@ const ModalRoot = React.forwardRef<HTMLDivElement, ModalProps>(
           {children}
         </div>
       </div>,
-      document.body
+      portalTarget
     );
   }
 );
