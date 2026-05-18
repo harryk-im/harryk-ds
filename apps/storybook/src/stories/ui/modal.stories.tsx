@@ -16,8 +16,10 @@ const meta: Meta<typeof Modal> = {
       description: "모달의 너비를 결정해요.",
     },
     isOpen: {
-      control: "boolean",
-      description: "모달의 열림 상태예요.",
+      control: false,
+      table: { disable: true },
+      description:
+        "모달의 열림 상태예요. 스토리에서는 useDisclosure로 관리해요.",
     },
   },
 };
@@ -31,7 +33,7 @@ type Story = StoryObj<typeof Modal>;
  */
 export const Default: Story = {
   render: (args) => {
-    const { isOpen, onOpen, onClose } = useDisclosure(args.isOpen);
+    const { isOpen, onOpen, onClose } = useDisclosure();
 
     return (
       <>
@@ -54,7 +56,6 @@ export const Default: Story = {
     );
   },
   args: {
-    isOpen: false,
     size: "md",
   },
 };
@@ -64,7 +65,7 @@ export const Default: Story = {
  */
 export const Small: Story = {
   render: (args) => {
-    const { isOpen, onOpen, onClose } = useDisclosure(args.isOpen);
+    const { isOpen, onOpen, onClose } = useDisclosure();
 
     return (
       <>
@@ -85,7 +86,6 @@ export const Small: Story = {
     );
   },
   args: {
-    isOpen: false,
     size: "sm",
   },
 };
@@ -95,7 +95,7 @@ export const Small: Story = {
  */
 export const Medium: Story = {
   render: (args) => {
-    const { isOpen, onOpen, onClose } = useDisclosure(args.isOpen);
+    const { isOpen, onOpen, onClose } = useDisclosure();
 
     return (
       <>
@@ -117,7 +117,6 @@ export const Medium: Story = {
     );
   },
   args: {
-    isOpen: false,
     size: "md",
   },
 };
@@ -127,7 +126,7 @@ export const Medium: Story = {
  */
 export const Large: Story = {
   render: (args) => {
-    const { isOpen, onOpen, onClose } = useDisclosure(args.isOpen);
+    const { isOpen, onOpen, onClose } = useDisclosure();
 
     return (
       <>
@@ -135,7 +134,7 @@ export const Large: Story = {
         <Modal {...args} isOpen={isOpen} onClose={onClose}>
           <Modal.Header onClose={onClose}>이용 약관</Modal.Header>
           <Modal.Body>
-            <div style={{ height: "300px", overflowY: "auto" }}>
+            <div>
               제 1 조 (목적) <br />이 약관은 harryk-ds이(가) 제공하는 서비스의
               이용조건 및 절차, 이용자와 서비스 운영자의 권리, 의무, 책임사항
               등을 규정함을 목적으로 합니다. <br />
@@ -156,7 +155,35 @@ export const Large: Story = {
     );
   },
   args: {
-    isOpen: false,
     size: "lg",
+  },
+};
+
+/**
+ * 문서용으로 처음부터 열린 모달을 보여줘요.
+ */
+export const Opened: Story = {
+  render: (args) => {
+    const { isOpen, onClose } = useDisclosure(true);
+
+    return (
+      <Modal {...args} isOpen={isOpen} onClose={onClose}>
+        <Modal.Header onClose={onClose}>안내 메세지</Modal.Header>
+        <Modal.Body>
+          Harryk 디자인 시스템의 모달 컴포넌트예요. <br />
+          Compound Component 패턴을 사용하여 Header, Body, Footer를 자유롭게
+          조합할 수 있어요.
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="outline" onClick={onClose}>
+            취소
+          </Button>
+          <Button onClick={onClose}>확인</Button>
+        </Modal.Footer>
+      </Modal>
+    );
+  },
+  args: {
+    size: "md",
   },
 };
