@@ -158,32 +158,3 @@ export const Large: Story = {
     size: "lg",
   },
 };
-
-/**
- * 문서용으로 처음부터 열린 모달을 보여줘요.
- */
-export const Opened: Story = {
-  render: (args) => {
-    const { isOpen, onClose } = useDisclosure(true);
-
-    return (
-      <Modal {...args} isOpen={isOpen} onClose={onClose}>
-        <Modal.Header onClose={onClose}>안내 메세지</Modal.Header>
-        <Modal.Body>
-          Harryk 디자인 시스템의 모달 컴포넌트예요. <br />
-          Compound Component 패턴을 사용하여 Header, Body, Footer를 자유롭게
-          조합할 수 있어요.
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="outline" onClick={onClose}>
-            취소
-          </Button>
-          <Button onClick={onClose}>확인</Button>
-        </Modal.Footer>
-      </Modal>
-    );
-  },
-  args: {
-    size: "md",
-  },
-};
