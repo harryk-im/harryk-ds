@@ -1,5 +1,13 @@
 # @harryk-ds/ui
 
+## 0.1.7
+
+### Patch Changes
+
+- 2cb8b33: Fixed a size discrepancy between the `fill` and `outline` variants in the `Button` component caused by differences in border styling. All variants now apply consistent border rules to maintain uniform dimensions.
+- 2cb8b33: implement Modal component system and associated utility hooks
+- 2cb8b33: Add Modal compound component (`Header` / `Body` / `Footer`) with `sm`/`md`/`lg` sizes, portal rendering, overlay dismiss, and companion hooks (`useDisclosure`, `useCloseOnEsc`, `useScrollLock`).
+
 ## 0.1.6
 
 ### Patch Changes
