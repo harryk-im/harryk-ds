@@ -1,11 +1,5 @@
-import type { RecipeVariants } from "@vanilla-extract/recipes";
 import type React from "react";
-import type {
-  buttonColor,
-  buttonSize,
-  buttonStyle,
-  buttonVariant,
-} from "./button.css";
+import type { buttonColor, buttonSize, buttonVariant } from "./button.css";
 
 /**
  * Button 컴포넌트의 Props예요.
@@ -15,7 +9,7 @@ export interface ButtonProps
   extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "color"> {
   /**
    * 버튼의 색상을 선택해요.
-   * @default "primary"
+   * @default "blue"
    */
   color?: ButtonColor;
 
@@ -30,18 +24,25 @@ export interface ButtonProps
    * @default "md"
    */
   size?: ButtonSize;
+
+  /**
+   * 버튼이 부모 너비를 가득 채우도록 해요.
+   * @default false
+   */
+  fullWidth?: boolean;
+
+  /**
+   * 로딩 상태예요. `true`이면 버튼 동작이 막혀요(disabled).
+   * @default false
+   */
+  loading?: boolean;
 }
 
 /**
- * Button 컴포넌트의 모든 스타일 옵션을 포함하는 타입이에요.
- * recipe에서 자동으로 추론돼요.
- */
-export type ButtonToken = RecipeVariants<typeof buttonStyle>;
-
-/**
  * 버튼의 색상을 지정해요.
- * - `primary`: 주요 액션에 사용하는 파란색이에요.
- * - `secondary`: 보조 액션에 사용하는 회색이에요.
+ * - `blue`: 주요 액션에 사용하는 파란색이에요.
+ * - `red`: 위험하거나 주의가 필요한 액션에 사용하는 빨간색이에요.
+ * - `grey`: 보조 액션에 사용하는 회색이에요.
  */
 export type ButtonColor = keyof typeof buttonColor;
 
@@ -56,6 +57,6 @@ export type ButtonSize = keyof typeof buttonSize;
 /**
  * 버튼의 스타일을 지정해요.
  * - `fill`: 배경색이 채워진 스타일이에요.
- * - `outline`: 테두리만 있는 스타일이에요.
+ * - `weak`: 흰 배경 위에 반투명 색상 배경 레이어를 덧입힌 스타일이에요.
  */
 export type ButtonVariant = keyof typeof buttonVariant;

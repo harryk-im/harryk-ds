@@ -46,7 +46,7 @@ export const Default: Story = {
             조합할 수 있어요.
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="outline" onClick={onClose}>
+            <Button color="grey" variant="weak" onClick={onClose}>
               취소
             </Button>
             <Button onClick={onClose}>확인</Button>
@@ -74,7 +74,7 @@ export const Small: Story = {
           <Modal.Header onClose={onClose}>삭제 확인</Modal.Header>
           <Modal.Body>정말로 삭제하시겠습니까?</Modal.Body>
           <Modal.Footer>
-            <Button variant="outline" onClick={onClose} size="sm">
+            <Button color="grey" variant="weak" onClick={onClose} size="sm">
               취소
             </Button>
             <Button onClick={onClose} size="sm">
@@ -107,7 +107,7 @@ export const Medium: Story = {
             적용됩니다.
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="outline" onClick={onClose}>
+            <Button color="grey" variant="weak" onClick={onClose}>
               취소
             </Button>
             <Button onClick={onClose}>변경하기</Button>
