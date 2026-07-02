@@ -1,29 +1,15 @@
 import React from "react";
-import { buttonStyle } from "./button.css";
+import { buttonBackdrop, buttonContent, buttonStyle } from "./button.css";
 import type { ButtonProps } from "./button.types";
 
 /**
  * 다양한 색상, 스타일, 크기를 선택할 수 있는 버튼이에요.
- *
- * @example
- * ```tsx
- * // 기본 사용법
- * <Button>클릭하세요</Button>
- *
- * // 색상과 스타일 지정
- * <Button color="primary" variant="outline">Outline 버튼</Button>
- *
- * // 크기 지정
- * <Button size="lg">큰 버튼</Button>
- *
- * // 비활성화
- * <Button disabled>비활성화된 버튼</Button>
- * ```
  */
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
-      color = "primary",
+      type = "button",
+      color = "blue",
       variant = "fill",
       size = "md",
       className,
@@ -37,8 +23,9 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       .join(" ");
 
     return (
-      <button ref={ref} className={buttonClasses} {...props}>
-        {children}
+      <button ref={ref} type={type} className={buttonClasses} {...props}>
+        {variant === "weak" && <span className={buttonBackdrop} aria-hidden />}
+        <span className={buttonContent}>{children}</span>
       </button>
     );
   }
