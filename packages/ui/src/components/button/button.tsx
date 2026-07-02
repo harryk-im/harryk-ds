@@ -51,12 +51,12 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     return (
       <button
+        {...props}
         ref={ref}
         type={type}
         className={buttonClasses}
         disabled={disabled || loading}
         aria-busy={loading}
-        {...props}
       >
         {variant === "weak" && <span className={buttonBackdrop} aria-hidden />}
         <span className={buttonContent}>{children}</span>
