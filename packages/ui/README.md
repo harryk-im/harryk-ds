@@ -35,7 +35,7 @@ import { Button } from "@harryk-ds/ui";
 
 function App() {
   return (
-    <Button color="primary" variant="fill" size="md">
+    <Button color="blue" variant="fill" size="md">
       클릭하세요
     </Button>
   );
@@ -64,21 +64,24 @@ const MyButton: React.FC<ButtonProps> = (props) => {
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `color` | `'primary' \| 'secondary'` | `'primary'` | 버튼의 색상을 선택해요. |
-| `variant` | `'fill' \| 'outline'` | `'fill'` | 버튼의 스타일을 선택해요. |
+| `color` | `'blue' \| 'red' \| 'grey'` | `'blue'` | 버튼의 색상을 선택해요. |
+| `variant` | `'fill' \| 'weak'` | `'fill'` | 버튼의 스타일을 선택해요. |
 | `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | 버튼의 크기를 선택해요. |
+| `fullWidth` | `boolean` | `false` | 버튼이 부모 너비를 가득 채우도록 해요. |
+| `loading` | `boolean` | `false` | 로딩 상태예요. `true`이면 버튼 동작이 막혀요(disabled). |
 | `children` | `React.ReactNode` | - | 버튼에 표시할 내용이에요. |
 | `...props` | `ButtonHTMLAttributes` | - | HTML button 요소의 모든 속성을 지원해요. |
 
 #### 색상 옵션
 
-- `primary`: 주요 액션에 사용하는 파란색이에요.
-- `secondary`: 보조 액션에 사용하는 회색이에요.
+- `blue`: 주요 액션에 사용하는 파란색이에요.
+- `red`: 위험하거나 주의가 필요한 액션에 사용하는 빨간색이에요.
+- `grey`: 보조 액션에 사용하는 회색이에요.
 
 #### 스타일 옵션
 
 - `fill`: 배경색이 채워진 기본 스타일이에요.
-- `outline`: 테두리만 있는 스타일이에요.
+- `weak`: 흰 배경 위에 반투명 색상 배경 레이어를 덧입힌 스타일이에요.
 
 #### 크기 옵션
 
@@ -91,21 +94,27 @@ const MyButton: React.FC<ButtonProps> = (props) => {
 ```tsx
 import { Button } from "@harryk-ds/ui";
 
-// 기본 버튼
+// 기본 버튼 (blue · fill · md)
 <Button>기본 버튼</Button>
 
-// 색상과 스타일 지정
-<Button color="primary" variant="fill" size="lg">
-  Primary Fill 버튼
+// 색상과 스타일, 크기 지정
+<Button color="blue" variant="fill" size="lg">
+  Blue Fill 버튼
 </Button>
 
-<Button color="primary" variant="outline" size="md">
-  Primary Outline 버튼
+<Button color="grey" variant="weak" size="md">
+  Grey Weak 버튼
 </Button>
 
-<Button color="secondary" variant="fill" size="sm">
-  Secondary 버튼
+<Button color="red" variant="fill" size="sm">
+  Red 버튼
 </Button>
+
+// 부모 너비를 가득 채우기
+<Button fullWidth>전체 너비 버튼</Button>
+
+// 로딩 상태 (동작이 막혀요)
+<Button loading>저장 중</Button>
 
 // 이벤트 핸들러
 <Button onClick={() => console.log("clicked")}>
@@ -126,7 +135,7 @@ import { Button } from "@harryk-ds/ui";
 1. `인라인 스타일` 통해 커스터 마이징이 가능해요.
 
 ``` tsx
-<Button style={{ backgroundColor: 'blue' }} color="primary">
+<Button style={{ backgroundColor: 'blue' }} color="blue">
   커스텀 스타일 버튼
 </Button>
 ```
@@ -134,7 +143,7 @@ import { Button } from "@harryk-ds/ui";
 2. `className` prop을 통해 커스터 마이징이 가능해요.
 
 ```tsx
-<Button className="my-custom-class" color="primary">
+<Button className="my-custom-class" color="blue">
   커스텀 스타일 버튼
 </Button>
 ```
