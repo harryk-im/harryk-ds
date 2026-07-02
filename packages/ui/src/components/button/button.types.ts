@@ -24,6 +24,18 @@ export interface ButtonProps
    * @default "md"
    */
   size?: ButtonSize;
+
+  /**
+   * 버튼이 부모 너비를 가득 채우도록 해요.
+   * @default false
+   */
+  fullWidth?: boolean;
+
+  /**
+   * 로딩 상태예요. `true`이면 버튼 동작이 막혀요(disabled).
+   * @default false
+   */
+  loading?: boolean;
 }
 
 /**
