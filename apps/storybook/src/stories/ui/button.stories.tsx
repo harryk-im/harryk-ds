@@ -130,6 +130,40 @@ export const Disabled: Story = {
   },
 };
 
+export const FullWidth: Story = {
+  args: {
+    fullWidth: true,
+    children: "전체 너비 버튼",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "`fullWidth`를 켜면 부모 너비를 가득 채워요.",
+      },
+    },
+  },
+  render: (args) => (
+    <div style={{ width: "320px" }}>
+      <Button {...args} />
+    </div>
+  ),
+};
+
+export const Loading: Story = {
+  args: {
+    loading: true,
+    children: "저장 중",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "`loading`이 켜지면 동작이 막히고(disabled) 스크린리더에 `aria-busy`로 로딩 중임을 알려요.",
+      },
+    },
+  },
+};
+
 // 조합 모음 스토리들
 export const AllColors: Story = {
   parameters: {
