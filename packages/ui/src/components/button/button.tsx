@@ -16,8 +16,11 @@ import type { ButtonProps } from "./button.types";
  * // weak 스타일 (흰 배경 위 반투명 배경 레이어)
  * <Button color="grey" variant="weak">취소</Button>
  *
- * // 크기 지정
- * <Button size="lg">큰 버튼</Button>
+ * // 부모 너비를 가득 채우기
+ * <Button fullWidth>전체 너비</Button>
+ *
+ * // 로딩 (동작이 막혀요)
+ * <Button loading>저장 중</Button>
  *
  * // 비활성화
  * <Button disabled>비활성화된 버튼</Button>
@@ -30,18 +33,31 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       color = "blue",
       variant = "fill",
       size = "md",
+      fullWidth = false,
+      loading = false,
+      disabled,
       className,
       children,
       ...props
     },
     ref
   ) => {
-    const buttonClasses = [buttonStyle({ color, variant, size }), className]
+    const buttonClasses = [
+      buttonStyle({ color, variant, size, fullWidth }),
+      className,
+    ]
       .filter(Boolean)
       .join(" ");
 
     return (
-      <button ref={ref} type={type} className={buttonClasses} {...props}>
+      <button
+        ref={ref}
+        type={type}
+        className={buttonClasses}
+        disabled={disabled || loading}
+        aria-busy={loading}
+        {...props}
+      >
         {variant === "weak" && <span className={buttonBackdrop} aria-hidden />}
         <span className={buttonContent}>{children}</span>
       </button>

@@ -9,10 +9,6 @@ import {
   SPACING,
 } from "../../styles";
 
-/**
- * 색상 역할별 CSS 변수예요.
- * `buttonColor`가 색상별 토큰을 주입하고, `buttonVariant`·`buttonBackdrop`이 소비해요.
- */
 const fillBackground = createVar();
 const weakText = createVar();
 const weakBackdrop = createVar();
@@ -92,6 +88,9 @@ export const buttonStyle = recipe({
     color: buttonColor,
     variant: buttonVariant,
     size: buttonSize,
+    fullWidth: {
+      true: { width: "100%" },
+    },
   },
 });
 
