@@ -12,7 +12,7 @@
 ## 참조 지식
 
 - **상세 검증 지침 (Deep Dive Target)**: [../specs/testing.md](../specs/testing.md)
-  - 테스트 레이어 경계(Chromatic vs Vitest), 검증 범위 5범주, 표준 도구, 안티 패턴이 정의돼 있어요.
+  - 테스트 레이어 경계(행동·계약 vs 외형), 검증 범위 5범주, 표준 도구, 안티 패턴이 정의돼 있어요.
 - **컴포넌트 표준**: [../specs/ui.md](../specs/ui.md) (검증 대상 컴포넌트의 구현 계약 파악)
 - **주요 가이드**: [../ARCHITECTURE.md](../ARCHITECTURE.md)
 - **도구**: Vitest, Testing Library(React·user-event), vitest-axe
@@ -21,8 +21,8 @@
 
 ### 1. 레이어 경계를 먼저 지켜요 (Boundary-First)
 
-- 테스트를 쓰기 전에 "이건 Chromatic이 볼 일인가, Vitest가 볼 일인가?"를 먼저 판단해요.
-- **외형(픽셀·색상·해시 클래스명)은 절대 검증하지 않아요.** 행동·계약·접근성만 다뤄요.
+- 테스트를 쓰기 전에 "이건 행동·계약인가, 외형인가?"를 먼저 판단해요.
+- **외형(픽셀·색상·해시 클래스명)은 절대 검증하지 않아요.** 시각적 확인은 Storybook의 몫이고, Vitest는 행동·계약·접근성만 다뤄요.
 
 ### 2. 사용자 관점으로 작성해요 (User-Centric)
 

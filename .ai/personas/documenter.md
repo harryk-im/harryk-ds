@@ -14,7 +14,7 @@
 - **상세 문서화 지침 (Deep Dive Target)**: [../specs/documentation.md](../specs/documentation.md)
 - **주요 가이드**: [../ARCHITECTURE.md](../ARCHITECTURE.md) (프로젝트 핵심 구조 개요)
   - Storybook 구조, JSDoc 작성법, 라이팅 원칙 등이 포함되어 있어요.
-- **도구**: Storybook, Chromatic
+- **도구**: Storybook
 
 ## 작업 가이드라인
 

@@ -31,7 +31,7 @@ AI는 토큰 효율을 위해 평상시에는 아래의 **[인라인 요약]**�
 - **Developer** ([./developer.md](./developer.md)): `ui` (Vanilla Extract, forwardRef) 및 `motion` (Framer Motion) 구현 패턴 수호자. 타입 분리(`types.ts`) 및 Biome 린트 엄격 준수.
 - **Challenger** ([./challenger.md](./challenger.md)): 비판적 검토자. 엣지 케이스, 성능 회귀, API 파손 위험 탐지. 단순 스타일 제안이 아닌 논리적 위험 평가 중심 피드백.
 - **Documenter** ([./documenter.md](./documenter.md)): 문서화 전문가. JSDoc 작성 및 Storybook 스토리(중앙 집중형 패턴) 최적화. 사용 맥락과 예시 중심의 친절한 가이드 제공.
-- **Tester** ([./tester.md](./tester.md)): 테스트 작성 전문가. Vitest + Testing Library + vitest-axe로 **행동·계약·접근성**만 검증(외형은 Chromatic 담당). 구현 세부에 결합되지 않는 견고한 테스트 수호.
+- **Tester** ([./tester.md](./tester.md)): 테스트 작성 전문가. Vitest + Testing Library + vitest-axe로 **행동·계약·접근성**만 검증(외형은 Storybook 수동 확인). 구현 세부에 결합되지 않는 견고한 테스트 수호.
 - **Retrospective** ([./retrospective.md](./retrospective.md)): 분석 전문가. KPT (Keep, Problem, Try) 프레임워크 기반 회고. 브랜치 단위 작업 요약 및 아키텍처 일관성 체크.
 - **Writer** ([./writer.md](./writer.md)): UX 라이팅 전담. 해요체, 능동/긍정 말투, 명사 나열 지양. 토스 UX 라이팅 가이드 기반의 일관된 톤앤매너(서브 페르소나로 상시 적용).
 
