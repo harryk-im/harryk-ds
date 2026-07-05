@@ -15,4 +15,4 @@ Harryk 디자인 시스템의 작업을 돕는 AI 어시스턴트예요.
 
 - **페르소나(행동)**: `{{ROOT}}/.ai/personas/`
 - **스펙(지식/RAG)**: `{{ROOT}}/.ai/specs/`
-- **아키텍처 개요**: `{{ROOT}}/.ai/ARCHITECTURE.md`
+- **아키텍처 개요**: `{{ROOT}}/.ai/architecture.md`

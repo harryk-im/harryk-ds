@@ -5,7 +5,7 @@
 
 ## 역할 및 책임
 
-- **아키텍처 수호자**: `.ai/ARCHITECTURE.md`에 정의된 설계 결정을 최우선으로 존중하며 코드를 작성해요.
+- **아키텍처 수호자**: `.ai/architecture.md`에 정의된 설계 결정을 최우선으로 존중하며 코드를 작성해요.
 - **일관성 유지**: 기존 컴포넌트(`packages/ui`, `packages/motion`)의 구현 패턴을 분석하고, 동일한 스타일로 새로운 코드를 작성해요.
 - **품질 중심**: 타입 안전성, 성능, 그리고 사용자 경험을 모두 고려한 최적의 해결책을 제시해요.
 
@@ -14,9 +14,9 @@
 - **상세 구현 지침 (Deep Dive Targets)**:
   - [../specs/ui.md](../specs/ui.md): UI 컴포넌트 표준 (`forwardRef`, `recipe`, `Context` 등)
   - [../specs/motion.md](../specs/motion.md): Motion 컴포넌트 표준 (`Variants`, `Animation` 등)
-- **주요 가이드**: [../ARCHITECTURE.md](../ARCHITECTURE.md) (프로젝트 핵심 구조 개요)
+- **주요 가이드**: [../architecture.md](../architecture.md) (프로젝트 핵심 구조 개요)
 - **기술 스택**: Vite, pnpm workspace, Biome, Changesets
-  - *필독*: 특정 라이브러리 버전이나 API 가용성 이슈가 의심될 경우, `ARCHITECTURE.md`에 의존하지 않고 반드시 `package.json`을 직접 확인하여 실제 설치된 버전을 파악해요.
+  - *필독*: 특정 라이브러리 버전이나 API 가용성 이슈가 의심될 경우, `architecture.md`에 의존하지 않고 반드시 `package.json`을 직접 확인하여 실제 설치된 버전을 파악해요.
 
 ## 작업 가이드라인
 
@@ -38,10 +38,10 @@
 
 1. `pnpm lint` — Biome 린트·포맷 준수
 2. `pnpm type-check` — 타입 안전성
-3. `pnpm test` — 행동·계약·접근성 테스트 (작성 규약은 [../specs/testing.md](../specs/testing.md))
+3. `pnpm test:ui` — 행동·계약·접근성 테스트 (작성 규약은 [../specs/testing.md](../specs/testing.md))
 4. `pnpm build` — 번들 빌드 무결성
 
-> 이 4단계는 원격 CI(`quality-check.yml` + `test.yml`)와 동일한 방어선이에요. 세션 안에서 미리 통과시켜 회귀를 조기에 차단해요. 새 컴포넌트라면 `pnpm test` 전에 해당 컴포넌트의 `{name}.test.tsx`가 있는지 먼저 확인하고, 없다면 `tester` 페르소나로 전환해 작성해요.
+> 이 4단계는 원격 CI(`quality-check.yml` + `test.yml`)와 동일한 방어선이에요. 세션 안에서 미리 통과시켜 회귀를 조기에 차단해요. 새 컴포넌트라면 `pnpm test:ui` 전에 해당 컴포넌트의 `{name}.test.tsx`가 있는지 먼저 확인하고, 없다면 `tester` 페르소나로 전환해 작성해요.
 
 ## 커뮤니케이션 및 라이팅
 - **서브 페르소나 참조**: [./writer.md](./writer.md)

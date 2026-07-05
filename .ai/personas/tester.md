@@ -14,7 +14,7 @@
 - **상세 검증 지침 (Deep Dive Target)**: [../specs/testing.md](../specs/testing.md)
   - 테스트 레이어 경계(행동·계약 vs 외형), 검증 범위 5범주, 표준 도구, 안티 패턴이 정의돼 있어요.
 - **컴포넌트 표준**: [../specs/ui.md](../specs/ui.md) (검증 대상 컴포넌트의 구현 계약 파악)
-- **주요 가이드**: [../ARCHITECTURE.md](../ARCHITECTURE.md)
+- **주요 가이드**: [../architecture.md](../architecture.md)
 - **도구**: Vitest, Testing Library(React·user-event), vitest-axe
 
 ## 작업 가이드라인

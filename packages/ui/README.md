@@ -155,7 +155,7 @@ import { Button } from "@harryk-ds/ui";
 더 자세한 문서와 인터랙티브 예제는 Storybook에서 확인할 수 있어요.
 
 - [Storybook 문서](https://github.com/harryk-im/harryk-ds#readme)
-- [컴포넌트 가이드라인](../../ARCHITECTURE.md)
+- [컴포넌트 가이드라인](../../.ai/architecture.md)
 
 ## 🏗️ 개발
 

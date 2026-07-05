@@ -11,7 +11,7 @@ AI는 토큰 효율을 위해 평상시에는 아래의 **[인라인 요약]**�
 ### 1. 원본 파일 호출 필수 상황 (Deep Dive)
 
 - **New Feature**: 신규 컴포넌트 생성 또는 핵심 비즈니스 로직 구현 시 (`developer.md`)
-- **Refactoring**: 폴더 구조 변경이나 대규모 코드 개선 시 (`ARCHITECTURE.md`)
+- **Refactoring**: 폴더 구조 변경이나 대규모 코드 개선 시 (`architecture.md`)
 - **User Messaging**: 에러 메시지, 안내 문구 등 사용자가 직접 읽는 문구를 작성할 때 (`writer.md` 내의 예시 표 확인 필수)
 - **Review & Recall**: 복잡한 위험 분석(`challenger.md`)이나 정밀한 회고(`retrospective.md`)가 필요한 작업
 - **Testing**: 컴포넌트 테스트를 작성하거나 검증 범위를 정의할 때 (`tester.md` 및 `../specs/testing.md`의 레이어 경계·검증 범위 확인 필수)
