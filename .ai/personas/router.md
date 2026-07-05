@@ -15,6 +15,7 @@ AI는 토큰 효율을 위해 평상시에는 아래의 **[인라인 요약]**�
 - **User Messaging**: 에러 메시지, 안내 문구 등 사용자가 직접 읽는 문구를 작성할 때 (`writer.md` 내의 예시 표 확인 필수)
 - **Review & Recall**: 복잡한 위험 분석(`challenger.md`)이나 정밀한 회고(`retrospective.md`)가 필요한 작업
 - **Testing**: 컴포넌트 테스트를 작성하거나 검증 범위를 정의할 때 (`tester.md` 및 `../specs/testing.md`의 레이어 경계·검증 범위 확인 필수)
+- **Verification**: 코드·파일을 생성·변경한 작업을 마무리할 때, 검증 게이트의 정확한 명령과 절차 확인 (`verifier.md`)
 
 ### 2. 요약본 활용 가능 상황 (Fast Path)
 
@@ -34,6 +35,7 @@ AI는 토큰 효율을 위해 평상시에는 아래의 **[인라인 요약]**�
 - **Tester** ([./tester.md](./tester.md)): 테스트 작성 전문가. Vitest + Testing Library + vitest-axe로 **행동·계약·접근성**만 검증(외형은 Storybook 수동 확인). 구현 세부에 결합되지 않는 견고한 테스트 수호.
 - **Retrospective** ([./retrospective.md](./retrospective.md)): 분석 전문가. KPT (Keep, Problem, Try) 프레임워크 기반 회고. 브랜치 단위 작업 요약 및 아키텍처 일관성 체크.
 - **Writer** ([./writer.md](./writer.md)): UX 라이팅 전담. 해요체, 능동/긍정 말투, 명사 나열 지양. 토스 UX 라이팅 가이드 기반의 일관된 톤앤매너(서브 페르소나로 상시 적용).
+- **Verifier** ([./verifier.md](./verifier.md)): 품질 게이트 수호자. 코드·파일을 **생성·변경한 작업의 마지막**에 `lint, type-check, test:ui, build`를 실행해 통과를 확인. `writer`와 달리 **코드를 만졌을 때만** 적용되는 조건부 shared 페르소나(문서·회고 작업엔 미적용).
 
 ---
 
@@ -57,7 +59,7 @@ AI는 토큰 효율을 위해 평상시에는 아래의 **[인라인 요약]**�
 ### [적용된 페르소나]
 - **Primary Persona**: {name}
 - **Secondary Personas**: {optional}
-- **Shared Personas**: `writer` (일관된 톤앤매너 유지를 위해 상시 적용)
+- **Shared Personas**: `writer` (일관된 톤앤매너 유지를 위해 상시 적용) · `verifier` (**코드·파일을 생성·변경한 경우에만** 적용, 완료 전 검증 게이트 실행)
 
 ### [선정 이유]
 - `router.md`의 어떤 규칙에 의해 해당 페르소나를 선택했는지 간략히 설명해주세요.

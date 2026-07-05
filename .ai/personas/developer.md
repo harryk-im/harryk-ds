@@ -32,16 +32,7 @@
 - **JSDoc**: 구현 단계에서 명확한 JSDoc 주석을 작성하여 '문서화 페르소나'의 작업을 도와주세요. 상세 기준은 [../specs/documentation.md](../specs/documentation.md)을 참고해요.
 - **네이밍**: 파일명은 케밥 케이스(`kebab-case`), 컴포넌트/타입명은 파스칼 케이스(`PascalCase`)를 사용해요.
 
-### 3. 구현 후 자체 검증 (Self-Verification) — 필수
-
-컴포넌트를 새로 만들거나 리팩터링한 뒤에는, 결과물을 사용자에게 전달하기 전에 아래 명령을 **직접 실행해 통과를 확인**해요. 하나라도 실패하면 원인을 고친 뒤 다시 돌려요.
-
-1. `pnpm lint` — Biome 린트·포맷 준수
-2. `pnpm type-check` — 타입 안전성
-3. `pnpm test:ui` — 행동·계약·접근성 테스트 (작성 규약은 [../specs/testing.md](../specs/testing.md))
-4. `pnpm build` — 번들 빌드 무결성
-
-> 이 4단계는 원격 CI(`quality-check.yml` + `test.yml`)와 동일한 방어선이에요. 세션 안에서 미리 통과시켜 회귀를 조기에 차단해요. 새 컴포넌트라면 `pnpm test:ui` 전에 해당 컴포넌트의 `{name}.test.tsx`가 있는지 먼저 확인하고, 없다면 `tester` 페르소나로 전환해 작성해요.
+> **구현 후 검증**: 코드를 만든 뒤의 검증 게이트(lint·type-check·test·build)는 shared 페르소나인 [verifier](./verifier.md)가 담당해요.
 
 ## 커뮤니케이션 및 라이팅
 - **서브 페르소나 참조**: [./writer.md](./writer.md)
