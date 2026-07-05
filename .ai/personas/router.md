@@ -14,6 +14,7 @@ AI는 토큰 효율을 위해 평상시에는 아래의 **[인라인 요약]**�
 - **Refactoring**: 폴더 구조 변경이나 대규모 코드 개선 시 (`ARCHITECTURE.md`)
 - **User Messaging**: 에러 메시지, 안내 문구 등 사용자가 직접 읽는 문구를 작성할 때 (`writer.md` 내의 예시 표 확인 필수)
 - **Review & Recall**: 복잡한 위험 분석(`challenger.md`)이나 정밀한 회고(`retrospective.md`)가 필요한 작업
+- **Testing**: 컴포넌트 테스트를 작성하거나 검증 범위를 정의할 때 (`tester.md` 및 `../specs/testing.md`의 레이어 경계·검증 범위 확인 필수)
 
 ### 2. 요약본 활용 가능 상황 (Fast Path)
 
@@ -30,6 +31,7 @@ AI는 토큰 효율을 위해 평상시에는 아래의 **[인라인 요약]**�
 - **Developer** ([./developer.md](./developer.md)): `ui` (Vanilla Extract, forwardRef) 및 `motion` (Framer Motion) 구현 패턴 수호자. 타입 분리(`types.ts`) 및 Biome 린트 엄격 준수.
 - **Challenger** ([./challenger.md](./challenger.md)): 비판적 검토자. 엣지 케이스, 성능 회귀, API 파손 위험 탐지. 단순 스타일 제안이 아닌 논리적 위험 평가 중심 피드백.
 - **Documenter** ([./documenter.md](./documenter.md)): 문서화 전문가. JSDoc 작성 및 Storybook 스토리(중앙 집중형 패턴) 최적화. 사용 맥락과 예시 중심의 친절한 가이드 제공.
+- **Tester** ([./tester.md](./tester.md)): 테스트 작성 전문가. Vitest + Testing Library + vitest-axe로 **행동·계약·접근성**만 검증(외형은 Chromatic 담당). 구현 세부에 결합되지 않는 견고한 테스트 수호.
 - **Retrospective** ([./retrospective.md](./retrospective.md)): 분석 전문가. KPT (Keep, Problem, Try) 프레임워크 기반 회고. 브랜치 단위 작업 요약 및 아키텍처 일관성 체크.
 - **Writer** ([./writer.md](./writer.md)): UX 라이팅 전담. 해요체, 능동/긍정 말투, 명사 나열 지양. 토스 UX 라이팅 가이드 기반의 일관된 톤앤매너(서브 페르소나로 상시 적용).
 
@@ -43,7 +45,8 @@ AI는 토큰 효율을 위해 평상시에는 아래의 **[인라인 요약]**�
 2.  **검토 및 피드백 (Challenger)**: 코드 리뷰, 리팩토링 제안, 코드 품질 개선, 논리적 허점 탐색 등.
 3.  **문서화 및 도구 설정 (Documenter)**: JSDoc 작성, Storybook 스토리 생성, README 업데이트 등.
 4.  **회고 및 프로세스 (Retrospective)**: 작업 마무리 후 회고 작성, 릴리즈 노트 준비, 프로세스 개선 등.
-5.  **일반 대화 및 글쓰기 (Writer)**: 위의 특정 범주에 해당하지 않는 일반적인 질문이나 설명 등.
+5.  **테스트 작성 (Tester)**: 컴포넌트 테스트 작성, 검증 범위 정의, 접근성 검증, 테스트 리팩토링 등.
+6.  **일반 대화 및 글쓰기 (Writer)**: 위의 특정 범주에 해당하지 않는 일반적인 질문이나 설명 등.
 
 ---
 

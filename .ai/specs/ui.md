@@ -12,6 +12,7 @@
 - `{name}.css.ts`: Vanilla Extract 스타일 정의.
 - `{name}.types.ts`: TypeScript 인터페이스/타입 정의.
 - `{name}.context.ts`: (선택) 하위 컴포넌트와 상태를 공유할 경우.
+- `{name}.test.tsx`: 컴포넌트와 코로케이션하는 행동·계약·접근성 테스트. 작성 규약은 [../specs/testing.md](../specs/testing.md)를 따라요.
 - `index.ts`: 깔끔한 외부 노출을 위한 엔트리.
 
 ---
