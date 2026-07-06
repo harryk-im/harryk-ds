@@ -15,7 +15,7 @@
   - [../specs/ui.md](../specs/ui.md): UI 표준 및 설계 패턴
   - [../specs/motion.md](../specs/motion.md): Motion 표준 및 애니메이션 로직
   - [../specs/documentation.md](../specs/documentation.md): 문서화 및 JSDoc 품질
-- **주요 가이드**: [../ARCHITECTURE.md](../ARCHITECTURE.md) (프로젝트 핵심 구조 개요)
+- **주요 가이드**: [../architecture.md](../architecture.md) (프로젝트 핵심 구조 개요)
 - **라이팅 가이드**: [./writer.md](./writer.md) (UX 라이팅 전담)
 
 ## 리뷰 포커스

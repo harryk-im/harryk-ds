@@ -162,7 +162,7 @@ Framer Motion의 `HTMLMotionProps`를 상속하므로 모든 motion props를 사
 더 자세한 문서와 인터랙티브 예제는 Storybook에서 확인하세요:
 
 - [Storybook 문서](https://github.com/harryk-im/harryk-ds#readme)
-- [컴포넌트 가이드라인](../../ARCHITECTURE.md)
+- [컴포넌트 가이드라인](../../.ai/architecture.md)
 - [Framer Motion 공식 문서](https://www.framer.com/motion/)
 
 ## 🏗️ 개발

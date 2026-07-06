@@ -17,6 +17,7 @@
     "chromatic:ci": "pnpm --filter @harryk-ds/storybook chromatic:ci",
     "clean": "pnpm -r exec rm -rf dist && rm -rf apps/storybook/storybook-static",
     "type-check": "pnpm -r type-check",
+    "test:ui": "pnpm --filter @harryk-ds/ui test",
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
     "prepare": "husky",

@@ -10,7 +10,7 @@ Harryk 디자인 시스템은 **중앙 집중형으로 스토리를 관리**하�
 harryk-ds/
 ├── packages/         # 배포용 패키지 (ui, motion)
 ├── apps/storybook    # 컴포넌트 문서화 및 테스트
-└── .github/          # CI/CD (Chromatic, Release 등)
+└── .github/          # CI/CD (Release 등)
 ```
 
 상세한 파일 구조는 AI 혹은 사용자가 직접 탐색(`ls`)하여 파악하는 것을 권장해요.
@@ -26,7 +26,7 @@ harryk-ds/
 | **스타일** | Vanilla Extract |
 | **애니메이션** | Framer Motion |
 | **린트/포맷** | Biome |
-| **문서화** | Storybook + Chromatic |
+| **문서화** | Storybook |
 | **릴리즈** | Changesets |
 
 ---
