@@ -24,6 +24,7 @@
  */
 
 import { COLORS } from "./colors";
+import { FAMILIES, RAMPS } from "./colors.source";
 
 /* ------------------------------------------------------------------ *
  * 색공간 변환 (의도적 중복 — 위 주석 참고)
@@ -244,7 +245,69 @@ describe("COLORS", () => {
       expect(broken).toEqual([]);
     });
 
-    it.todo("같은 단계면 계열이 달라도 명도가 같아요");
+    it("코어 계열은 같은 단계에서 명도가 같아요", () => {
+      // 이 디자인 시스템의 핵심 계약이에요. 명도가 어긋나면 blue500 과 grey500 의
+      // 시각적 무게가 달라지고, semantic 토큰을 계열 사이에서 바꿔 끼울 수 없어요.
+      //
+      // lightGrey 는 배경 전용이라 의도적으로 이 축 밖에 있어요. 아래 램프 일치
+      // 테스트가 lightGrey 를 포함해서 각자 선언된 램프를 지키는지 따로 확인해요.
+      const CORE_FAMILIES = ["blue", "red", "grey"];
+      const mismatched: string[] = [];
+
+      const byFamily = Object.fromEntries(scales);
+      const steps = Object.keys(byFamily[CORE_FAMILIES[0]]);
+
+      for (const step of steps) {
+        const lightnesses = CORE_FAMILIES.map((family) => ({
+          family,
+          lightness: parseOklch(byFamily[family][step])?.lightness,
+        }));
+        const distinct = [...new Set(lightnesses.map((it) => it.lightness))];
+
+        if (distinct.length > 1) {
+          mismatched.push(
+            `${step}: ${lightnesses
+              .map(
+                ({ family, lightness }) =>
+                  `${family}=${(lightness ?? 0) * 100}%`
+              )
+              .join(", ")}`
+          );
+        }
+      }
+
+      expect(mismatched).toEqual([]);
+    });
+
+    it("모든 계열의 명도가 선언된 램프와 일치해요", () => {
+      // 램프가 둘 이상이면 생성기가 계열에 엉뚱한 램프를 물릴 수 있어요.
+      // 눈으로는 "그럴듯한 회색"으로 보여서 놓치기 쉬운 종류의 버그예요.
+      const mismatched: string[] = [];
+
+      for (const [family, scale] of scales) {
+        const baseFamily = family.replace(
+          alphaSuffix,
+          ""
+        ) as keyof typeof FAMILIES;
+        const ramp: Record<string, number> = RAMPS[FAMILIES[baseFamily].ramp];
+
+        for (const [step, value] of Object.entries(scale)) {
+          const color = parseOklch(value);
+          if (!color) continue;
+
+          // 백분율을 0~1 로 나눴다 되돌리는 과정에서 부동소수점 오차가 생겨요.
+          const lightness = Number((color.lightness * 100).toFixed(6));
+
+          if (lightness !== ramp[step]) {
+            mismatched.push(
+              `${family}[${step}]: ${lightness}% (램프 선언값 ${ramp[step]}%)`
+            );
+          }
+        }
+      }
+
+      expect(mismatched).toEqual([]);
+    });
   });
 
   describe("알파 계열 파생", () => {
