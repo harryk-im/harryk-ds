@@ -142,7 +142,10 @@ const scales = new Map<string, Scale>();
 
 const scaleOf = (name: string): Scale => {
   const scale = scales.get(name);
-  if (!scale) throw new Error(`알 수 없는 스케일이에요: ${name}`);
+  if (!scale)
+    throw new Error(
+      `${name} 스케일을 찾지 못했어요. FAMILIES 에 등록했는지 확인해주세요.`
+    );
   return scale;
 };
 
@@ -218,7 +221,7 @@ const buildColorsTs = (): string => {
 
   return [
     "// 이 파일은 packages/ui/scripts/build-colors.ts 가 생성했어요. 직접 편집하지 마세요.",
-    "// 값을 바꾸려면 colors.source.ts 를 수정하고 `pnpm build:colors` 를 실행하세요.",
+    "// 값을 바꾸려면 colors.source.ts 를 수정하고 `pnpm build:colors` 를 실행해주세요.",
     "",
     "export const COLORS = {",
     blocks.join("\n"),
@@ -283,15 +286,15 @@ const tokenCount =
   [...scales.values()].reduce((sum, scale) => sum + scale.size, 0) +
   standalone.size;
 
-console.log(`생성 완료 — 토큰 ${tokenCount}개`);
+console.log(`토큰 ${tokenCount}개를 만들었어요.`);
 console.log(`  ${COLORS_TS}`);
 console.log(`  ${TOKENS_JSON}`);
 
 if (clamped.length === 0) {
-  console.log("\n채도가 깎인 토큰 없음 (모든 목표 채도가 sRGB 안에 있어요)");
+  console.log("\n목표 채도를 그대로 썼어요. 전부 sRGB 안에 들어와요.");
 } else {
   console.log(
-    `\n채도가 깎인 토큰 ${clamped.length}개 — sRGB 한계에 걸린 자리예요:`
+    `\n토큰 ${clamped.length}개는 채도를 깎았어요. sRGB 한계에 걸린 자리예요.`
   );
   for (const { token, lightness, target, actual } of clamped) {
     const ratio = Math.round((actual / target) * 100);

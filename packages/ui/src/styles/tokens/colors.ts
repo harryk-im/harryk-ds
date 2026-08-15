@@ -1,5 +1,5 @@
 // 이 파일은 packages/ui/scripts/build-colors.ts 가 생성했어요. 직접 편집하지 마세요.
-// 값을 바꾸려면 colors.source.ts 를 수정하고 `pnpm build:colors` 를 실행하세요.
+// 값을 바꾸려면 colors.source.ts 를 수정하고 `pnpm build:colors` 를 실행해주세요.
 
 export const COLORS = {
   // blue
