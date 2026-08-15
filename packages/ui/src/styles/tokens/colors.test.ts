@@ -3,10 +3,10 @@
  *
  * ## `testing.md` 의 "픽셀·색상 검증 금지" 규칙과 충돌하지 않아요
  *
- * 그 규칙은 **컴포넌트 테스트**를 향한 거예요. "Button 이 blue300 을 쓰는가" 같은
+ * 그 규칙은 컴포넌트 테스트를 향한 거예요. "Button 이 blue300 을 쓰는가" 같은
  * 외형은 Storybook 에서 눈으로 확인해요.
  *
- * 여기서 검증하는 건 외형이 아니라 **토큰이 지켜야 할 데이터 계약**이에요.
+ * 여기서 검증하는 건 외형이 아니라 토큰이 지켜야 할 데이터 계약이에요.
  * "모든 토큰이 sRGB 로 표현 가능한가", "램프가 단조로운가" 같은 불변식은
  * 눈으로는 확인할 수 없고, 깨지면 잘못된 색이 조용히 배포돼요.
  *
@@ -17,10 +17,10 @@
  *
  * 그래서 이렇게 나눴어요.
  *
- *   1. `색공간 변환` 블록이 이 파일의 구현을 **외부에 공표된 sRGB 원색 좌표**로 검증해요.
+ *   1. 첫 블록이 이 파일의 구현을 외부에 공표된 sRGB 원색 좌표로 검증해요.
  *   2. 나머지 블록이 그 검증된 구현으로 토큰을 검사해요.
  *
- * 두 구현 중 어느 쪽에 오타가 나도 빨간불이 떠요. **이 중복을 제거하지 마세요.**
+ * 두 구현 중 어느 쪽에 오타가 나도 빨간불이 떠요. 이 중복을 제거하지 마세요.
  */
 
 import { COLORS } from "./colors";
@@ -131,6 +131,10 @@ const parsed = tokens.flatMap(({ name, value }) => {
 
 const alphaSuffix = /Alpha(\d+)$/;
 
+const coreFamilies = Object.entries(FAMILIES)
+  .filter(([, family]) => family.ramp === "core")
+  .map(([name]) => name);
+
 /* ------------------------------------------------------------------ *
  * 테스트
  * ------------------------------------------------------------------ */
@@ -138,7 +142,7 @@ const alphaSuffix = /Alpha(\d+)$/;
 describe("COLORS", () => {
   // 이 블록이 아래 모든 테스트의 신뢰 근거예요.
   // 변환식에 오타가 나면 여기가 먼저 빨간불이 떠요.
-  describe("색공간 변환", () => {
+  describe("색공간 변환이 정확한지 먼저 확인해요", () => {
     const references = [
       { name: "흰색", value: "oklch(100% 0 0)", hex: "#ffffff" },
       { name: "검정", value: "oklch(0% 0 0)", hex: "#000000" },
@@ -171,7 +175,7 @@ describe("COLORS", () => {
     );
   });
 
-  describe("토큰 형식", () => {
+  describe("모든 토큰이 약속한 표기법을 지켜요", () => {
     it("모든 토큰이 oklch() 문법이에요", () => {
       // 생성기가 숫자 포맷을 잘못 뱉거나 누군가 손으로 hex 를 적어 넣으면 걸려요.
       const invalid = tokens
@@ -195,7 +199,7 @@ describe("COLORS", () => {
     });
   });
 
-  describe("sRGB 색역", () => {
+  describe("모든 색을 sRGB 화면에 그대로 그릴 수 있어요", () => {
     it("모든 토큰이 sRGB 로 표현 가능해요", () => {
       // 색역을 벗어나면 브라우저가 제멋대로 보정해서 기기마다 다른 색이 나와요.
       // 목표 채도를 올리거나 램프를 넓히면 양 끝 토큰부터 여기에 걸려요.
@@ -207,9 +211,9 @@ describe("COLORS", () => {
     });
   });
 
-  describe("램프 구조", () => {
+  // 한 계열 안에서 단계가 어떻게 이어지는지 봐요.
+  describe("스케일이 단계 규칙을 지켜요", () => {
     it("모든 계열이 같은 단계 집합을 가져요", () => {
-      // 계열마다 단계가 다르면 semantic 토큰을 계열 사이에서 바꿔 끼울 수 없어요.
       const stepSets = scales.map(([family, scale]) => ({
         family,
         steps: Object.keys(scale).sort().join(","),
@@ -220,7 +224,6 @@ describe("COLORS", () => {
     });
 
     it("단계 숫자가 커질수록 어두워져요", () => {
-      // 900 이 가장 어둡다는 규칙이 깨지면 스케일 전체가 의미를 잃어요.
       const broken: string[] = [];
 
       for (const [family, scale] of scales) {
@@ -244,21 +247,26 @@ describe("COLORS", () => {
 
       expect(broken).toEqual([]);
     });
+  });
 
-    it("코어 계열은 같은 단계에서 명도가 같아요", () => {
+  describe("토큰 계열끼리 명도(L) 기준을 맞춰요", () => {
+    it("코어 계열 명도(L) 정렬 검사에 blue·red·grey 가 포함되는지 확인해요", () => {
+      // 셋 중 하나를 코어에서 빼는 건 설계 변경이라 의식적인 결정이어야 해요.
+      expect(coreFamilies).toEqual(
+        expect.arrayContaining(["blue", "red", "grey"])
+      );
+    });
+
+    it("코어 계열은 같은 단계에서 명도(L)가 같아요", () => {
       // 이 디자인 시스템의 핵심 계약이에요. 명도가 어긋나면 blue500 과 grey500 의
       // 시각적 무게가 달라지고, semantic 토큰을 계열 사이에서 바꿔 끼울 수 없어요.
-      //
-      // lightGrey 는 배경 전용이라 의도적으로 이 축 밖에 있어요. 아래 램프 일치
-      // 테스트가 lightGrey 를 포함해서 각자 선언된 램프를 지키는지 따로 확인해요.
-      const CORE_FAMILIES = ["blue", "red", "grey"];
       const mismatched: string[] = [];
 
       const byFamily = Object.fromEntries(scales);
-      const steps = Object.keys(byFamily[CORE_FAMILIES[0]]);
+      const steps = Object.keys(byFamily[coreFamilies[0]]);
 
       for (const step of steps) {
-        const lightnesses = CORE_FAMILIES.map((family) => ({
+        const lightnesses = coreFamilies.map((family) => ({
           family,
           lightness: parseOklch(byFamily[family][step])?.lightness,
         }));
@@ -279,7 +287,7 @@ describe("COLORS", () => {
       expect(mismatched).toEqual([]);
     });
 
-    it("모든 계열의 명도가 선언된 램프와 일치해요", () => {
+    it("모든 계열의 명도(L)가 선언된 램프와 일치해요", () => {
       // 램프가 둘 이상이면 생성기가 계열에 엉뚱한 램프를 물릴 수 있어요.
       // 눈으로는 "그럴듯한 회색"으로 보여서 놓치기 쉬운 종류의 버그예요.
       const mismatched: string[] = [];
@@ -310,7 +318,7 @@ describe("COLORS", () => {
     });
   });
 
-  describe("알파 계열 파생", () => {
+  describe("알파 계열이 원본을 그대로 따라가요", () => {
     it("모든 기본 계열이 짝이 되는 알파 계열을 가져요", () => {
       const names = scales.map(([family]) => family);
       const bases = names.filter((name) => !alphaSuffix.test(name));
