@@ -14,7 +14,7 @@ AI는 토큰 효율을 위해 평상시에는 아래의 **[인라인 요약]**�
 - **Refactoring**: 폴더 구조 변경이나 대규모 코드 개선 시 (`architecture.md`)
 - **User Messaging**: 에러 메시지, 안내 문구 등 사용자가 직접 읽는 문구를 작성할 때 (`writer.md` 내의 예시 표 확인 필수)
 - **Review & Recall**: 복잡한 위험 분석(`challenger.md`)이나 정밀한 회고(`retrospective.md`)가 필요한 작업
-- **Testing**: 컴포넌트 테스트를 작성하거나 검증 범위를 정의할 때 (`tester.md` 및 `../specs/testing.md`의 레이어 경계·검증 범위 확인 필수)
+- **Testing**: 테스트를 작성하거나 검증 범위를 정의할 때 (`tester.md` 내의 레이어 경계·검증 대상별 지침 확인 필수)
 - **Verification**: 코드·파일을 생성·변경한 작업을 마무리할 때, 검증 게이트의 정확한 명령과 절차 확인 (`verifier.md`)
 
 ### 2. 요약본 활용 가능 상황 (Fast Path)
