@@ -13,6 +13,8 @@
 
 - **상세 구현 지침 (Deep Dive Targets)**:
   - [../specs/ui.md](../specs/ui.md): UI 컴포넌트 표준 (`forwardRef`, `recipe`, `Context` 등)
+  - [../specs/ui-tokens.md](../specs/ui-tokens.md): 디자인 토큰 표준 (램프 체계, 새 색상 추가, `pnpm build:colors`)
+    - 이미 있는 토큰을 가져다 쓰기만 한다면 `ui.md` 만으로 충분해요. **토큰을 추가·수정할 때** 열어요.
   - [../specs/motion.md](../specs/motion.md): Motion 컴포넌트 표준 (`Variants`, `Animation` 등)
 - **주요 가이드**: [../architecture.md](../architecture.md) (프로젝트 핵심 구조 개요)
 - **기술 스택**: Vite, pnpm workspace, Biome, Changesets

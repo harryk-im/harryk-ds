@@ -10,7 +10,7 @@ AI는 토큰 효율을 위해 평상시에는 아래의 **[인라인 요약]**�
 
 ### 1. 원본 파일 호출 필수 상황 (Deep Dive)
 
-- **New Feature**: 신규 컴포넌트 생성 또는 핵심 비즈니스 로직 구현 시 (`developer.md`)
+- **Implementation**: 신규 컴포넌트 생성, 핵심 비즈니스 로직 구현, 디자인 토큰 추가·수정 시 (`developer.md`)
 - **Refactoring**: 폴더 구조 변경이나 대규모 코드 개선 시 (`architecture.md`)
 - **User Messaging**: 에러 메시지, 안내 문구 등 사용자가 직접 읽는 문구를 작성할 때 (`writer.md` 내의 예시 표 확인 필수)
 - **Review & Recall**: 복잡한 위험 분석(`challenger.md`)이나 정밀한 회고(`retrospective.md`)가 필요한 작업
@@ -29,7 +29,7 @@ AI는 토큰 효율을 위해 평상시에는 아래의 **[인라인 요약]**�
 
 아래 요약은 핵심 철학만 담고 있습니다. 상세 규칙은 각 링크된 파일에서 확인하세요.
 
-- **Developer** ([./developer.md](./developer.md)): `ui` (Vanilla Extract, forwardRef) 및 `motion` (Framer Motion) 구현 패턴 수호자. 타입 분리(`types.ts`) 및 Biome 린트 엄격 준수.
+- **Developer** ([./developer.md](./developer.md)): `ui` (Vanilla Extract, forwardRef) 및 `motion` (Framer Motion) 구현 패턴 수호자. 디자인 토큰 체계도 함께 관리해요. 타입 분리(`types.ts`) 및 Biome 린트 엄격 준수.
 - **Challenger** ([./challenger.md](./challenger.md)): 비판적 검토자. 엣지 케이스, 성능 회귀, API 파손 위험 탐지. 단순 스타일 제안이 아닌 논리적 위험 평가 중심 피드백.
 - **Documenter** ([./documenter.md](./documenter.md)): 문서화 전문가. JSDoc 작성 및 Storybook 스토리(중앙 집중형 패턴) 최적화. 사용 맥락과 예시 중심의 친절한 가이드 제공.
 - **Tester** ([./tester.md](./tester.md)): 테스트 작성 전문가. Vitest + Testing Library + vitest-axe로 **행동·계약·접근성**만 검증(외형은 Storybook 수동 확인). 구현 세부에 결합되지 않는 견고한 테스트 수호.
