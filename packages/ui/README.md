@@ -148,7 +148,41 @@ import { Button } from "@harryk-ds/ui";
 </Button>
 ```
 
+### 컬러 토큰
 
+색상은 `oklch` 기반의 `COLORS` 토큰으로 제공해요. 계열마다 100~900 아홉 단계가 있고, **숫자가 클수록 어두워요.**
+
+```tsx
+import { COLORS, withOpacity } from "@harryk-ds/ui";
+
+COLORS.blue[500]                    // oklch(53% 0.125 263.18)
+COLORS.lightGrey[300]               // 배경용 밝은 회색
+withOpacity(COLORS.blue[500], 0.4)  // 임의의 투명도가 필요할 때
+```
+
+용도에 따라 두 갈래로 나뉘어요.
+
+| 계열 | 쓰는 자리 |
+|------|-----------|
+| `blue` · `red` · `grey` | 텍스트, 보더, 솔리드 배경처럼 **또렷하게 잡히는 자리** |
+| `lightGrey` | 페이지·카드·hover 처럼 **뒤로 물러나는 배경** |
+
+`blue` · `red` · `grey` 는 같은 명도 사다리를 공유해요. 그래서 `blue[500]` 과 `grey[500]` 은 명암비가 같고, 계열만 바꿔 끼워도 시각적 무게가 유지돼요. `lightGrey` 는 배경 전용이라 더 밝고 촘촘한 사다리를 따로 써요.
+
+이 밖에 각 계열의 `Alpha15` 변형과 `black` · `white` 를 제공해요.
+
+#### 토큰을 수정할 때 (기여자용)
+
+컬러 토큰은 **손으로 적지 않고 생성해요.** 사람이 편집하는 파일은 `colors.source.ts` 하나뿐이에요.
+
+```bash
+pnpm build:colors    # colors.ts 와 tokens.json 을 다시 생성해요
+pnpm check:colors    # 생성 결과가 커밋된 내용과 같은지 확인해요 (CI 가 돌려요)
+```
+
+> **`colors.ts` 와 `tokens.json` 을 직접 편집하지 마세요.** 다음 생성 때 사라져요.
+
+Figma·Token Studio 에서는 W3C DTCG 포맷인 `packages/ui/tokens.json` 을 가져다 쓰면 돼요.
 
 ## 📚 문서
 
@@ -191,8 +225,9 @@ pnpm --filter @harryk-ds/ui type-check
 ```bash
 packages/ui/src/components/ui-component/
 ├── ui-component.tsx
-├── ui-component.css.ts  # Vanilla Extract 스타일
-├── ui-component.types.ts # 타입 정의
+├── ui-component.css.ts    # Vanilla Extract 스타일
+├── ui-component.types.ts  # 타입 정의
+├── ui-component.test.tsx  # 행동·계약·접근성 테스트
 └── index.ts
 ```
 
@@ -226,20 +261,32 @@ pnpm build:ui
 
 ```
 packages/ui/
+├── scripts/
+│   └── build-colors.ts             # 컬러 토큰 생성기
 ├── src/
 │   ├── components/
+│   │   ├── badge/
 │   │   ├── button/
 │   │   │   ├── button.tsx
 │   │   │   ├── button.css.ts
 │   │   │   ├── button.types.ts
+│   │   │   ├── button.test.tsx
 │   │   │   └── index.ts
+│   │   ├── heading/
+│   │   ├── modal/
+│   │   ├── paragraph/              # context.ts 로 스타일을 물려줘요
 │   │   └── index.ts
-│   ├── styles/           # 공통 스타일 토큰
-│   │   └── tokens/
-│   │       ├── colors.css.ts
-│   │       └── typography.css.ts
+│   ├── styles/
+│   │   ├── foundation/             # withOpacity 등 스타일 헬퍼
+│   │   └── tokens/                 # 디자인 토큰
+│   │       ├── colors.source.ts    # 컬러 토큰 SSOT (사람이 편집해요)
+│   │       ├── colors.ts           # 생성물 (직접 편집하지 마세요)
+│   │       ├── typography.ts
+│   │       ├── spacing.ts
+│   │       └── radii.ts
 │   └── index.ts
-├── dist/                 # 빌드 결과물
+├── tokens.json                     # Figma / Token Studio 용 (생성물)
+├── dist/                           # 빌드 결과물
 └── package.json
 ```
 
