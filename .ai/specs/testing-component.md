@@ -62,9 +62,19 @@ expect(onClick).not.toHaveBeenCalled();
 
 ```tsx
 const ref = React.createRef<HTMLButtonElement>();
-render(<Button ref={ref} data-testid="save">저장</Button>);
-expect(ref.current).toBeInstanceOf(HTMLButtonElement);
-expect(screen.getByRole("button")).toHaveClass("my-class"); // className 병합 확인 시
+render(
+  <Button ref={ref} className="my-class" data-testid="save">
+    저장
+  </Button>
+);
+
+const button = screen.getByRole("button");
+expect(ref.current).toBeInstanceOf(HTMLButtonElement); // forwardRef 계약
+expect(button).toHaveAttribute("data-testid", "save"); // ...props 전달
+expect(button).toHaveClass("my-class");                // className 병합
+
+// toHaveClass 만으로는 덮어썼는지 못 잡아요. 내부 클래스가 함께 남아 있는지도 확인해요.
+expect(button.className.trim().split(/\s+/).length).toBeGreaterThan(1);
 ```
 
 ### ⑤ 접근성 (a11y, 필수)
