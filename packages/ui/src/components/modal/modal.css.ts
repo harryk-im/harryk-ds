@@ -68,7 +68,7 @@ export const closeButtonStyle = style({
   borderRadius: "8px",
 
   ":hover": {
-    backgroundColor: COLORS.grey[100],
+    backgroundColor: COLORS.lightGrey[300],
   },
 });
 

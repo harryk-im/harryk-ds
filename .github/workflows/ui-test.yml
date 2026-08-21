@@ -1,4 +1,4 @@
-name: "Check Code Quality"
+name: "UI Package Test"
 
 on:
   push:
@@ -6,18 +6,23 @@ on:
   pull_request:
     branches: [main, develop]
 
+permissions:
+  contents: read
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
   cancel-in-progress: true
 
 jobs:
-  quality-check:
-    name: Lint, Type Check, Build & Token Sync
+  ui-package-test:
+    name: Unit & Accessibility Tests
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -45,18 +50,5 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Lint
-        run: pnpm lint
-
-      - name: Type check
-        run: pnpm type-check
-
-      - name: Check color token sync
-        run: |
-          if ! pnpm check:colors; then
-            echo "::error::컬러 토큰이 SSOT 와 어긋나요. colors.source.ts 를 고친 뒤 pnpm build:colors 를 실행하고 결과를 함께 커밋해주세요."
-            exit 1
-          fi
-
-      - name: Build packages
-        run: pnpm build
+      - name: Test
+        run: pnpm test:ui

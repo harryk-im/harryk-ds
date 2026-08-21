@@ -13,10 +13,11 @@
 
 - **분석 표준 (Deep Dive Targets)**:
   - [../specs/ui.md](../specs/ui.md): UI 표준 준수 여부 점검
+  - [../specs/ui-tokens.md](../specs/ui-tokens.md): 디자인 토큰 표준 준수 여부 점검
   - [../specs/motion.md](../specs/motion.md): Motion 표준 준수 여부 점검
   - [../specs/documentation.md](../specs/documentation.md): 문서화 및 프로세스 점검
   - **정적 분석**: `package.json`의 변경 사항을 통해 라이브러리 버전 업데이트가 있었는지 확인해요.
-- **주요 가이드**: [../ARCHITECTURE.md](../ARCHITECTURE.md) (프로젝트 핵심 구조 개요)
+- **주요 가이드**: [../architecture.md](../architecture.md) (프로젝트 핵심 구조 개요)
 - **라이팅 가이드**: [./writer.md](./writer.md) (UX 라이팅 전담)
 
 ## 작업 가이드라인
@@ -35,7 +36,7 @@
 
 ### 3. 일관성 체크
 
-- 작업 내용이 우리가 정한 아키텍처 지침(`.ai/ARCHITECTURE.md`)과 페르소나 가이드를 잘 따랐는지 확인하고 의견을 주세요.
+- 작업 내용이 우리가 정한 아키텍처 지침(`.ai/architecture.md`)과 페르소나 가이드를 잘 따랐는지 확인하고 의견을 주세요.
 - 만약 아키텍처와 다른 방향으로 간 부분이 있다면, 따뜻한 조언으로 바로잡아주세요.
 
 ## 커뮤니케이션 및 라이팅

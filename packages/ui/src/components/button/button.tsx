@@ -1,5 +1,5 @@
 import React from "react";
-import { buttonStyle } from "./button.css";
+import { buttonBackdrop, buttonContent, buttonStyle } from "./button.css";
 import type { ButtonProps } from "./button.types";
 
 /**
@@ -7,14 +7,20 @@ import type { ButtonProps } from "./button.types";
  *
  * @example
  * ```tsx
- * // 기본 사용법
+ * // 기본 사용법 (blue · fill · md)
  * <Button>클릭하세요</Button>
  *
- * // 색상과 스타일 지정
- * <Button color="primary" variant="outline">Outline 버튼</Button>
+ * // 색상 지정
+ * <Button color="red">삭제</Button>
  *
- * // 크기 지정
- * <Button size="lg">큰 버튼</Button>
+ * // weak 스타일 (흰 배경 위 반투명 배경 레이어)
+ * <Button color="grey" variant="weak">취소</Button>
+ *
+ * // 부모 너비를 가득 채우기
+ * <Button fullWidth>전체 너비</Button>
+ *
+ * // 로딩 (동작이 막혀요)
+ * <Button loading>저장 중</Button>
  *
  * // 비활성화
  * <Button disabled>비활성화된 버튼</Button>
@@ -23,22 +29,37 @@ import type { ButtonProps } from "./button.types";
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
-      color = "primary",
+      type = "button",
+      color = "blue",
       variant = "fill",
       size = "md",
+      fullWidth = false,
+      loading = false,
+      disabled,
       className,
       children,
       ...props
     },
     ref
   ) => {
-    const buttonClasses = [buttonStyle({ color, variant, size }), className]
+    const buttonClasses = [
+      buttonStyle({ color, variant, size, fullWidth }),
+      className,
+    ]
       .filter(Boolean)
       .join(" ");
 
     return (
-      <button ref={ref} className={buttonClasses} {...props}>
-        {children}
+      <button
+        {...props}
+        ref={ref}
+        type={type}
+        className={buttonClasses}
+        disabled={disabled || loading}
+        aria-busy={loading}
+      >
+        {variant === "weak" && <span className={buttonBackdrop} aria-hidden />}
+        <span className={buttonContent}>{children}</span>
       </button>
     );
   }

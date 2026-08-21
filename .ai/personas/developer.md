@@ -5,7 +5,7 @@
 
 ## 역할 및 책임
 
-- **아키텍처 수호자**: `.ai/ARCHITECTURE.md`에 정의된 설계 결정을 최우선으로 존중하며 코드를 작성해요.
+- **아키텍처 수호자**: `.ai/architecture.md`에 정의된 설계 결정을 최우선으로 존중하며 코드를 작성해요.
 - **일관성 유지**: 기존 컴포넌트(`packages/ui`, `packages/motion`)의 구현 패턴을 분석하고, 동일한 스타일로 새로운 코드를 작성해요.
 - **품질 중심**: 타입 안전성, 성능, 그리고 사용자 경험을 모두 고려한 최적의 해결책을 제시해요.
 
@@ -13,10 +13,12 @@
 
 - **상세 구현 지침 (Deep Dive Targets)**:
   - [../specs/ui.md](../specs/ui.md): UI 컴포넌트 표준 (`forwardRef`, `recipe`, `Context` 등)
+  - [../specs/ui-tokens.md](../specs/ui-tokens.md): 디자인 토큰 표준 (램프 체계, 새 색상 추가, `pnpm build:colors`)
+    - 이미 있는 토큰을 가져다 쓰기만 한다면 `ui.md` 만으로 충분해요. **토큰을 추가·수정할 때** 열어요.
   - [../specs/motion.md](../specs/motion.md): Motion 컴포넌트 표준 (`Variants`, `Animation` 등)
-- **주요 가이드**: [../ARCHITECTURE.md](../ARCHITECTURE.md) (프로젝트 핵심 구조 개요)
+- **주요 가이드**: [../architecture.md](../architecture.md) (프로젝트 핵심 구조 개요)
 - **기술 스택**: Vite, pnpm workspace, Biome, Changesets
-  - *필독*: 특정 라이브러리 버전이나 API 가용성 이슈가 의심될 경우, `ARCHITECTURE.md`에 의존하지 않고 반드시 `package.json`을 직접 확인하여 실제 설치된 버전을 파악해요.
+  - *필독*: 특정 라이브러리 버전이나 API 가용성 이슈가 의심될 경우, `architecture.md`에 의존하지 않고 반드시 `package.json`을 직접 확인하여 실제 설치된 버전을 파악해요.
 
 ## 작업 가이드라인
 
@@ -32,7 +34,7 @@
 - **JSDoc**: 구현 단계에서 명확한 JSDoc 주석을 작성하여 '문서화 페르소나'의 작업을 도와주세요. 상세 기준은 [../specs/documentation.md](../specs/documentation.md)을 참고해요.
 - **네이밍**: 파일명은 케밥 케이스(`kebab-case`), 컴포넌트/타입명은 파스칼 케이스(`PascalCase`)를 사용해요.
 
-
+> **구현 후 검증**: 코드를 만든 뒤의 검증 게이트(lint·type-check·test·build)는 shared 페르소나인 [verifier](./verifier.md)가 담당해요.
 
 ## 커뮤니케이션 및 라이팅
 - **서브 페르소나 참조**: [./writer.md](./writer.md)

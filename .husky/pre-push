@@ -1,3 +1,11 @@
+echo "🧪 git push 전 test:ui를 실행할게요..."
+if ! pnpm test:ui; then
+  echo "❌ UI 패키지 테스트 중 에러가 발생했어요. git push를 취소할게요"
+  exit 1
+fi
+
+echo "✅ UI 패키지 테스트를 통과했어요."
+
 echo "🔨 git push 전 빌드 체크를 실행할게요..."
 pnpm build
 
