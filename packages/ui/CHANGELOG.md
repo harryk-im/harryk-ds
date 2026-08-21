@@ -1,5 +1,12 @@
 # @harryk-ds/ui
 
+## 0.2.0
+
+### Minor Changes
+
+- 2b63c3f: Redesign the `Button` component to match the updated design system: replace semantic `color` values (`primary`/`secondary`) with primitives (`blue`/`red`/`grey`), swap the `outline` variant for `weak`, remove borders and built-in animation, and add `fullWidth` and `loading` props.
+- 5aa6a91: Realign the `COLORS` ramps to a lightness-first scale: `blue`, `red`, and `grey` share one core ramp so the same step has the same lightness across families, and `lightGrey` becomes a background-only surface ramp. No token names changed, but most values did — expect a visible color shift.
+
 ## 0.1.7
 
 ### Patch Changes
