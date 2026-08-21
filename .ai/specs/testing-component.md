@@ -63,18 +63,24 @@ expect(onClick).not.toHaveBeenCalled();
 ```tsx
 const ref = React.createRef<HTMLButtonElement>();
 render(
-  <Button ref={ref} className="my-class" data-testid="save">
+  <Button ref={ref} data-testid="save">
     저장
   </Button>
 );
 
-const button = screen.getByRole("button");
-expect(ref.current).toBeInstanceOf(HTMLButtonElement); // forwardRef 계약
-expect(button).toHaveAttribute("data-testid", "save"); // ...props 전달
-expect(button).toHaveClass("my-class");                // className 병합
+expect(ref.current).toBeInstanceOf(HTMLButtonElement);
+expect(screen.getByRole("button")).toHaveAttribute("data-testid", "save");
+```
 
-// toHaveClass 만으로는 덮어썼는지 못 잡아요. 내부 클래스가 함께 남아 있는지도 확인해요.
-expect(button.className.trim().split(/\s+/).length).toBeGreaterThan(1);
+**병합은 따로 검증해요.** `toHaveClass("my-class")` 만으로는 부족하거든요. 내부 클래스를 전부 덮어쓰고 사용자 클래스만 대입해도 그 단언은 통과해서, 정작 막으려던 회귀를 놓쳐요.
+
+내부 클래스명은 해시라 고정하면 안 되니, **스타일 구현체에서 그대로 가져와** 사용자 클래스와 함께 있는지 봐요.
+
+```tsx
+import { buttonStyle } from "./button.css";
+
+render(<Button className="my-class">저장</Button>);
+expect(screen.getByRole("button")).toHaveClass(buttonStyle({}), "my-class");
 ```
 
 ### ⑤ 접근성 (a11y, 필수)
