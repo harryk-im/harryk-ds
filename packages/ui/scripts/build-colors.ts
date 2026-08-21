@@ -4,7 +4,7 @@
  * `src/styles/tokens/colors.source.ts` 를 읽어서 아래 두 파일을 생성해요.
  *
  *   - `src/styles/tokens/colors.ts` (컴포넌트가 import 하는 토큰)
- *   - `tokens.json` (Figma / Token Studio 용 W3C DTCG 포맷)
+ *   - `tokens.json` (Figma / Token Studio 포맷)
  *
  * 실행: `pnpm build:colors`
  * 검증: `pnpm check:colors` (생성 결과가 커밋된 내용과 같은지 확인)
@@ -231,19 +231,21 @@ const buildColorsTs = (): string => {
 };
 
 /* ------------------------------------------------------------------ *
- * 출력 2 — tokens.json (W3C DTCG)
+ * 출력 2 — tokens.json (Figma / Token Studio)
  * ------------------------------------------------------------------ *
  * tokens.json 에는 색상 말고 spacing, typography 같은 다른 토큰도 들어 있어요.
  * 그래서 파일을 통째로 덮어쓰지 않고 `global.color` 만 교체해요.
+ *
+ * 값 표기는 Token Studio 규약(`$type` / `$value`)을 따라요.
  */
 
-type DtcgToken = { $type: "color"; $value: string };
-type DtcgNode = DtcgToken | Record<string, DtcgToken>;
+type TokenStudioToken = { $type: "color"; $value: string };
+type TokenStudioNode = TokenStudioToken | Record<string, TokenStudioToken>;
 
-const buildColorNode = (): Record<string, DtcgNode> => {
-  const node: Record<string, DtcgNode> = {};
+const buildColorNode = (): Record<string, TokenStudioNode> => {
+  const node: Record<string, TokenStudioNode> = {};
 
-  // DTCG 쪽은 기본 계열을 먼저 모으고, 그 다음 알파 계열, 마지막에 단독 색상 순서예요.
+  // 기본 계열을 먼저 모으고, 그 다음 알파 계열, 마지막에 단독 색상 순서예요.
   const families = Object.keys(FAMILIES);
   const alphaNames = families.flatMap((family) =>
     ALPHA_VARIANTS.map((percent) => `${family}Alpha${percent}`)
@@ -256,7 +258,7 @@ const buildColorNode = (): Record<string, DtcgNode> => {
         step,
         { $type: "color", $value: value },
       ])
-    ) as Record<string, DtcgToken>;
+    ) as Record<string, TokenStudioToken>;
   }
 
   for (const [name, value] of standalone) {

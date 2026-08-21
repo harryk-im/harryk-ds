@@ -5,7 +5,7 @@
  * 수정한 뒤 `pnpm build:colors` 를 실행하면 아래 두 파일이 함께 다시 생성돼요.
  *
  *   - `packages/ui/src/styles/tokens/colors.ts` (컴포넌트가 import 하는 토큰)
- *   - `tokens.json` (Figma / Token Studio 용 W3C DTCG 포맷)
+ *   - `tokens.json` (Figma / Token Studio 포맷)
  *
  * ## 설계 원칙
  *

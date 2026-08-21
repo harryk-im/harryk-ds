@@ -182,7 +182,7 @@ pnpm check:colors    # 생성 결과가 커밋된 내용과 같은지 확인해�
 
 > **`colors.ts` 와 `tokens.json` 을 직접 편집하지 마세요.** 다음 생성 때 사라져요.
 
-Figma·Token Studio 에서는 W3C DTCG 포맷인 `packages/ui/tokens.json` 을 가져다 쓰면 돼요.
+Figma·Token Studio 에서는 `packages/ui/tokens.json` 을 가져다 쓰면 돼요. Token Studio 포맷(`$type` / `$value`)이에요.
 
 ## 📚 문서
 

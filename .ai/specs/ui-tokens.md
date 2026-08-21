@@ -11,7 +11,7 @@
 
 ```
 colors.source.ts  ──[ pnpm build:colors ]──┬──▶  colors.ts     (컴포넌트가 import 하는 토큰)
-   ↑ 사람이 편집하는 유일한 파일             └──▶  tokens.json   (Figma / Token Studio 용 W3C DTCG)
+   ↑ 사람이 편집하는 유일한 파일             └──▶  tokens.json   (Figma / Token Studio 포맷)
 ```
 
 | 파일 | 역할 |
