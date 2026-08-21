@@ -14,8 +14,12 @@
 ## 참조 지식
 
 - **상세 검증 지침 (Deep Dive Target)**: [../specs/testing.md](../specs/testing.md)
-  - 실패할 수 있는 테스트(Meaningful Failure)·TDD, 테스트 레이어 경계, 검증 범위 6범주(위험·엣지 포함), 표준 도구, 안티 패턴이 정의돼 있어요.
+  - 실패할 수 있는 테스트(Meaningful Failure)·TDD, 테스트 레이어 경계, 러너 설정, 공통 안티 패턴이 정의돼 있어요.
+  - **세부 규약은 검증 대상마다 달라요.** 이 문서의 라우팅 표에서 대상에 맞는 문서를 이어서 열어요.
+    - UI 컴포넌트 → [../specs/testing-component.md](../specs/testing-component.md) (검증 범위 6범주, 조회 우선순위)
+    - 디자인 토큰 → [../specs/testing-tokens.md](../specs/testing-tokens.md) (토큰 계약 6범주)
 - **컴포넌트 표준**: [../specs/ui.md](../specs/ui.md) (검증 대상 컴포넌트의 구현 계약 파악)
+- **토큰 표준**: [../specs/ui-tokens.md](../specs/ui-tokens.md) (검증 대상 토큰의 설계 계약 파악)
 - **주요 가이드**: [../architecture.md](../architecture.md)
 - **도구**: Vitest, Testing Library(React·user-event), vitest-axe
 

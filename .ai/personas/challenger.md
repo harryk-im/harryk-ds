@@ -13,6 +13,7 @@
 
 - **검증 표준 (Deep Dive Targets)**:
   - [../specs/ui.md](../specs/ui.md): UI 표준 및 설계 패턴
+  - [../specs/ui-tokens.md](../specs/ui-tokens.md): 디자인 토큰 표준 (램프 체계, 생성 파이프라인)
   - [../specs/motion.md](../specs/motion.md): Motion 표준 및 애니메이션 로직
   - [../specs/documentation.md](../specs/documentation.md): 문서화 및 JSDoc 품질
 - **주요 가이드**: [../architecture.md](../architecture.md) (프로젝트 핵심 구조 개요)

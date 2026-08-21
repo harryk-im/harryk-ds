@@ -30,6 +30,8 @@
   ],
   "scripts": {
     "build": "vite build",
+    "build:colors": "node scripts/build-colors.ts",
+    "check:colors": "pnpm build:colors && git diff --exit-code -- src/styles/tokens/colors.ts tokens.json",
     "dev": "vite build --watch",
     "type-check": "tsc --noEmit",
     "test": "vitest run",

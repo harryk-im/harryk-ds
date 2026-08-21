@@ -47,6 +47,11 @@ export interface Props extends React.HTMLAttributes<HTMLDivElement> {
 ### 1. oklch 색상 토큰
 색상은 하드코딩하지 않고 `oklch` 기반의 `COLORS` 토큰을 사용해요.
 - 위치: `packages/ui/src/styles/tokens/colors.ts`
+- 텍스트·보더·솔리드 배경은 `blue` · `red` · `grey`(core 램프), 페이지·카드·hover 배경은 `lightGrey`(surface 램프)를 써요.
+
+> **토큰을 추가·수정하거나 어떤 단계를 쓸지 고민된다면** [ui-tokens.md](./ui-tokens.md)를 열어주세요.
+> 램프 체계, 새 색상 추가 방법, 생성 파이프라인(`pnpm build:colors`)이 정리돼 있어요.
+> 이미 있는 토큰을 가져다 쓰기만 한다면 이 절만으로 충분해요.
 
 ### 2. recipe 패턴
 컴포넌트의 변형(Variants)은 `recipe` 함수를 이용해 선언적으로 관리해요. 이때, 타입 추론 최적화와 가독성을 위해 스타일 객체를 `as const`로 먼저 선언하는 패턴을 권장해요.

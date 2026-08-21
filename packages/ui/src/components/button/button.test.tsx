@@ -3,6 +3,7 @@ import userEvent from "@testing-library/user-event";
 import React from "react";
 import { axe } from "vitest-axe";
 import { Button } from "./button";
+import { buttonStyle } from "./button.css";
 
 describe("Button", () => {
   // ① 렌더링 & 시맨틱 (필수)
@@ -140,11 +141,7 @@ describe("Button", () => {
     it("사용자 className을 내부 스타일과 함께 병합해요", () => {
       render(<Button className="custom">저장</Button>);
 
-      const button = screen.getByRole("button");
-      expect(button).toHaveClass("custom");
-      // 내부 스타일 클래스를 덮어쓰지 않고 함께 유지해야 해요.
-      // className을 그대로 대입하는 회귀가 생기면 이 단언이 깨져요.
-      expect(button.className.trim().split(/\s+/).length).toBeGreaterThan(1);
+      expect(screen.getByRole("button")).toHaveClass(buttonStyle({}), "custom");
     });
 
     it("지정하지 않은 속성은 button 요소로 전달돼요", () => {

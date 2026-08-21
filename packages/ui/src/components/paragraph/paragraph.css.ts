@@ -43,7 +43,7 @@ export const paragraphLinkStyle = recipe({
     textDecoration: "underline",
     cursor: "pointer",
     ":hover": {
-      backgroundColor: COLORS.grey[100],
+      backgroundColor: COLORS.lightGrey[300],
       opacity: 0.8,
     },
   },

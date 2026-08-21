@@ -10,7 +10,9 @@ export default defineConfig({
     vanillaExtractPlugin(),
     dts({
       include: ["src"],
-      exclude: ["**/*.stories.*", "**/*.test.*"],
+      // *.source.* 는 토큰 생성기의 입력이라 배포하지 않아요.
+      // 공개 계약은 토큰 값(COLORS)이지 램프·채도 같은 생성 규칙이 아니에요.
+      exclude: ["**/*.stories.*", "**/*.test.*", "**/*.source.*"],
     }),
   ],
   build: {

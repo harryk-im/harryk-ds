@@ -36,6 +36,7 @@ harryk-ds/
 상세한 구현 규칙은 각 전문 영역별 문서에서 최신 상태로 관리돼요.
 
 - **UI 표준**: [ui.md](./specs/ui.md)
+- **디자인 토큰 표준**: [ui-tokens.md](./specs/ui-tokens.md)
 - **애니메이션 표준**: [motion.md](./specs/motion.md)
 - **문서화 표준**: [documentation.md](./specs/documentation.md)
 
