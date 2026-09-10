@@ -16,22 +16,22 @@ const weakBackdrop = createVar();
 export const buttonColor = {
   blue: {
     vars: {
-      [fillBackground]: COLORS.blue[300],
-      [weakText]: COLORS.blue[200],
+      [fillBackground]: COLORS.blue[400],
+      [weakText]: COLORS.blue[300],
       [weakBackdrop]: COLORS.blueAlpha15[100],
     },
   },
   red: {
     vars: {
-      [fillBackground]: COLORS.red[300],
-      [weakText]: COLORS.red[200],
+      [fillBackground]: COLORS.red[400],
+      [weakText]: COLORS.red[300],
       [weakBackdrop]: COLORS.redAlpha15[100],
     },
   },
   grey: {
     vars: {
-      [fillBackground]: COLORS.grey[300],
-      [weakText]: COLORS.grey[200],
+      [fillBackground]: COLORS.grey[400],
+      [weakText]: COLORS.grey[300],
       [weakBackdrop]: COLORS.greyAlpha15[100],
     },
   },
@@ -43,7 +43,7 @@ export const buttonVariant = {
     color: COLORS.white,
   },
   weak: {
-    backgroundColor: COLORS.white,
+    backgroundColor: COLORS.lightGreyAlpha15[100],
     color: weakText,
   },
 } as const;
@@ -51,14 +51,17 @@ export const buttonVariant = {
 export const buttonSize = {
   sm: {
     padding: `${SPACING["2xs"]} ${SPACING.sm}`,
+    borderRadius: RADII.md,
     ...getTypography("sm"),
   },
   md: {
     padding: `${SPACING.xs} ${SPACING.md}`,
+    borderRadius: RADII.lg,
     ...getTypography("md"),
   },
   lg: {
     padding: `${SPACING.sm} ${SPACING.lg}`,
+    borderRadius: RADII.xl,
     ...getTypography("lg"),
   },
 } as const;
@@ -68,7 +71,6 @@ export const buttonBase = {
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
-  borderRadius: RADII.lg,
   border: "none",
   overflow: "hidden",
   fontWeight: FONT_WEIGHTS.bold,
