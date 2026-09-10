@@ -81,6 +81,9 @@ export const buttonBase = {
       cursor: "not-allowed",
       opacity: 0.6,
     },
+    '&[aria-busy="true"]': {
+      cursor: "wait",
+    },
   },
 } as const;
 
