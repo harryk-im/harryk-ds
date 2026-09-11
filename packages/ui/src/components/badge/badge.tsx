@@ -1,5 +1,5 @@
 import React from "react";
-import { badgeStyle } from "./badge.css";
+import { badgeBackdrop, badgeStyle } from "./badge.css";
 import type { BadgeProps } from "./badge.types";
 
 /**
@@ -7,22 +7,25 @@ import type { BadgeProps } from "./badge.types";
  *
  * @example
  * ```tsx
- * // 기본 사용법
- * <Badge>New</Badge>
+ * // 기본 사용법 (blue · fill · md)
+ * <Badge>프론트엔드</Badge>
  *
- * // 색상과 스타일 지정
- * <Badge color="primary" variant="outline">Outline 뱃지</Badge>
+ * // 색상 지정
+ * <Badge color="red">오류</Badge>
+ *
+ * // weak 스타일 (옅은 바닥 위 반투명 색상 레이어)
+ * <Badge color="grey" variant="weak">임시 저장</Badge>
  *
  * // 크기 지정
- * <Badge size="lg">큰 뱃지</Badge>
+ * <Badge size="xs">NEW</Badge>
  * ```
  */
 export const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
   (
     {
-      color = "primary",
+      color = "blue",
       variant = "fill",
-      size = "sm",
+      size = "md",
       className,
       children,
       ...props
@@ -34,7 +37,8 @@ export const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
       .join(" ");
 
     return (
-      <span ref={ref} className={badgeClasses} {...props}>
+      <span {...props} ref={ref} className={badgeClasses}>
+        {variant === "weak" && <span className={badgeBackdrop} aria-hidden />}
         {children}
       </span>
     );
