@@ -15,7 +15,7 @@ export interface BadgeProps
   extends Omit<React.HTMLAttributes<HTMLSpanElement>, "color"> {
   /**
    * 뱃지의 색상을 선택해요.
-   * @default "primary"
+   * @default "blue"
    */
   color?: BadgeColor;
 
@@ -27,7 +27,7 @@ export interface BadgeProps
 
   /**
    * 뱃지의 크기를 선택해요.
-   * @default "sm"
+   * @default "md"
    */
   size?: BadgeSize;
 }
@@ -40,13 +40,15 @@ export type BadgeToken = RecipeVariants<typeof badgeStyle>;
 
 /**
  * 뱃지의 색상을 지정해요.
- * - `primary`: 주요 정보에 사용하는 파란색이에요.
- * - `secondary`: 보조 정보에 사용하는 회색이에요.
+ * - `blue`: 주요 정보에 사용하는 파란색이에요.
+ * - `red`: 오류나 경고처럼 주의가 필요한 정보에 사용하는 빨간색이에요.
+ * - `grey`: 보조 정보에 사용하는 회색이에요.
  */
 export type BadgeColor = keyof typeof badgeColor;
 
 /**
  * 뱃지의 크기를 지정해요.
+ * - `xs`: 가장 작은 크기예요.
  * - `sm`: 작은 크기예요.
  * - `md`: 기본 크기예요.
  * - `lg`: 큰 크기예요.
@@ -56,7 +58,6 @@ export type BadgeSize = keyof typeof badgeSize;
 /**
  * 뱃지의 스타일을 지정해요.
  * - `fill`: 배경색이 채워진 스타일이에요.
- * - `outline`: 테두리만 있는 스타일이에요.
- * - `weak`: 배경색이 반투명한 스타일이에요.
+ * - `weak`: 옅은 바닥 위에 반투명 색상 레이어를 덧입힌 스타일이에요. 어떤 배경 위에서도 같은 색으로 보여요.
  */
 export type BadgeVariant = keyof typeof badgeVariant;
