@@ -1,5 +1,12 @@
 # @harryk-ds/ui
 
+## 0.3.0
+
+### Minor Changes
+
+- 0a0e527: Redesign the `Badge` component to match the updated design system: replace semantic `color` values (`primary`/`secondary`) with primitives (`blue`/`red`/`grey`), remove the `outline` variant, and add an `xs` size. The default `size` changes from `sm` to `md`, so badges without an explicit `size` render larger. `weak` now layers a translucent color over an opaque `lightGrey` base so it looks the same on any surface, and its text uses the `600` step to meet WCAG AA contrast. Borders are removed and every size is fully rounded.
+- 3224627: Refine the `Button` styles: shift `fill` backgrounds and `weak` text one step darker (`400` and `300`), replace the white `weak` background with translucent `lightGrey`, and scale the border radius with `size` (`sm` 8px, `md` 12px, `lg` 16px) instead of a fixed 16px. No props changed — expect a visible style shift.
+
 ## 0.2.0
 
 ### Minor Changes
