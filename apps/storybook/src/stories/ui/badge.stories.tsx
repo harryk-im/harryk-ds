@@ -14,21 +14,6 @@ const meta = {
   },
   tags: ["autodocs"],
   argTypes: {
-    color: {
-      control: { type: "select" },
-      options: ["primary", "secondary"],
-      description: "뱃지의 색상을 선택해요.",
-    },
-    variant: {
-      control: { type: "select" },
-      options: ["fill", "outline", "weak"],
-      description: "뱃지의 스타일을 선택해요.",
-    },
-    size: {
-      control: { type: "select" },
-      options: ["sm", "md", "lg"],
-      description: "뱃지의 크기를 선택해요.",
-    },
     children: {
       control: { type: "text" },
       description: "뱃지에 표시할 텍스트예요.",
@@ -44,32 +29,53 @@ export const Default: Story = {
   args: {
     children: "뱃지",
   },
-};
-
-// Color 스토리들
-export const Primary: Story = {
-  args: {
-    color: "primary",
-    children: "Primary",
-  },
   parameters: {
     docs: {
       description: {
-        story: "주요 정보에 사용하는 기본 색상이에요.",
+        story: "가장 기본적인 사용법이에요. (blue · fill · md)",
       },
     },
   },
 };
 
-export const Secondary: Story = {
+// Color 스토리들
+export const Blue: Story = {
   args: {
-    color: "secondary",
-    children: "Secondary",
+    color: "blue",
+    children: "Blue",
   },
   parameters: {
     docs: {
       description: {
-        story: "보조 정보에 사용하는 색상이에요.",
+        story: "주요 정보에 사용하는 파란색이에요.",
+      },
+    },
+  },
+};
+
+export const Red: Story = {
+  args: {
+    color: "red",
+    children: "Red",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "오류나 경고처럼 주의가 필요한 정보에 사용하는 빨간색이에요.",
+      },
+    },
+  },
+};
+
+export const Grey: Story = {
+  args: {
+    color: "grey",
+    children: "Grey",
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "보조 정보에 사용하는 회색이에요.",
       },
     },
   },
@@ -90,20 +96,6 @@ export const Fill: Story = {
   },
 };
 
-export const Outline: Story = {
-  args: {
-    variant: "outline",
-    children: "Outline",
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "테두리만 있는 스타일이에요.",
-      },
-    },
-  },
-};
-
 export const Weak: Story = {
   args: {
     variant: "weak",
@@ -112,112 +104,81 @@ export const Weak: Story = {
   parameters: {
     docs: {
       description: {
-        story: "배경색이 반투명한 스타일이에요.",
+        story:
+          "옅은 바닥 위에 반투명 색상 레이어를 덧입힌 스타일이에요. 덜 강조되는 정보에 적합해요.",
       },
     },
   },
 };
 
-// Size 스토리들
-export const Small: Story = {
-  args: {
-    size: "sm",
-    children: "Small",
-  },
+// 조합 모음 스토리들
+export const AllColors: Story = {
   parameters: {
     docs: {
       description: {
-        story: "작은 크기의 뱃지예요.",
+        story: "제공되는 3가지 색상이에요.",
       },
     },
   },
+  render: () => (
+    <div style={{ display: "flex", gap: "12px" }}>
+      <Badge color="blue">Blue</Badge>
+      <Badge color="red">Red</Badge>
+      <Badge color="grey">Grey</Badge>
+    </div>
+  ),
 };
 
-export const Medium: Story = {
-  args: {
-    size: "md",
-    children: "Medium",
-  },
+export const AllVariants: Story = {
   parameters: {
     docs: {
       description: {
-        story: "중간 크기의 뱃지예요.",
+        story: "색상별 fill · weak 스타일을 한눈에 비교해보세요.",
       },
     },
   },
+  render: () => (
+    <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+      <div style={{ display: "flex", gap: "12px" }}>
+        <Badge color="blue" variant="fill">
+          Blue Fill
+        </Badge>
+        <Badge color="red" variant="fill">
+          Red Fill
+        </Badge>
+        <Badge color="grey" variant="fill">
+          Grey Fill
+        </Badge>
+      </div>
+      <div style={{ display: "flex", gap: "12px" }}>
+        <Badge color="blue" variant="weak">
+          Blue Weak
+        </Badge>
+        <Badge color="red" variant="weak">
+          Red Weak
+        </Badge>
+        <Badge color="grey" variant="weak">
+          Grey Weak
+        </Badge>
+      </div>
+    </div>
+  ),
 };
 
-export const Large: Story = {
-  args: {
-    size: "lg",
-    children: "Large",
-  },
+export const AllSizes: Story = {
   parameters: {
     docs: {
       description: {
-        story: "큰 크기의 뱃지예요.",
+        story: "제공되는 4가지 크기예요.",
       },
     },
   },
-};
-
-// 조합 스토리들
-export const PrimaryOutline: Story = {
-  args: {
-    color: "primary",
-    variant: "outline",
-    children: "Primary Outline",
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "Primary 색상의 Outline 스타일이에요.",
-      },
-    },
-  },
-};
-
-export const SecondaryOutline: Story = {
-  args: {
-    color: "secondary",
-    variant: "outline",
-    children: "Secondary Outline",
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "Secondary 색상의 Outline 스타일이에요.",
-      },
-    },
-  },
-};
-
-export const PrimaryWeak: Story = {
-  args: {
-    color: "primary",
-    variant: "weak",
-    children: "Primary Weak",
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "Primary 색상의 Weak 스타일이에요. 배경이 반투명해요.",
-      },
-    },
-  },
-};
-
-export const SecondaryWeak: Story = {
-  args: {
-    color: "secondary",
-    variant: "weak",
-    children: "Secondary Weak",
-  },
-  parameters: {
-    docs: {
-      description: {
-        story: "Secondary 색상의 Weak 스타일이에요. 배경이 반투명해요.",
-      },
-    },
-  },
+  render: () => (
+    <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+      <Badge size="xs">XSmall</Badge>
+      <Badge size="sm">Small</Badge>
+      <Badge size="md">Medium</Badge>
+      <Badge size="lg">Large</Badge>
+    </div>
+  ),
 };
