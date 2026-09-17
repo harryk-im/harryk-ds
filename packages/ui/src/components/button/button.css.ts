@@ -16,23 +16,23 @@ const weakBackdrop = createVar();
 export const buttonColor = {
   blue: {
     vars: {
-      [fillBackground]: COLORS.blue[400],
-      [weakText]: COLORS.blue[300],
-      [weakBackdrop]: COLORS.blueAlpha15[100],
+      [fillBackground]: COLORS.blue[500],
+      [weakText]: COLORS.blue[600],
+      [weakBackdrop]: COLORS.blueAlpha15[300],
     },
   },
   red: {
     vars: {
-      [fillBackground]: COLORS.red[400],
-      [weakText]: COLORS.red[300],
-      [weakBackdrop]: COLORS.redAlpha15[100],
+      [fillBackground]: COLORS.red[500],
+      [weakText]: COLORS.red[600],
+      [weakBackdrop]: COLORS.redAlpha15[300],
     },
   },
   grey: {
     vars: {
-      [fillBackground]: COLORS.grey[400],
-      [weakText]: COLORS.grey[300],
-      [weakBackdrop]: COLORS.greyAlpha15[100],
+      [fillBackground]: COLORS.grey[500],
+      [weakText]: COLORS.grey[600],
+      [weakBackdrop]: COLORS.greyAlpha15[300],
     },
   },
 } as const;
@@ -43,7 +43,7 @@ export const buttonVariant = {
     color: COLORS.white,
   },
   weak: {
-    backgroundColor: COLORS.lightGreyAlpha15[100],
+    backgroundColor: COLORS.lightGrey[100],
     color: weakText,
   },
 } as const;
