@@ -43,8 +43,6 @@ export const badgeVariant = {
     color: COLORS.white,
   },
   weak: {
-    // 불투명한 바닥 레이어예요. 위에 얹는 반투명 레이어(badgeBackdrop)와 합쳐져
-    // 어떤 배경 위에 놓여도 같은 색·같은 대비로 보여요.
     backgroundColor: COLORS.lightGrey[100],
     color: weakText,
   },
