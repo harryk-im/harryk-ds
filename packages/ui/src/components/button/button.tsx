@@ -1,5 +1,5 @@
 import React from "react";
-import { buttonBackdrop, buttonContent, buttonStyle } from "./button.css";
+import { buttonBackdrop, buttonStyle } from "./button.css";
 import type { ButtonProps } from "./button.types";
 
 /**
@@ -13,7 +13,7 @@ import type { ButtonProps } from "./button.types";
  * // 색상 지정
  * <Button color="red">삭제</Button>
  *
- * // weak 스타일 (흰 배경 위 반투명 배경 레이어)
+ * // weak 스타일 (옅은 바닥 위 반투명 색상 레이어)
  * <Button color="grey" variant="weak">취소</Button>
  *
  * // 부모 너비를 가득 채우기
@@ -59,7 +59,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         aria-busy={loading}
       >
         {variant === "weak" && <span className={buttonBackdrop} aria-hidden />}
-        <span className={buttonContent}>{children}</span>
+        {children}
       </button>
     );
   }
