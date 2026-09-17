@@ -68,11 +68,14 @@ export const buttonSize = {
 
 export const buttonBase = {
   position: "relative",
+  // buttonBackdrop의 zIndex: -1 을 이 버튼 안에 가둬요.
+  // 지우면 배경 레이어가 루트 배경 뒤로 숨고, transform 애니메이션 중에만
+  // 잠깐 보이는 식으로 조용히 깨져요.
+  isolation: "isolate",
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
   border: "none",
-  overflow: "hidden",
   fontWeight: FONT_WEIGHTS.bold,
   cursor: "pointer",
 
@@ -104,21 +107,13 @@ export const buttonStyle = recipe({
  *
  * 버튼 전체를 덮는 반투명 색상 배경 레이어예요.
  * `inset: 0`으로 버튼 영역을 채우고, 부모가 심은 `weakBackdrop` 변수를 상속해요.
+ * `zIndex: -1`로 루트 배경 위·글자 아래에 그려져서 콘텐츠 래퍼 없이도 글자를 가리지 않아요.
  */
 export const buttonBackdrop = style({
   position: "absolute",
   inset: 0,
+  zIndex: -1,
+  borderRadius: "inherit",
   pointerEvents: "none",
   backgroundColor: weakBackdrop,
-});
-
-/**
- * 배경 레이어 위에 콘텐츠를 올리기 위한 콘텐츠 래퍼예요.
- * `position: relative` + DOM 순서(배경 뒤, 콘텐츠 앞)로 z-index 없이 위에 쌓여요.
- */
-export const buttonContent = style({
-  position: "relative",
-  display: "inline-flex",
-  alignItems: "center",
-  justifyContent: "center",
 });
