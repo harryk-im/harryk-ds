@@ -31,21 +31,18 @@ export const headingAlign = {
   right: { textAlign: "right" },
 } as const;
 
+export const headingBase = {
+  margin: 0,
+  padding: 0,
+  overflowWrap: "break-word",
+} as const;
+
 export const headingStyle = recipe({
-  base: {
-    margin: 0,
-    padding: 0,
-    display: "block",
-  },
+  base: headingBase,
   variants: {
     size: headingSize,
     color: headingColor,
     weight: headingWeight,
     align: headingAlign,
-  },
-  defaultVariants: {
-    color: "black",
-    weight: "bold",
-    align: "left",
   },
 });
