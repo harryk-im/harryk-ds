@@ -103,10 +103,14 @@ ParagraphText.displayName = "Paragraph.Text";
 /**
  * 문단 내에서 하이퍼링크를 표현할 때 사용하는 컴포넌트예요.
  * `<a>` 태그로 렌더링되며, 부모의 색상 설정과 무관하게 기본적으로 파란색(`blue`)으로 표시돼요.
+ * `target`, `rel` 등은 일반 `<a>` 태그와 똑같이 동작해요. 새 탭이 필요하면 직접 넣어주세요.
  *
  * @example
  * ```tsx
- * <Paragraph.Link href="https://github.com/harryk-im/harryk-ds/">harryk-ds 깃허브 바로가기</Paragraph.Link>
+ * <Paragraph.Link href="/">현재 탭에서 열기</Paragraph.Link>
+ * <Paragraph.Link href="https://harryk.im" target="_blank" rel="noopener noreferrer">
+ *   새 탭에서 열기
+ * </Paragraph.Link>
  * ```
  */
 export const ParagraphLink = React.forwardRef<
@@ -134,13 +138,7 @@ export const ParagraphLink = React.forwardRef<
     .join(" ");
 
   return (
-    <a
-      target="_blank"
-      rel="noreferrer"
-      ref={ref}
-      className={classes}
-      {...props}
-    >
+    <a ref={ref} className={classes} {...props}>
       {children}
     </a>
   );
