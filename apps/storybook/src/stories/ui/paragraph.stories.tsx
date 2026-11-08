@@ -9,7 +9,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "문단 단위의 텍스트를 렌더링하기 위한 컴포넌트예요. Paragraph.Text와 Paragraph.Link를 조합하여 사용할 수 있어요.",
+          "문단 단위의 텍스트를 보여주는 컴포넌트예요. Paragraph.Text, Paragraph.Link와 함께 쓸 수 있어요.",
       },
     },
   },
@@ -22,13 +22,13 @@ const meta = {
     },
     color: {
       control: { type: "select" },
-      options: ["black", "grey", "lightGrey", "blue"],
+      options: ["black", "dark", "grey", "blue"],
       description: "텍스트의 색상을 선택해요.",
     },
     weight: {
       control: { type: "select" },
       options: ["bold", "normal"],
-      description: "텍스트의 굵기를 설정해요.",
+      description: "텍스트의 굵기를 선택해요.",
     },
   },
 } satisfies Meta<typeof Paragraph>;
@@ -38,12 +38,12 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    children: "이것은 기본적인 Paragraph 컴포넌트입니다.",
+    children: "기본 Paragraph 컴포넌트예요.",
   },
   parameters: {
     docs: {
       description: {
-        story: "가장 기본적인 Paragraph 사용법이에요.",
+        story: "Paragraph를 가장 간단하게 쓰는 방법이에요.",
       },
     },
   },
@@ -53,21 +53,21 @@ export const Composition: Story = {
   parameters: {
     docs: {
       description: {
-        story: `Paragraph.Text와 Paragraph.Link를 조합한 복합적인 구성이에요.
+        story: `Paragraph.Text와 Paragraph.Link를 함께 쓴 예시예요.
 
-- 부모 \`Paragraph\`에서 정의한 \`size="md"\`, \`color="black"\` 스타일이 하위 \`Text\` 요소들에게 **상속**돼요.
-- \`Link\` 컴포넌트는 부모의 색상을 무시하고 **고유의 링크 색상(blue)**을 유지해요.`,
+- 부모 \`Paragraph\`에 정한 \`size="md"\`, \`color="black"\` 스타일을 하위 \`Text\`가 **그대로 물려받아요**.
+- \`Link\`는 부모 색상과 상관없이 **링크 색상(blue)**으로 보여요.`,
       },
     },
   },
   render: (args) => (
     <Paragraph {...args}>
-      <Paragraph.Text>부모의 스타일을 상속받는 텍스트와 </Paragraph.Text>
+      <Paragraph.Text>부모 스타일을 물려받은 텍스트와 </Paragraph.Text>
       <Paragraph.Link href="https://github.com/harryk-im/harryk-ds">
         링크
       </Paragraph.Link>
-      <Paragraph.Text weight="bold">가 포함된 문단입니다.</Paragraph.Text>
-      Paragraph 컴포넌트만 내부에서 Text, Link 컴포넌트 없이도 사용이 가능해요.
+      <Paragraph.Text weight="bold">가 들어 있는 문단이에요.</Paragraph.Text>
+      Text나 Link 없이 글자만 넣어도 돼요.
     </Paragraph>
   ),
   args: {
@@ -80,29 +80,29 @@ export const Overrides: Story = {
   parameters: {
     docs: {
       description: {
-        story: `하위 요소에서 개별적으로 스타일을 덮어쓸(Override) 수 있어요.
+        story: `하위 요소마다 스타일을 따로 덮어쓸(Override) 수 있어요.
 
-- 첫 번째 \`Text\`는 \`color="grey"\`와 \`weight="bold"\`를 적용해 부모 스타일과 차별화를 뒀어요.
-- \`Link\`에도 \`color="black"\`을 직접 지정하면, 기본 링크 색상인 파란색 대신 **검은색 링크**를 만들 수 있어요.`,
+- 첫 번째 \`Text\`는 \`color="dark"\`와 \`weight="bold"\`로 부모 스타일과 다르게 보여줘요.
+- \`Link\`에 \`color="black"\`을 넣으면 기본 파란색 대신 **검은색 링크**를 만들 수 있어요.`,
       },
     },
   },
   render: (args) => (
     <Paragraph {...args}>
-      <Paragraph.Text weight="bold" color="grey">
-        이 부분만 굵고 회색입니다.
+      <Paragraph.Text weight="bold" color="dark">
+        이 부분만 굵고 짙은 회색이에요.
       </Paragraph.Text>
       <br />
-      <Paragraph.Text size="xs">이 부분은 매우 작습니다.</Paragraph.Text>
+      <Paragraph.Text size="xs">이 부분은 아주 작아요.</Paragraph.Text>
       <br />
       <Paragraph.Link href="#" color="black">
-        이 링크는 검은색으로 오버라이드되었습니다.
+        이 링크는 검은색으로 바꿨어요.
       </Paragraph.Link>
     </Paragraph>
   ),
   args: {
     size: "lg",
-    color: "lightGrey",
+    color: "grey",
   },
 };
 
@@ -110,7 +110,7 @@ export const AllSizes: Story = {
   parameters: {
     docs: {
       description: {
-        story: "제공되는 다양한 사이즈를 한눈에 확인해보세요.",
+        story: "모든 크기를 한눈에 비교해보세요.",
       },
     },
   },
@@ -132,16 +132,47 @@ export const AllColors: Story = {
   parameters: {
     docs: {
       description: {
-        story: "제공되는 4가지 색상이에요.",
+        story: "쓸 수 있는 색상은 4가지예요.",
       },
     },
   },
   render: () => (
     <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
       <Paragraph color="black">Black (Default)</Paragraph>
+      <Paragraph color="dark">Dark</Paragraph>
       <Paragraph color="grey">Grey</Paragraph>
-      <Paragraph color="lightGrey">Light Grey</Paragraph>
       <Paragraph color="blue">Blue</Paragraph>
+    </div>
+  ),
+};
+
+export const LinkHoverColors: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: `\`Paragraph.Link\`에 마우스를 올리면 글자색만 바뀌어요.
+
+| color | 기본 | hover |
+|---|---|---|
+| \`blue\` (기본) | \`blue[500]\` | \`blue[600]\` |
+| \`black\` | \`black\` | \`black\` |
+| \`dark\` | \`grey[900]\` | \`black\` |
+| \`grey\` | \`grey[600]\` | \`grey[700]\` |`,
+      },
+    },
+  },
+  render: () => (
+    <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+      <Paragraph.Link href="#">Blue (Default)</Paragraph.Link>
+      <Paragraph.Link href="#" color="black">
+        Black
+      </Paragraph.Link>
+      <Paragraph.Link href="#" color="dark">
+        Dark
+      </Paragraph.Link>
+      <Paragraph.Link href="#" color="grey">
+        Grey
+      </Paragraph.Link>
     </div>
   ),
 };
@@ -150,7 +181,8 @@ export const Standalone: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Paragraph.Text와 Paragraph.Link는 독립적으로도 사용 가능해요.",
+        story:
+          "Paragraph.Text와 Paragraph.Link는 Paragraph 없이 따로 써도 돼요.",
       },
     },
   },
@@ -164,10 +196,10 @@ export const Standalone: Story = {
       }}
     >
       <Paragraph.Text size="lg" weight="bold" color="blue">
-        독립적으로 사용된 Paragraph.Text
+        Paragraph 없이 쓴 Paragraph.Text
       </Paragraph.Text>
       <Paragraph.Link href="#" size="md">
-        독립적으로 사용된 Paragraph.Link
+        Paragraph 없이 쓴 Paragraph.Link
       </Paragraph.Link>
     </div>
   ),
