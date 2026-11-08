@@ -16,10 +16,17 @@ export const paragraphSize = {
 
 export const paragraphColor = {
   black: { color: COLORS.black },
-  grey: { color: COLORS.grey[900] },
-  lightGrey: { color: COLORS.grey[800] },
-  blue: { color: COLORS.blue[300] },
+  dark: { color: COLORS.grey[900] },
+  grey: { color: COLORS.grey[600] },
+  blue: { color: COLORS.blue[500] },
 } as const;
+
+export const paragraphLinkHoverColor = {
+  black: { selectors: { "&:hover": { color: COLORS.black } } },
+  dark: { selectors: { "&:hover": { color: COLORS.black } } },
+  grey: { selectors: { "&:hover": { color: COLORS.grey[700] } } },
+  blue: { selectors: { "&:hover": { color: COLORS.blue[600] } } },
+} as const satisfies Record<keyof typeof paragraphColor, unknown>;
 
 export const paragraphWeight = {
   bold: { fontWeight: FONT_WEIGHTS.bold },
@@ -42,9 +49,8 @@ export const paragraphLinkStyle = recipe({
   base: {
     textDecoration: "underline",
     cursor: "pointer",
-    ":hover": {
-      backgroundColor: COLORS.lightGrey[300],
-      opacity: 0.8,
-    },
+  },
+  variants: {
+    color: paragraphLinkHoverColor,
   },
 });

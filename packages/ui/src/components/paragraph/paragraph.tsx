@@ -124,7 +124,7 @@ export const ParagraphLink = React.forwardRef<
       color: resolvedStyle.color,
       weight: resolvedStyle.weight,
     }),
-    paragraphLinkStyle(),
+    paragraphLinkStyle({ color: resolvedStyle.color }),
     className,
   ]
     .filter(Boolean)
