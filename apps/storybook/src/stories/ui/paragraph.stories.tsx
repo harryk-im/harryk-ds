@@ -150,14 +150,7 @@ export const LinkHoverColors: Story = {
   parameters: {
     docs: {
       description: {
-        story: `\`Paragraph.Link\`에 마우스를 올리면 글자색만 바뀌어요.
-
-| color | 기본 | hover |
-|---|---|---|
-| \`blue\` (기본) | \`blue[500]\` | \`blue[600]\` |
-| \`black\` | \`black\` | \`black\` |
-| \`dark\` | \`grey[900]\` | \`black\` |
-| \`grey\` | \`grey[600]\` | \`grey[700]\` |`,
+        story: `\`Paragraph.Link\`에 마우스를 올리면 글자색과 같은 색이 15% 투명도로 배경에 깔려요. 글자색은 그대로예요.`,
       },
     },
   },
