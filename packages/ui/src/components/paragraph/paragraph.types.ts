@@ -19,9 +19,9 @@ export type ParagraphSize = keyof typeof paragraphSize;
 /**
  * Paragraph 컴포넌트의 가용한 색상이에요.
  * - `black`: 기본 검정색이에요.
- * - `grey`: 짙은 회색이에요.
- * - `lightGrey`: 연한 회색이에요.
- * - `blue`: 강조용 파란색이에요.
+ * - `dark`: 검정보다 한 톤 부드러운 짙은 회색이에요.
+ * - `grey`: 보조 정보에 쓰는 회색이에요.
+ * - `blue`: 강조용 파란색이에요. `Paragraph.Link`의 기본 색상이기도 해요.
  */
 export type ParagraphColor = keyof typeof paragraphColor;
 
