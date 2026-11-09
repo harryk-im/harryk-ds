@@ -39,6 +39,26 @@ describe("Paragraph", () => {
 
   // ② Props → 속성 변화
   describe("Props와 상태", () => {
+    it("Link는 target과 rel을 기본으로 추가하지 않아요", () => {
+      render(<Paragraph.Link href="/docs">문서 보기</Paragraph.Link>);
+
+      const link = screen.getByRole("link", { name: "문서 보기" });
+      expect(link).not.toHaveAttribute("target");
+      expect(link).not.toHaveAttribute("rel");
+    });
+
+    it("Link에 명시한 target과 rel을 그대로 전달해요", () => {
+      render(
+        <Paragraph.Link href="/docs" target="_blank" rel="noopener noreferrer">
+          문서 보기
+        </Paragraph.Link>
+      );
+
+      const link = screen.getByRole("link", { name: "문서 보기" });
+      expect(link).toHaveAttribute("target", "_blank");
+      expect(link).toHaveAttribute("rel", "noopener noreferrer");
+    });
+
     it("Link에 target을 넘기면 그 값을 따라요", () => {
       render(
         <Paragraph.Link href="/docs" target="_self">
@@ -181,6 +201,9 @@ describe("Paragraph", () => {
       expect(pRef.current).toBeInstanceOf(HTMLParagraphElement);
       expect(spanRef.current).toBeInstanceOf(HTMLSpanElement);
       expect(aRef.current).toBeInstanceOf(HTMLAnchorElement);
+      expect(pRef.current).toBe(screen.getByRole("paragraph"));
+      expect(spanRef.current).toBe(screen.getByText("텍스트"));
+      expect(aRef.current).toBe(screen.getByRole("link"));
     });
 
     it("사용자 className을 내부 스타일과 병합해요", () => {
@@ -202,6 +225,7 @@ describe("Paragraph", () => {
         "text-class"
       );
       expect(screen.getByRole("link")).toHaveClass(
+        expectedText({ color: "blue" }),
         paragraphLinkStyle({ color: "blue", size: "md" }),
         "link-class"
       );
